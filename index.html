@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IELTS Sprint — 10 Days to 7.5</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #eef1f0;
+    --surface: #ffffff;
+    --surface-2: #e4e8e6;
+    --text-primary: #171b20;
+    --text-secondary: #4b535b;
+    --text-muted: #737b82;
+    --border: #d7dbd9;
+    --accent: #c2790f;
+    --accent-ink: #ffffff;
+    --teal: #0e8f82;
+    --indigo: #5a63c4;
+    --good: #1f7a43;
+    --good-bg: #e3f1e8;
+    --warning: #b45309;
+    --warning-bg: #f7e7d3;
+    --critical: #b3261e;
+    --shadow: 0 1px 2px rgba(20, 24, 20, 0.06), 0 8px 24px -12px rgba(20, 24, 20, 0.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10151c;
+      --surface: #171d25;
+      --surface-2: #1e2530;
+      --text-primary: #edefef;
+      --text-secondary: #aeb4ba;
+      --text-muted: #7c848c;
+      --border: #2a323c;
+      --accent: #bc8730;
+      --accent-ink: #10151c;
+      --teal: #2aaa9e;
+      --indigo: #7b85d4;
+      --good: #4fbe79;
+      --good-bg: #163322;
+      --warning: #e08a3c;
+      --warning-bg: #3a2a17;
+      --critical: #e5675f;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -12px rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10151c;
+    --surface: #171d25;
+    --surface-2: #1e2530;
+    --text-primary: #edefef;
+    --text-secondary: #aeb4ba;
+    --text-muted: #7c848c;
+    --border: #2a323c;
+    --accent: #bc8730;
+    --accent-ink: #10151c;
+    --teal: #2aaa9e;
+    --indigo: #7b85d4;
+    --good: #4fbe79;
+    --good-bg: #163322;
+    --warning: #e08a3c;
+    --warning-bg: #3a2a17;
+    --critical: #e5675f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -12px rgba(0, 0, 0, 0.55);
+  }
+  :root[data-theme="light"] {
+    --bg: #eef1f0;
+    --surface: #ffffff;
+    --surface-2: #e4e8e6;
+    --text-primary: #171b20;
+    --text-secondary: #4b535b;
+    --text-muted: #737b82;
+    --border: #d7dbd9;
+    --accent: #c2790f;
+    --accent-ink: #ffffff;
+    --teal: #0e8f82;
+    --indigo: #5a63c4;
+    --good: #1f7a43;
+    --good-bg: #e3f1e8;
+    --warning: #b45309;
+    --warning-bg: #f7e7d3;
+    --critical: #b3261e;
+    --shadow: 0 1px 2px rgba(20, 24, 20, 0.06), 0 8px 24px -12px rgba(20, 24, 20, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--text-primary);
+  }
+  .mono, .tabular {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: var(--indigo); }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 32px) 64px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 44px);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: clamp(20px, 4vw, 36px);
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; }
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .hero-count {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    line-height: 1;
+  }
+  .hero-count span:first-child {
+    font-size: clamp(3.2rem, 8vw, 4.6rem);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-count-label {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .hero-sub {
+    margin: 12px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+  }
+  .accent-text { color: var(--accent); }
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stat-card {
+    background: var(--surface-2);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .stat-label {
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .progress-track {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+  .progress-fill.alt { background: var(--teal); }
+  .stat-value {
+    margin: 8px 0 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Panels ---------- */
+  .panel-head { margin-bottom: 18px; max-width: 66ch; }
+  .panel-head h2 { font-size: 1.5rem; margin-bottom: 6px; }
+  .panel-sub { margin: 0; color: var(--text-secondary); font-size: 0.94rem; }
+
+  /* ---------- Day grid ---------- */
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .day-card.is-today { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .day-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .day-num {
+    font-family: Georgia, serif;
+    font-size: 1.7rem;
+    color: var(--text-muted);
+    line-height: 1;
+  }
+  .day-card.is-today .day-num { color: var(--accent); }
+  .day-date { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+  .pill {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .pill-today { background: var(--accent); color: var(--accent-ink); }
+  .pill-done { background: var(--good-bg); color: var(--good); }
+  .pill-catchup { background: var(--warning-bg); color: var(--warning); }
+  .pill-upcoming { background: var(--surface-2); color: var(--text-muted); }
+  .day-focus {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .day-tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .day-tasks li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); }
+  .day-tasks input[type="checkbox"] { margin-top: 3px; width: 15px; height: 15px; accent-color: var(--accent); flex-shrink: 0; }
+  .day-tasks li.checked span { color: var(--text-muted); text-decoration: line-through; }
+  .task-min { color: var(--text-muted); font-size: 0.78rem; }
+
+  /* ---------- Score section ---------- */
+  .score-form {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  @media (max-width: 760px) { .score-form { grid-template-columns: repeat(2, 1fr); } }
+  .score-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .score-form input {
+    font: inherit;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 9px;
+    color: var(--text-primary);
+    width: 100%;
+  }
+  .score-form input:focus-visible, button:focus-visible, summary:focus-visible, input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .score-form button {
+    grid-column: span 2;
+    align-self: end;
+    font: inherit;
+    font-weight: 700;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+  }
+  @media (max-width: 760px) { .score-form button { grid-column: span 2; } }
+  .score-form button:hover { filter: brightness(1.06); }
+
+  .score-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 900px) { .score-body { grid-template-columns: 1fr; } }
+  .chart-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  #scoreChart { width: 100%; height: auto; display: block; }
+  .chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--text-primary);
+    color: var(--bg);
+    font-size: 0.76rem;
+    padding: 7px 10px;
+    border-radius: 8px;
+    line-height: 1.5;
+    transform: translate(-50%, -110%);
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    z-index: 5;
+  }
+  .legend { list-style: none; display: flex; gap: 16px; margin: 12px 0 0; padding: 0; flex-wrap: wrap; }
+  .legend li { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-secondary); }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .swatch.teal { background: var(--teal); }
+  .swatch.indigo { background: var(--indigo); }
+  .swatch.amber { background: var(--accent); }
+
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 4px 0;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.83rem; }
+  th, td { text-align: left; padding: 9px 12px; white-space: nowrap; }
+  th { color: var(--text-muted); text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.05em; position: sticky; top: 0; background: var(--surface); }
+  td { color: var(--text-secondary); font-variant-numeric: tabular-nums; border-top: 1px solid var(--border); }
+  td.overall { color: var(--text-primary); font-weight: 700; }
+  .empty-row td { color: var(--text-muted); font-style: italic; }
+
+  /* ---------- Clinic ---------- */
+  .clinic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 900px) { .clinic-grid { grid-template-columns: 1fr; } }
+  .clinic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .clinic-card h3 { font-size: 1.15rem; }
+  .clinic-card h4 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+  .clinic-card ul { margin: 0; padding-left: 20px; color: var(--text-secondary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 7px; }
+  .clinic-card ul li::marker { color: var(--accent); }
+  .drill-note { font-size: 0.88rem; color: var(--text-secondary); margin: 0; }
+  .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
+  .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
+  .passage { font-size: 0.92rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 12px; }
+  .passage p { margin: 0; }
+  .passage b { color: var(--text-primary); font-family: "SFMono-Regular", Consolas, monospace; margin-right: 6px; }
+  .questions { display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem; color: var(--text-secondary); }
+  .questions ol, .questions ul { padding-left: 20px; margin: 6px 0; display: flex; flex-direction: column; gap: 6px; }
+  .questions h5 { margin: 0; font-size: 0.82rem; color: var(--text-primary); font-family: -apple-system, sans-serif; }
+  details {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 10px 14px;
+  }
+  details[open] { padding-bottom: 14px; }
+  summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+  }
+  details p, details ol, details ul { font-size: 0.88rem; color: var(--text-secondary); }
+
+  /* ---------- Footer ---------- */
+  .site-footer { border-top: 1px solid var(--border); padding-top: 20px; font-size: 0.85rem; color: var(--text-secondary); }
+  .site-footer p { margin: 0 0 8px; }
+  .muted { color: var(--text-muted); font-size: 0.78rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .progress-fill { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-main">
+      <p class="eyebrow">IELTS Sprint · Md Mainul Islam</p>
+      <div class="hero-count"><span id="daysLeft" class="tabular">–</span><span class="hero-count-label">days to go</span></div>
+      <p class="hero-sub">Exam: <strong>Wednesday, 22 July 2026</strong> · Current best <strong id="heroCurrent" class="tabular">6.0–6.5</strong> → Target <strong class="accent-text">7.5</strong></p>
+      <p class="hero-sub" style="font-size:0.86rem; margin-top:6px;">Weak spots: <strong>Listening Section 4</strong> (last 10 questions) and <strong>Reading Passage 3</strong> (the final passage).</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <p class="stat-label">Goal progress</p>
+        <div class="progress-track"><div class="progress-fill" id="goalProgressFill"></div></div>
+        <p class="stat-value" id="goalProgressText">–</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Plan adherence</p>
+        <div class="progress-track"><div class="progress-fill alt" id="adherenceFill"></div></div>
+        <p class="stat-value" id="adherenceText">–</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="planSection">
+    <div class="panel-head">
+      <h2>Your 10-Day Battle Plan</h2>
+      <p class="panel-sub">Built around an 8am–7pm workday: weekdays get one focused ~45–60&nbsp;min evening session; the weekend (18–19 Jul) is where the full mock and deep repair happen. Check off tasks as you go — it's saved on this device.</p>
+    </div>
+    <div class="day-grid" id="dayGrid"></div>
+  </section>
+
+  <section id="scoreSection">
+    <div class="panel-head">
+      <h2>Score Tracker</h2>
+      <p class="panel-sub">Log every mock the moment you've marked it. One diagnostic entry is pre-filled from what you told me — add your real per-skill numbers as you go.</p>
+    </div>
+    <form class="score-form" id="scoreForm">
+      <label>Date
+        <input type="date" id="fDate" required />
+      </label>
+      <label>Listening
+        <input type="number" id="fListening" min="0" max="9" step="0.5" placeholder="6.0" />
+      </label>
+      <label>Reading
+        <input type="number" id="fReading" min="0" max="9" step="0.5" placeholder="6.0" />
+      </label>
+      <label>Writing
+        <input type="number" id="fWriting" min="0" max="9" step="0.5" placeholder="optional" />
+      </label>
+      <label>Speaking
+        <input type="number" id="fSpeaking" min="0" max="9" step="0.5" placeholder="optional" />
+      </label>
+      <label>Overall
+        <input type="number" id="fOverall" min="0" max="9" step="0.5" placeholder="auto" />
+      </label>
+      <button type="submit">Log this mock</button>
+    </form>
+    <div class="score-body">
+      <div class="chart-wrap">
+        <svg id="scoreChart" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Band score trend chart"></svg>
+        <div class="chart-tooltip" id="chartTooltip" hidden></div>
+        <ul class="legend">
+          <li><span class="swatch teal"></span>Listening</li>
+          <li><span class="swatch indigo"></span>Reading</li>
+          <li><span class="swatch amber"></span>Overall (dashed line = 7.5 goal)</li>
+        </ul>
+      </div>
+      <div class="table-wrap">
+        <table id="scoreTable">
+          <thead>
+            <tr><th>Date</th><th>Listen</th><th>Read</th><th>Write</th><th>Speak</th><th>Overall</th></tr>
+          </thead>
+          <tbody id="scoreTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="clinicSection">
+    <div class="panel-head">
+      <h2>Weak-Spot Clinic</h2>
+      <p class="panel-sub">Two original practice drills, built for exactly where you're losing marks. Full-length timed mocks still belong in your official prep books — these are the concentrated technique fixes.</p>
+    </div>
+    <div class="clinic-grid">
+
+      <article class="clinic-card">
+        <h3>🎧 Listening — Section 4</h3>
+        <h4>Survival tactics</h4>
+        <ul>
+          <li>Section 4 is one uninterrupted lecture — no dialogue cues to re-orient you. Pre-read all 10 gaps the moment Section 3 ends; predict the word type (number? name? noun?) for each before audio starts.</li>
+          <li>The talk follows your note sheet in strict order. If you miss a blank, don't backtrack — jump to the next signpost and keep moving.</li>
+          <li>Listen for signpost language that flags an answer is coming: "the first factor is…", "in contrast…", "this led to…", "more importantly…".</li>
+          <li>Self-corrections are a trap: if the speaker says "in 1990 — well, actually 1991" the <em>second</em> value is the answer.</li>
+          <li>After writing an answer, check it fits the grammar of the note. If it doesn't, you likely misheard the word class, not just the word.</li>
+        </ul>
+        <h4>Practice drill — Urban Beekeeping Programme</h4>
+        <p class="drill-note">You can't get real exam audio here, so simulate a single-pass listen: have someone read the script aloud to you <strong>once</strong>, at normal talking speed, with no pausing — or paste it into a phone text-to-speech reader and only listen, don't read along. Fill the notes as you go.</p>
+        <ol class="note-sheet">
+          <li>Programme launched in: <b>(31) ____</b></li>
+          <li>Number of hives at launch: <b>(32) ____</b></li>
+          <li>City hives outperform rural ones thanks to the <b>(33) ____</b> effect</li>
+          <li>Average honey yield per hive: <b>(34) ____</b> kg/year</li>
+          <li>Hives are inspected every <b>(35) ____</b> weeks</li>
+          <li>Biggest threat identified by beekeepers: <b>(36) ____</b></li>
+          <li>Volunteer training course lasts: <b>(37) ____</b></li>
+          <li>Programme is funded mainly through: <b>(38) ____</b></li>
+          <li>Next year's new site: <b>(39) ____</b></li>
+          <li>Contact person's job title: <b>(40) ____</b></li>
+        </ol>
+        <details>
+          <summary>Reader script — don't peek before practicing</summary>
+          <p>"Good evening, everyone. Tonight I want to talk about the rise of urban beekeeping programmes, using our own city's scheme as the case study. The scheme actually started back in twenty-nineteen, when the council installed just twelve hives on rooftops across the centre. Interestingly, city hives tend to outperform their rural cousins, largely thanks to the urban heat island effect — all that concrete keeps temperatures a degree or two higher, which extends the flowering season. On average, each hive now produces around eighteen kilos of honey a year. Every hive is inspected fortnightly — that's once every two weeks — to check on colony health. When we surveyed the volunteers, the single biggest threat they identified wasn't disease at all, but pesticide exposure from nearby private gardens. Before anyone can take on a hive, they complete a short training course, which runs for six weeks and covers basic hive management. Funding, interestingly, comes mainly from corporate sponsorship rather than council budgets. Next year the programme is expanding to a new site: the grounds of the old railway depot. And if any of you would like to get involved, you can contact our volunteer coordinator, whose job title is Community Engagement Officer."</p>
+        </details>
+        <details>
+          <summary>Answer key</summary>
+          <p>31. 2019 &nbsp;·&nbsp; 32. 12 (twelve) &nbsp;·&nbsp; 33. urban heat island &nbsp;·&nbsp; 34. 18 &nbsp;·&nbsp; 35. two &nbsp;·&nbsp; 36. pesticide exposure &nbsp;·&nbsp; 37. six weeks &nbsp;·&nbsp; 38. corporate sponsorship &nbsp;·&nbsp; 39. the old railway depot &nbsp;·&nbsp; 40. Community Engagement Officer</p>
+        </details>
+      </article>
+
+      <article class="clinic-card">
+        <h3>📖 Reading — Passage 3</h3>
+        <h4>Survival tactics</h4>
+        <ul>
+          <li>Budget exactly 20 minutes for Passage 3. If Passages 1–2 ran over, cut this one to 17–18 min and guess the rest — never let it eat your whole remaining time.</li>
+          <li>Read only the first and last sentence of each paragraph before answering anything — that's usually enough to know its role, which is most of the work for Matching Headings.</li>
+          <li>True/False/Not Given: "False" means the text directly contradicts the statement. "Not Given" means the text is simply silent — don't use outside knowledge to decide.</li>
+          <li>Underline qualifiers in the question (all, most, some, always, may) — mismatches on these words are the single most common Passage 3 trap.</li>
+          <li>Questions follow the passage in order. Use that to narrow your search instead of re-reading from the top each time.</li>
+        </ul>
+        <h4>Practice drill — Circadian Rhythms and the Cost of the Nine-to-Five</h4>
+        <div class="passage">
+          <p><b>A</b> For most of the industrial era, the working day has begun at roughly the same hour regardless of who is doing the work. The nine-to-five schedule was not derived from any study of human biology; it was set by factory whistles and, later, office convention, and has simply persisted. Yet a substantial body of research now suggests that individuals differ predictably in when their bodies are naturally primed for alertness — a trait researchers call chronotype — and that forcing everyone onto an identical clock carries a real, measurable cost.</p>
+          <p><b>B</b> At the centre of this system sits the suprachiasmatic nucleus, a cluster of neurons in the brain that governs the timing of hormones such as cortisol and melatonin, effectively setting the body's internal clock roughly a day in length. Twin studies suggest that around half of the variation in chronotype between individuals is genetic, with the remainder shaped by age, light exposure and habit. Adolescents in particular undergo a well-documented shift toward later chronotypes during puberty, a change that reverses only gradually in early adulthood.</p>
+          <p><b>C</b> When an individual's biological clock is out of step with the schedule imposed on them, the result has been termed "social jet lag" — a chronic mismatch, rather than the acute kind experienced after a long flight. Unlike ordinary tiredness, social jet lag accumulates: sufferers do not simply feel sleepy, they build up a sleep debt linked in the literature to elevated risks of cardiovascular disease, metabolic disruption and depressed mood, even after controlling for total hours slept.</p>
+          <p><b>D</b> Despite this evidence, flexible scheduling remains the exception rather than the rule in most workplaces. Employers frequently cite the coordination costs of staggered hours — meetings, client calls and shift handovers all become harder to plan when staff are not present at the same time. For organisations built around synchronous collaboration, the perceived administrative burden of accommodating chronotype has, in practice, outweighed the productivity gains that the research points to.</p>
+          <p><b>E</b> A small number of schools and employers have nonetheless experimented with later start times. Several secondary schools that delayed their first lesson by an hour reported measurable improvements in test scores and a drop in recorded absences within a single academic year. Comparable pilot programmes in office settings found reduced reported fatigue among staff, though the same organisations noted that shift-based industries — manufacturing, healthcare, transport — cannot adopt these changes without redesigning rosters from the ground up, and public transport timetables rarely adjust to match.</p>
+          <p><b>F</b> Advances in remote and asynchronous work tools have made chronotype-aware scheduling more feasible than at any point in the past, allowing some employees to shift their hours without a formal policy change. Yet flexibility of this kind introduces its own difficulties: those working far outside standard hours report greater isolation from colleagues, and the boundary between work and rest can blur when no schedule is imposed at all. No single arrangement yet reconciles biological variation with the practical demands of collective work.</p>
+        </div>
+        <div class="questions">
+          <div>
+            <h5>Questions 1–6 — Matching Headings</h5>
+            <p>The passage has six paragraphs, A–F. Choose the correct heading for each paragraph from the list below.</p>
+            <ul>
+              <li>i. The biological machinery behind our internal clock</li>
+              <li>ii. Why flexible schedules remain rare despite the evidence</li>
+              <li>iii. A costly mismatch between body clocks and bell schedules</li>
+              <li>iv. The financial toll of ignoring chronotype</li>
+              <li>v. Early evidence from schools and offices that adapted</li>
+              <li>vi. The myth that willpower can override biology</li>
+              <li>vii. A brief history of the standardised working day</li>
+              <li>viii. Looking ahead: promise and pitfalls of flexibility</li>
+            </ul>
+            <p>1. Paragraph A &nbsp; 2. Paragraph B &nbsp; 3. Paragraph C &nbsp; 4. Paragraph D &nbsp; 5. Paragraph E &nbsp; 6. Paragraph F</p>
+          </div>
+          <div>
+            <h5>Questions 7–11 — True / False / Not Given</h5>
+            <ol type="7">
+              <li>Chronotype is determined entirely by lifestyle choices rather than biology.</li>
+              <li>Adolescents typically shift toward a later chronotype during puberty.</li>
+              <li>"Social jet lag" refers to the effects of long-haul air travel.</li>
+              <li>Every industry that has trialled later start times has been able to implement them successfully.</li>
+              <li>Researchers have calculated one precise global dollar figure for productivity lost to chronotype mismatch.</li>
+            </ol>
+          </div>
+          <div>
+            <h5>Questions 12–15 — Summary completion (ONE WORD from the passage each)</h5>
+            <p>Chronotype is regulated by the <b>(12)&nbsp;____</b>, a brain structure controlling hormones like melatonin. Roughly half of chronotype variation is <b>(13)&nbsp;____</b>. When schedules ignore this, the resulting sleep debt is linked to higher rates of <b>(14)&nbsp;____</b> disease. New <b>(15)&nbsp;____</b> work tools now make chronotype-aware scheduling more realistic than before.</p>
+          </div>
+        </div>
+        <details>
+          <summary>Answer key</summary>
+          <p><strong>Headings:</strong> 1–vii · 2–i · 3–iii · 4–ii · 5–v · 6–viii</p>
+          <p><strong>True/False/Not Given:</strong> 7–False · 8–True · 9–False · 10–False · 11–Not Given</p>
+          <p><strong>Summary:</strong> 12–suprachiasmatic (nucleus) · 13–genetic · 14–cardiovascular · 15–asynchronous</p>
+        </details>
+      </article>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Every drill above is original material written for this plan — for full-length, officially calibrated mocks, use <strong>Cambridge IELTS 17/18</strong>, the <strong>British Council</strong> practice tests, or <strong>IELTS Liz</strong>. Search these names directly rather than following a link from here.</p>
+    <p class="muted">All progress data is stored only in this browser (localStorage) — nothing is uploaded or sent anywhere.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var EXAM_DATE = "2026-07-22";
+  var GOAL_BAND = 7.5;
+  var BASELINE_BAND = 6.0;
+
+  var DAY_PLAN = [
+    { day: 1, date: "2026-07-13", weekday: "Mon", focus: "Listening Section 4 · Foundations",
+      tasks: [
+        ["d1t1", "Read the Section 4 survival tactics below", 10],
+        ["d1t2", "Complete the Urban Beekeeping note-completion drill", 15],
+        ["d1t3", "One official Section 4 audio, timed, no pausing", 20],
+        ["d1t4", "Tag every wrong answer: mishear / word-type / spelling / lost place", 10]
+      ] },
+    { day: 2, date: "2026-07-14", weekday: "Tue", focus: "Reading Passage 3 · Foundations",
+      tasks: [
+        ["d2t1", "Read the Passage 3 survival tactics below", 10],
+        ["d2t2", "Complete the Circadian Rhythms passage, strict 20-min timer", 20],
+        ["d2t3", "Tag wrong answers: T/F/NG confusion vs vocab miss vs timing", 15]
+      ] },
+    { day: 3, date: "2026-07-15", weekday: "Wed", focus: "Listening · Numbers &amp; Spelling",
+      tasks: [
+        ["d3t1", "Redo Day 1's audio with transcript open — log every misheard word", 15],
+        ["d3t2", "One new official Section 4, timed", 20],
+        ["d3t3", "Dictation drill: write 20 random numbers/dates fast, no second-guessing", 10]
+      ] },
+    { day: 4, date: "2026-07-16", weekday: "Thu", focus: "Reading · Headings &amp; Synonyms",
+      tasks: [
+        ["d4t1", "Build a synonym log from Day 2's misses (passage word → question word)", 10],
+        ["d4t2", "New Passage 3 — Matching Headings only, explain your reasoning", 25],
+        ["d4t3", "Same passage, True/False/NG only, 8 min timed", 10]
+      ] },
+    { day: 5, date: "2026-07-17", weekday: "Fri", focus: "Mixed Active Recall",
+      tasks: [
+        ["d5t1", "Redo Day 1's Section 4 from memory of your error log", 20],
+        ["d5t2", "Redo Day 2's True/False/NG questions, 10 min timed", 10],
+        ["d5t3", "Update your personal 'Top 5 traps' list", 10]
+      ] },
+    { day: 6, date: "2026-07-18", weekday: "Sat", focus: "FULL MOCK TEST",
+      tasks: [
+        ["d6t1", "Full official Listening + Reading test, strict exam timing", 120],
+        ["d6t2", "Mark it and log the result in the tracker below immediately", 10],
+        ["d6t3", "Deep-review every Section 4 and Passage 3 miss — find the pattern", 30]
+      ] },
+    { day: 7, date: "2026-07-19", weekday: "Sun", focus: "Targeted Repair",
+      tasks: [
+        ["d7t1", "Two more Section 4 audios back-to-back, based on yesterday's pattern", 40],
+        ["d7t2", "One more Passage 3, focused on your worst question type", 20],
+        ["d7t3", "Skim Writing/Speaking notes so they don't go cold", 15]
+      ] },
+    { day: 8, date: "2026-07-20", weekday: "Mon", focus: "Timing &amp; Endurance",
+      tasks: [
+        ["d8t1", "Skim Reading 1+2 fast (12 min), then a timed Passage 3 (20 min) while tired", 32],
+        ["d8t2", "One Section 4 immediately after, no break", 10]
+      ] },
+    { day: 9, date: "2026-07-21", weekday: "Tue", focus: "Confidence Lock-In",
+      tasks: [
+        ["d9t1", "Final timed Section 4 + Passage 3 — compare to Day 1/2 scores", 35],
+        ["d9t2", "Write your exam-day cheat sheet: top 5 traps + 3 techniques that worked", 15]
+      ] },
+    { day: 10, date: "2026-07-22", weekday: "Wed", focus: "EXAM DAY",
+      tasks: [
+        ["d10t1", "Read your cheat sheet once — no new material", 10],
+        ["d10t2", "Listen to 10 min of any native English audio to switch your ear on", 10],
+        ["d10t3", "Trust the prep. Go.", 0]
+      ] }
+  ];
+
+  var LS_TASKS = "ielts10.tasks.v1";
+  var LS_ATTEMPTS = "ielts10.attempts.v1";
+
+  function todayISO() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function parseISO(iso) {
+    var p = iso.split("-").map(Number);
+    return new Date(p[0], p[1] - 1, p[2]);
+  }
+  function fmtShort(iso) {
+    var d = parseISO(iso);
+    return d.toLocaleDateString(undefined, { day: "numeric", month: "short" });
+  }
+  function loadJSON(key, fallback) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch (e) { return fallback; }
+  }
+  function saveJSON(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+
+  /* ---------- Hero: countdown ---------- */
+  function renderHero() {
+    var today = parseISO(todayISO());
+    var exam = parseISO(EXAM_DATE);
+    var diffDays = Math.round((exam - today) / 86400000);
+    document.getElementById("daysLeft").textContent = diffDays >= 0 ? diffDays : 0;
+  }
+
+  /* ---------- Day plan + checklist ---------- */
+  var taskState = loadJSON(LS_TASKS, {});
+
+  function dayStatus(dayObj, todayIso) {
+    var allChecked = dayObj.tasks.every(function (t) { return taskState[t[0]]; });
+    if (dayObj.date === todayIso) return "today";
+    if (dayObj.date < todayIso) return allChecked ? "done" : "catchup";
+    return "upcoming";
+  }
+
+  function renderDayGrid() {
+    var todayIso = todayISO();
+    var grid = document.getElementById("dayGrid");
+    grid.innerHTML = "";
+    DAY_PLAN.forEach(function (d) {
+      var status = dayStatus(d, todayIso);
+      var card = document.createElement("div");
+      card.className = "day-card" + (status === "today" ? " is-today" : "");
+
+      var pillMap = {
+        today: ["Today", "pill-today"],
+        done: ["Done", "pill-done"],
+        catchup: ["Catch up", "pill-catchup"],
+        upcoming: ["Upcoming", "pill-upcoming"]
+      };
+      var pill = pillMap[status];
+
+      var tasksHtml = d.tasks.map(function (t) {
+        var id = t[0], label = t[1], mins = t[2];
+        var checked = !!taskState[id];
+        return '<li class="' + (checked ? "checked" : "") + '">' +
+          '<input type="checkbox" data-task="' + id + '" ' + (checked ? "checked" : "") + ' />' +
+          '<span>' + label + (mins ? ' <span class="task-min">(' + mins + ' min)</span>' : "") + '</span>' +
+          '</li>';
+      }).join("");
+
+      card.innerHTML =
+        '<div class="day-card-top">' +
+          '<div><div class="day-num">Day ' + d.day + '</div><div class="day-date">' + d.weekday + ', ' + fmtShort(d.date) + '</div></div>' +
+          '<span class="pill ' + pill[1] + '">' + pill[0] + '</span>' +
+        '</div>' +
+        '<div class="day-focus">' + d.focus + '</div>' +
+        '<ul class="day-tasks">' + tasksHtml + '</ul>';
+
+      grid.appendChild(card);
+    });
+
+    grid.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener("change", function () {
+        taskState[cb.dataset.task] = cb.checked;
+        saveJSON(LS_TASKS, taskState);
+        renderDayGrid();
+        renderAdherence();
+      });
+    });
+  }
+
+  function renderAdherence() {
+    var total = 0, done = 0;
+    DAY_PLAN.forEach(function (d) { d.tasks.forEach(function (t) { total++; if (taskState[t[0]]) done++; }); });
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById("adherenceFill").style.width = pct + "%";
+    document.getElementById("adherenceText").textContent = done + " / " + total + " tasks · " + pct + "%";
+  }
+
+  /* ---------- Score tracker ---------- */
+  var attempts = loadJSON(LS_ATTEMPTS, null);
+  if (attempts === null) {
+    attempts = [{ date: todayISO(), listening: null, reading: null, writing: null, speaking: null, overall: 6.25, note: "Diagnostic mock (reported)" }];
+    saveJSON(LS_ATTEMPTS, attempts);
+  }
+
+  function computeOverall(l, r, w, s) {
+    var vals = [l, r, w, s].filter(function (v) { return typeof v === "number" && !isNaN(v); });
+    if (!vals.length) return null;
+    var avg = vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
+    return Math.round(avg * 4) / 4; // nearest 0.25 as a light approximation of IELTS rounding
+  }
+
+  function renderTable() {
+    var body = document.getElementById("scoreTableBody");
+    if (!attempts.length) {
+      body.innerHTML = '<tr class="empty-row"><td colspan="6">No mocks logged yet — add your first one above.</td></tr>';
+      return;
+    }
+    body.innerHTML = attempts.map(function (a) {
+      return "<tr><td>" + fmtShort(a.date) + (a.note ? " <span class='muted'>(" + a.note + ")</span>" : "") + "</td>" +
+        "<td>" + (a.listening != null ? a.listening : "–") + "</td>" +
+        "<td>" + (a.reading != null ? a.reading : "–") + "</td>" +
+        "<td>" + (a.writing != null ? a.writing : "–") + "</td>" +
+        "<td>" + (a.speaking != null ? a.speaking : "–") + "</td>" +
+        "<td class='overall'>" + (a.overall != null ? a.overall : "–") + "</td></tr>";
+    }).join("");
+  }
+
+  function renderGoalProgress() {
+    var latestOverall = null;
+    for (var i = attempts.length - 1; i >= 0; i--) {
+      if (typeof attempts[i].overall === "number") { latestOverall = attempts[i].overall; break; }
+    }
+    var pct = latestOverall == null ? 0 : Math.max(0, Math.min(100, Math.round(((latestOverall - BASELINE_BAND) / (GOAL_BAND - BASELINE_BAND)) * 100)));
+    document.getElementById("goalProgressFill").style.width = pct + "%";
+    document.getElementById("goalProgressText").textContent = (latestOverall != null ? latestOverall.toFixed(2) : "–") + " → 7.5 · " + pct + "%";
+    document.getElementById("heroCurrent").textContent = latestOverall != null ? latestOverall.toFixed(2) : "6.0–6.5";
+  }
+
+  var svgNS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs) {
+    var e = document.createElementNS(svgNS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  function renderChart() {
+    var svg = document.getElementById("scoreChart");
+    svg.innerHTML = "";
+    var W = 640, H = 300, ML = 34, MR = 16, MT = 16, MB = 34;
+    var plotW = W - ML - MR, plotH = H - MT - MB;
+    var yMin = 5, yMax = 9;
+
+    function yPos(v) { return MT + plotH - ((v - yMin) / (yMax - yMin)) * plotH; }
+    function xPos(i) { return attempts.length <= 1 ? ML + plotW / 2 : ML + (i / (attempts.length - 1)) * plotW; }
+
+    // gridlines + y labels
+    for (var v = yMin; v <= yMax; v++) {
+      var gy = yPos(v);
+      svg.appendChild(el("line", { x1: ML, x2: W - MR, y1: gy, y2: gy, stroke: "var(--border)", "stroke-width": 1 }));
+      var lbl = document.createElementNS(svgNS, "text");
+      lbl.setAttribute("x", ML - 8); lbl.setAttribute("y", gy + 4); lbl.setAttribute("text-anchor", "end");
+      lbl.setAttribute("font-size", "10.5"); lbl.setAttribute("fill", "var(--text-muted)");
+      lbl.textContent = v; svg.appendChild(lbl);
+    }
+    // goal dashed line
+    var goalY = yPos(GOAL_BAND);
+    svg.appendChild(el("line", { x1: ML, x2: W - MR, y1: goalY, y2: goalY, stroke: "var(--accent)", "stroke-width": 1.5, "stroke-dasharray": "5 4" }));
+    var goalLbl = document.createElementNS(svgNS, "text");
+    goalLbl.setAttribute("x", W - MR); goalLbl.setAttribute("y", goalY - 6); goalLbl.setAttribute("text-anchor", "end");
+    goalLbl.setAttribute("font-size", "10.5"); goalLbl.setAttribute("fill", "var(--accent)"); goalLbl.setAttribute("font-weight", "700");
+    goalLbl.textContent = "Goal 7.5"; svg.appendChild(goalLbl);
+
+    // x labels
+    attempts.forEach(function (a, i) {
+      var lbl = document.createElementNS(svgNS, "text");
+      lbl.setAttribute("x", xPos(i)); lbl.setAttribute("y", H - 10); lbl.setAttribute("text-anchor", "middle");
+      lbl.setAttribute("font-size", "10"); lbl.setAttribute("fill", "var(--text-muted)");
+      lbl.textContent = fmtShort(a.date); svg.appendChild(lbl);
+    });
+
+    var series = [
+      { key: "listening", color: "var(--teal)" },
+      { key: "reading", color: "var(--indigo)" },
+      { key: "overall", color: "var(--accent)" }
+    ];
+
+    series.forEach(function (s) {
+      var pts = [];
+      attempts.forEach(function (a, i) { if (typeof a[s.key] === "number") pts.push([xPos(i), yPos(a[s.key]), a]); });
+      if (pts.length > 1) {
+        var d = pts.map(function (p, i) { return (i === 0 ? "M" : "L") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" ");
+        svg.appendChild(el("path", { d: d, fill: "none", stroke: s.color, "stroke-width": 2.5, "stroke-linecap": "round" }));
+      }
+      pts.forEach(function (p) {
+        var c = el("circle", { cx: p[0], cy: p[1], r: 4.5, fill: s.color, stroke: "var(--surface)", "stroke-width": 1.5 });
+        svg.appendChild(c);
+      });
+    });
+
+    // hover targets
+    var tooltip = document.getElementById("chartTooltip");
+    attempts.forEach(function (a, i) {
+      var hit = el("circle", { cx: xPos(i), cy: MT + plotH / 2, r: plotH / 2, fill: "transparent", style: "cursor:pointer" });
+      hit.addEventListener("mouseenter", function (ev) { showTip(a, i, ev); });
+      hit.addEventListener("mousemove", function (ev) { showTip(a, i, ev); });
+      hit.addEventListener("mouseleave", function () { tooltip.hidden = true; });
+      svg.appendChild(hit);
+    });
+
+    function showTip(a, i, ev) {
+      var rect = svg.getBoundingClientRect();
+      var wrap = svg.parentElement.getBoundingClientRect();
+      var px = rect.left - wrap.left + (xPos(i) / W) * rect.width;
+      tooltip.style.left = px + "px";
+      tooltip.style.top = "10px";
+      tooltip.innerHTML = "<strong>" + fmtShort(a.date) + "</strong><br/>" +
+        "Listening: " + (a.listening != null ? a.listening : "–") + " · Reading: " + (a.reading != null ? a.reading : "–") + "<br/>" +
+        "Overall: " + (a.overall != null ? a.overall : "–");
+      tooltip.hidden = false;
+    }
+  }
+
+  function renderScoreSection() {
+    renderTable();
+    renderGoalProgress();
+    renderChart();
+  }
+
+  document.getElementById("scoreForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var num = function (id) { var v = document.getElementById(id).value; return v === "" ? null : parseFloat(v); };
+    var l = num("fListening"), r = num("fReading"), w = num("fWriting"), s = num("fSpeaking");
+    var overallInput = num("fOverall");
+    var overall = overallInput != null ? overallInput : computeOverall(l, r, w, s);
+    var dateVal = document.getElementById("fDate").value || todayISO();
+    attempts.push({ date: dateVal, listening: l, reading: r, writing: w, speaking: s, overall: overall });
+    attempts.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    saveJSON(LS_ATTEMPTS, attempts);
+    renderScoreSection();
+    ev.target.reset();
+  });
+
+  /* ---------- init ---------- */
+  document.getElementById("fDate").value = todayISO();
+  renderHero();
+  renderDayGrid();
+  renderAdherence();
+  renderScoreSection();
+})();
+</script>
+</body>
+</html>

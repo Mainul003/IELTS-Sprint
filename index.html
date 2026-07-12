@@ -27,43 +27,43 @@
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #10151c;
-      --surface: #171d25;
-      --surface-2: #1e2530;
-      --text-primary: #edefef;
-      --text-secondary: #aeb4ba;
-      --text-muted: #7c848c;
-      --border: #2a323c;
+      --bg: #17140f;
+      --surface: #211d19;
+      --surface-2: #2a2620;
+      --text-primary: #ede6da;
+      --text-secondary: #bbb2a3;
+      --text-muted: #8c8375;
+      --border: #3a342c;
       --accent: #bc8730;
-      --accent-ink: #10151c;
+      --accent-ink: #17140f;
       --teal: #2aaa9e;
       --indigo: #7b85d4;
       --good: #4fbe79;
-      --good-bg: #163322;
+      --good-bg: #23331f;
       --warning: #e08a3c;
-      --warning-bg: #3a2a17;
+      --warning-bg: #3a2c19;
       --critical: #e5675f;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -12px rgba(0, 0, 0, 0.55);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 28px -12px rgba(0, 0, 0, 0.6);
     }
   }
   :root[data-theme="dark"] {
-    --bg: #10151c;
-    --surface: #171d25;
-    --surface-2: #1e2530;
-    --text-primary: #edefef;
-    --text-secondary: #aeb4ba;
-    --text-muted: #7c848c;
-    --border: #2a323c;
+    --bg: #17140f;
+    --surface: #211d19;
+    --surface-2: #2a2620;
+    --text-primary: #ede6da;
+    --text-secondary: #bbb2a3;
+    --text-muted: #8c8375;
+    --border: #3a342c;
     --accent: #bc8730;
-    --accent-ink: #10151c;
+    --accent-ink: #17140f;
     --teal: #2aaa9e;
     --indigo: #7b85d4;
     --good: #4fbe79;
-    --good-bg: #163322;
+    --good-bg: #23331f;
     --warning: #e08a3c;
-    --warning-bg: #3a2a17;
+    --warning-bg: #3a2c19;
     --critical: #e5675f;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -12px rgba(0, 0, 0, 0.55);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 28px -12px rgba(0, 0, 0, 0.6);
   }
   :root[data-theme="light"] {
     --bg: #eef1f0;
@@ -204,6 +204,15 @@
   /* ---------- Panels ---------- */
   .panel-head { margin-bottom: 18px; max-width: 66ch; }
   .panel-head h2 { font-size: 1.5rem; margin-bottom: 6px; }
+  .panel-head h2::after {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 3px;
+    margin-top: 9px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
   .panel-sub { margin: 0; color: var(--text-secondary); font-size: 0.94rem; }
 
   /* ---------- Day grid ---------- */
@@ -387,6 +396,28 @@
   .clinic-card ul { margin: 0; padding-left: 20px; color: var(--text-secondary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 7px; }
   .clinic-card ul li::marker { color: var(--accent); }
   .drill-note { font-size: 0.88rem; color: var(--text-secondary); margin: 0; }
+  .play-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 2px 0 4px; }
+  .play-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.82rem;
+    background: var(--teal);
+    color: var(--bg);
+    border: none;
+    border-radius: 100px;
+    padding: 8px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .play-btn:hover:not(:disabled) { filter: brightness(1.08); }
+  .play-btn:disabled { opacity: 0.6; cursor: default; }
+  .play-hint { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+  .data-table { border-collapse: collapse; width: 100%; font-size: 0.86rem; margin: 4px 0; }
+  .data-table th, .data-table td { text-align: left; padding: 6px 10px; border: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  .data-table th { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .prep-template { display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--text-secondary); margin: 0; padding-left: 0; list-style: none; }
+  .prep-template li b { color: var(--text-primary); font-family: "SFMono-Regular", Consolas, monospace; margin-right: 6px; }
   .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
   .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
   .passage { font-size: 0.92rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 12px; }
@@ -501,7 +532,7 @@
   <section id="clinicSection">
     <div class="panel-head">
       <h2>Weak-Spot Clinic</h2>
-      <p class="panel-sub">Two original practice drills, built for exactly where you're losing marks. Full-length timed mocks still belong in your official prep books — these are the concentrated technique fixes.</p>
+      <p class="panel-sub">Your overall band needs all four skills, so all four get tactics and an original drill below — Listening and Reading go deepest since that's where you reported losing the most marks. Full-length timed mocks still belong in your official prep books; these are the concentrated technique fixes.</p>
     </div>
     <div class="clinic-grid">
 
@@ -516,7 +547,11 @@
           <li>After writing an answer, check it fits the grammar of the note. If it doesn't, you likely misheard the word class, not just the word.</li>
         </ul>
         <h4>Practice drill — Urban Beekeeping Programme</h4>
-        <p class="drill-note">You can't get real exam audio here, so simulate a single-pass listen: have someone read the script aloud to you <strong>once</strong>, at normal talking speed, with no pausing — or paste it into a phone text-to-speech reader and only listen, don't read along. Fill the notes as you go.</p>
+        <p class="drill-note">Press play for a single-pass listen using your browser's built-in voice — same rules as the real test: it plays once, no rewinding. Fill in the notes as you listen.</p>
+        <div class="play-row">
+          <button type="button" id="playScriptBtn" class="play-btn">▶ Play the script once</button>
+          <p class="play-hint">Built-in text-to-speech (Web Speech API) — works offline, no audio file to download.</p>
+        </div>
         <ol class="note-sheet">
           <li>Programme launched in: <b>(31) ____</b></li>
           <li>Number of hives at launch: <b>(32) ____</b></li>
@@ -530,7 +565,7 @@
           <li>Contact person's job title: <b>(40) ____</b></li>
         </ol>
         <details>
-          <summary>Reader script — don't peek before practicing</summary>
+          <summary>Transcript (fallback if audio doesn't play, or for a friend to read aloud)</summary>
           <p>"Good evening, everyone. Tonight I want to talk about the rise of urban beekeeping programmes, using our own city's scheme as the case study. The scheme actually started back in twenty-nineteen, when the council installed just twelve hives on rooftops across the centre. Interestingly, city hives tend to outperform their rural cousins, largely thanks to the urban heat island effect — all that concrete keeps temperatures a degree or two higher, which extends the flowering season. On average, each hive now produces around eighteen kilos of honey a year. Every hive is inspected fortnightly — that's once every two weeks — to check on colony health. When we surveyed the volunteers, the single biggest threat they identified wasn't disease at all, but pesticide exposure from nearby private gardens. Before anyone can take on a hive, they complete a short training course, which runs for six weeks and covers basic hive management. Funding, interestingly, comes mainly from corporate sponsorship rather than council budgets. Next year the programme is expanding to a new site: the grounds of the old railway depot. And if any of you would like to get involved, you can contact our volunteer coordinator, whose job title is Community Engagement Officer."</p>
         </details>
         <details>
@@ -597,6 +632,67 @@
         </details>
       </article>
 
+      <article class="clinic-card">
+        <h3>✍️ Writing — Task 1 &amp; Task 2</h3>
+        <h4>Survival tactics</h4>
+        <ul>
+          <li>One hour, two tasks: give Task 1 (150+ words) about 20 minutes and Task 2 (250+ words) about 40 — Task 2 counts for twice as much of the Writing band.</li>
+          <li>Task 2 structure examiners can follow instantly: intro (paraphrase + your clear position) → two body paragraphs (one idea each: topic sentence, explanation, example) → conclusion (restate position, no new ideas).</li>
+          <li>Answer <em>every</em> part of the question. A fluent essay that ignores half a two-part prompt is capped on Task Achievement regardless of how good the language is.</li>
+          <li>The 6→7.5 gap is usually Grammatical Range: aim for at least one genuine complex sentence per paragraph (a relative clause, a conditional) — but only where it reads naturally.</li>
+          <li>Drop memorised template phrases ("In today's modern world...", "There are many pros and cons...") — examiners flag them instantly. Plain, specific sentences score higher.</li>
+          <li>For Task 1: open with an overview sentence naming the 1–2 biggest overall trends before any numbers. Most candidates skip this — it's free Task Achievement marks.</li>
+        </ul>
+        <h4>Practice drill — Task 1 overview + Task 2 outline</h4>
+        <p class="drill-note">Task 1: write only the overview sentence below, then compare it to the model. This single habit is the highest-leverage fix for Task 1.</p>
+        <table class="data-table">
+          <thead><tr><th>Sector</th><th>2015 (hrs/week)</th><th>2025 (hrs/week)</th></tr></thead>
+          <tbody>
+            <tr><td>Retail</td><td>38</td><td>33</td></tr>
+            <tr><td>Healthcare</td><td>42</td><td>45</td></tr>
+            <tr><td>Technology</td><td>41</td><td>38</td></tr>
+            <tr><td>Manufacturing</td><td>44</td><td>40</td></tr>
+          </tbody>
+        </table>
+        <p class="drill-note">Task 2 prompt: <em>"Some people believe employees should choose their own working hours, while others think a fixed schedule set by the employer is more effective. Discuss both views and give your own opinion."</em> Write only a 4-part outline (intro position / case for fixed / case for flexible / conclusion), then compare to the model below.</p>
+        <details>
+          <summary>Model overview + outline + sample paragraph</summary>
+          <p><strong>Task 1 overview:</strong> "Overall, working hours declined in most sectors between 2015 and 2025, with the sharpest fall in retail, while healthcare was the only sector to see an increase."</p>
+          <p><strong>Task 2 outline:</strong> Intro — flexible hours are generally more effective, though some structure remains necessary. Body 1 — the case for fixed schedules (coordination, accountability, fairness). Body 2 — the case for flexible hours (matches natural alertness, improves retention) + your opinion. Conclusion — restate position, one practical caveat.</p>
+          <p><strong>Sample body paragraph:</strong> "On the other hand, flexible scheduling recognises that not everyone reaches peak alertness at the same hour. Employees permitted to start later, for instance, often report fewer errors during the tasks they find most demanding. This is not simply a matter of comfort: several companies that trialled flexible hours recorded measurable drops in absenteeism within a year. For this reason, I would argue that flexibility should be the default wherever a role allows it, with fixed hours reserved for positions where real-time coordination is unavoidable, such as customer support or manufacturing shifts."</p>
+        </details>
+      </article>
+
+      <article class="clinic-card">
+        <h3>🗣️ Speaking — Parts 1–3</h3>
+        <h4>Survival tactics</h4>
+        <ul>
+          <li>Part 1 (4–5 min, personal questions): answer directly, then add one reason or example in 2–3 sentences total — never a single word, never a speech.</li>
+          <li>Part 2 (cue card): 1 minute to prepare, up to 2 minutes to speak. Treat the four bullet prompts as your outline — a sentence or two per bullet paces you to fill the full 2 minutes without stalling or stopping early.</li>
+          <li>Part 3 (abstract discussion): extend every answer — reason, example, then a contrast or speculation ("...whereas in the past...", "...though that might change if..."). One-line answers are the single biggest Part 3 score killer.</li>
+          <li>Fluency is scored on natural self-correction and linking, not on speaking without a single pause — correcting yourself briefly ("she go— she went") and moving on reads as more fluent than freezing.</li>
+          <li>Record yourself on your phone during practice and listen back once. Most candidates don't notice their own filler-word habits (um, like, you know) until they hear the recording.</li>
+        </ul>
+        <h4>Practice drill — Cue card + follow-up discussion</h4>
+        <p class="drill-note"><strong>Cue card:</strong> Describe a skill you learned recently. You should say: what the skill was, how you learned it, how long it took, and explain how you feel about having learned it.</p>
+        <ul class="prep-template">
+          <li><b>What:</b> ______________________</li>
+          <li><b>How:</b> ______________________</li>
+          <li><b>How long:</b> ______________________</li>
+          <li><b>Feeling (+ one reason):</b> ______________________</li>
+        </ul>
+        <p class="drill-note">Prepare for 1 minute using the template above, then speak for 2 minutes, timed. Follow up with these Part 3 questions:</p>
+        <ol class="note-sheet">
+          <li>Do adults today have enough time to learn new skills?</li>
+          <li>Are some skills more useful to learn in childhood than in adulthood?</li>
+          <li>How has technology changed the way people learn new skills?</li>
+        </ol>
+        <details>
+          <summary>Model 30-second opening (pacing reference only — don't memorise it)</summary>
+          <p>"One skill I picked up fairly recently is basic conversational Spanish. I started because I kept running into Spanish-speaking clients at work and felt embarrassed I couldn't even greet them properly, so about four months ago I began using a language app for twenty minutes most evenings. It's taken longer than I expected — I'm still far from fluent — but I feel genuinely proud whenever I manage a full exchange without switching back to English."</p>
+        </details>
+      </article>
+
     </div>
   </section>
 
@@ -645,7 +741,8 @@
       tasks: [
         ["d5t1", "Redo Day 1's Section 4 from memory of your error log", 20],
         ["d5t2", "Redo Day 2's True/False/NG questions, 10 min timed", 10],
-        ["d5t3", "Update your personal 'Top 5 traps' list", 10]
+        ["d5t3", "Update your personal 'Top 5 traps' list", 10],
+        ["d5t4", "Writing: write the Task 1 overview sentence drill below", 10]
       ] },
     { day: 6, date: "2026-07-18", weekday: "Sat", focus: "FULL MOCK TEST",
       tasks: [
@@ -657,7 +754,8 @@
       tasks: [
         ["d7t1", "Two more Section 4 audios back-to-back, based on yesterday's pattern", 40],
         ["d7t2", "One more Passage 3, focused on your worst question type", 20],
-        ["d7t3", "Skim Writing/Speaking notes so they don't go cold", 15]
+        ["d7t3", "Writing: do the Task 2 outline + model-paragraph drill", 15],
+        ["d7t4", "Speaking: do the cue-card drill aloud, timed 2 minutes", 15]
       ] },
     { day: 8, date: "2026-07-20", weekday: "Mon", focus: "Timing &amp; Endurance",
       tasks: [
@@ -918,12 +1016,39 @@
     ev.target.reset();
   });
 
+  /* ---------- Listening drill: browser text-to-speech ---------- */
+  var LISTENING_SCRIPT = "Good evening, everyone. Tonight I want to talk about the rise of urban beekeeping programmes, using our own city's scheme as the case study. The scheme actually started back in twenty-nineteen, when the council installed just twelve hives on rooftops across the centre. Interestingly, city hives tend to outperform their rural cousins, largely thanks to the urban heat island effect — all that concrete keeps temperatures a degree or two higher, which extends the flowering season. On average, each hive now produces around eighteen kilos of honey a year. Every hive is inspected fortnightly — that's once every two weeks — to check on colony health. When we surveyed the volunteers, the single biggest threat they identified wasn't disease at all, but pesticide exposure from nearby private gardens. Before anyone can take on a hive, they complete a short training course, which runs for six weeks and covers basic hive management. Funding, interestingly, comes mainly from corporate sponsorship rather than council budgets. Next year the programme is expanding to a new site: the grounds of the old railway depot. And if any of you would like to get involved, you can contact our volunteer coordinator, whose job title is Community Engagement Officer.";
+
+  function initPlayButton() {
+    var btn = document.getElementById("playScriptBtn");
+    if (!btn) return;
+    if (!("speechSynthesis" in window)) {
+      btn.disabled = true;
+      btn.textContent = "Text-to-speech isn't supported in this browser";
+      return;
+    }
+    btn.addEventListener("click", function () {
+      if (window.speechSynthesis.speaking) return;
+      window.speechSynthesis.cancel();
+      var utter = new SpeechSynthesisUtterance(LISTENING_SCRIPT);
+      utter.rate = 0.95;
+      btn.disabled = true;
+      btn.textContent = "▶ Playing…";
+      utter.onend = utter.onerror = function () {
+        btn.disabled = false;
+        btn.textContent = "▶ Play the script once";
+      };
+      window.speechSynthesis.speak(utter);
+    });
+  }
+
   /* ---------- init ---------- */
   document.getElementById("fDate").value = todayISO();
   renderHero();
   renderDayGrid();
   renderAdherence();
   renderScoreSection();
+  initPlayButton();
 })();
 </script>
 </body>

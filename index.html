@@ -364,6 +364,52 @@
   .data-table th { color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
   .prep-template { display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; color: var(--text-secondary); margin: 0; padding-left: 0; list-style: none; }
   .prep-template li b { color: var(--text-primary); font-family: "SFMono-Regular", Consolas, monospace; margin-right: 6px; }
+
+  /* ---------- Scored gap-fill quizzes ---------- */
+  .gap-field {
+    font: inherit;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: var(--text-primary);
+  }
+  .gap-field.correct { border-color: var(--good); background: var(--good-bg); }
+  .gap-field.incorrect { border-color: var(--critical); background: #f8e6e4; }
+  select.gap-field { cursor: pointer; }
+  .gap-input { width: 150px; }
+  .gap-input-inline { width: 120px; display: inline-block; }
+  .gap-feedback { font-size: 0.78rem; color: var(--critical); margin-left: 6px; }
+  .match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; font-size: 0.88rem; color: var(--text-secondary); margin: 4px 0; }
+  .match-grid label { display: flex; align-items: center; gap: 6px; }
+  .tfng-list { display: flex; flex-direction: column; gap: 8px; padding-left: 20px; margin: 6px 0; }
+  .tfng-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .quiz-actions { display: flex; align-items: center; gap: 12px; margin-top: 6px; flex-wrap: wrap; }
+  .check-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.82rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 100px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  .check-btn:hover { filter: brightness(1.06); }
+  .reset-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.82rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  .quiz-score { font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
   .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
   .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
   .passage { font-size: 0.92rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 12px; }
@@ -498,18 +544,23 @@
           <button type="button" id="playScriptBtn" class="play-btn">▶ Play the script once</button>
           <p class="play-hint">Built-in text-to-speech (Web Speech API) — works offline, no audio file to download.</p>
         </div>
-        <ol class="note-sheet">
-          <li>Programme launched in: <b>(31) ____</b></li>
-          <li>Number of hives at launch: <b>(32) ____</b></li>
-          <li>City hives outperform rural ones thanks to the <b>(33) ____</b> effect</li>
-          <li>Average honey yield per hive: <b>(34) ____</b> kg/year</li>
-          <li>Hives are inspected every <b>(35) ____</b> weeks</li>
-          <li>Biggest threat identified by beekeepers: <b>(36) ____</b></li>
-          <li>Volunteer training course lasts: <b>(37) ____</b></li>
-          <li>Programme is funded mainly through: <b>(38) ____</b></li>
-          <li>Next year's new site: <b>(39) ____</b></li>
-          <li>Contact person's job title: <b>(40) ____</b></li>
+        <ol class="note-sheet" id="listeningDrill">
+          <li>Programme launched in: <b>(31)</b> <input type="text" class="gap-field gap-input" data-q="listen-31" autocomplete="off" /></li>
+          <li>Number of hives at launch: <b>(32)</b> <input type="text" class="gap-field gap-input" data-q="listen-32" autocomplete="off" /></li>
+          <li>City hives outperform rural ones thanks to the <b>(33)</b> <input type="text" class="gap-field gap-input" data-q="listen-33" autocomplete="off" /> effect</li>
+          <li>Average honey yield per hive: <b>(34)</b> <input type="text" class="gap-field gap-input" data-q="listen-34" autocomplete="off" /> kg/year</li>
+          <li>Hives are inspected every <b>(35)</b> <input type="text" class="gap-field gap-input" data-q="listen-35" autocomplete="off" /> weeks</li>
+          <li>Biggest threat identified by beekeepers: <b>(36)</b> <input type="text" class="gap-field gap-input" data-q="listen-36" autocomplete="off" /></li>
+          <li>Volunteer training course lasts: <b>(37)</b> <input type="text" class="gap-field gap-input" data-q="listen-37" autocomplete="off" /></li>
+          <li>Programme is funded mainly through: <b>(38)</b> <input type="text" class="gap-field gap-input" data-q="listen-38" autocomplete="off" /></li>
+          <li>Next year's new site: <b>(39)</b> <input type="text" class="gap-field gap-input" data-q="listen-39" autocomplete="off" /></li>
+          <li>Contact person's job title: <b>(40)</b> <input type="text" class="gap-field gap-input" data-q="listen-40" autocomplete="off" /></li>
         </ol>
+        <div class="quiz-actions">
+          <button type="button" class="check-btn" id="checkListeningBtn">Check my answers</button>
+          <button type="button" class="reset-btn" id="resetListeningBtn">Reset</button>
+          <span class="quiz-score" id="listeningScore" hidden></span>
+        </div>
         <details>
           <summary>Transcript (fallback if audio doesn't play, or for a friend to read aloud)</summary>
           <p>"Good evening, everyone. Tonight I want to talk about the rise of urban beekeeping programmes, using our own city's scheme as the case study. The scheme actually started back in twenty-nineteen, when the council installed just twelve hives on rooftops across the centre. Interestingly, city hives tend to outperform their rural cousins, largely thanks to the urban heat island effect — all that concrete keeps temperatures a degree or two higher, which extends the flowering season. On average, each hive now produces around eighteen kilos of honey a year. Every hive is inspected fortnightly — that's once every two weeks — to check on colony health. When we surveyed the volunteers, the single biggest threat they identified wasn't disease at all, but pesticide exposure from nearby private gardens. Before anyone can take on a hive, they complete a short training course, which runs for six weeks and covers basic hive management. Funding, interestingly, comes mainly from corporate sponsorship rather than council budgets. Next year the programme is expanding to a new site: the grounds of the old railway depot. And if any of you would like to get involved, you can contact our volunteer coordinator, whose job title is Community Engagement Officer."</p>
@@ -539,7 +590,7 @@
           <p><b>E</b> A small number of schools and employers have nonetheless experimented with later start times. Several secondary schools that delayed their first lesson by an hour reported measurable improvements in test scores and a drop in recorded absences within a single academic year. Comparable pilot programmes in office settings found reduced reported fatigue among staff, though the same organisations noted that shift-based industries — manufacturing, healthcare, transport — cannot adopt these changes without redesigning rosters from the ground up, and public transport timetables rarely adjust to match.</p>
           <p><b>F</b> Advances in remote and asynchronous work tools have made chronotype-aware scheduling more feasible than at any point in the past, allowing some employees to shift their hours without a formal policy change. Yet flexibility of this kind introduces its own difficulties: those working far outside standard hours report greater isolation from colleagues, and the boundary between work and rest can blur when no schedule is imposed at all. No single arrangement yet reconciles biological variation with the practical demands of collective work.</p>
         </div>
-        <div class="questions">
+        <div class="questions" id="readingDrill">
           <div>
             <h5>Questions 1–6 — Matching Headings</h5>
             <p>The passage has six paragraphs, A–F. Choose the correct heading for each paragraph from the list below.</p>
@@ -553,22 +604,56 @@
               <li>vii. A brief history of the standardised working day</li>
               <li>viii. Looking ahead: promise and pitfalls of flexibility</li>
             </ul>
-            <p>1. Paragraph A &nbsp; 2. Paragraph B &nbsp; 3. Paragraph C &nbsp; 4. Paragraph D &nbsp; 5. Paragraph E &nbsp; 6. Paragraph F</p>
+            <div class="match-grid">
+              <label>1. Paragraph A
+                <select class="gap-field" data-q="read-1"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+              <label>2. Paragraph B
+                <select class="gap-field" data-q="read-2"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+              <label>3. Paragraph C
+                <select class="gap-field" data-q="read-3"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+              <label>4. Paragraph D
+                <select class="gap-field" data-q="read-4"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+              <label>5. Paragraph E
+                <select class="gap-field" data-q="read-5"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+              <label>6. Paragraph F
+                <select class="gap-field" data-q="read-6"><option value=""></option><option>i</option><option>ii</option><option>iii</option><option>iv</option><option>v</option><option>vi</option><option>vii</option><option>viii</option></select>
+              </label>
+            </div>
           </div>
           <div>
             <h5>Questions 7–11 — True / False / Not Given</h5>
-            <ol type="7">
-              <li>Chronotype is determined entirely by lifestyle choices rather than biology.</li>
-              <li>Adolescents typically shift toward a later chronotype during puberty.</li>
-              <li>"Social jet lag" refers to the effects of long-haul air travel.</li>
-              <li>Every industry that has trialled later start times has been able to implement them successfully.</li>
-              <li>Researchers have calculated one precise global dollar figure for productivity lost to chronotype mismatch.</li>
+            <ol start="7" class="tfng-list">
+              <li>Chronotype is determined entirely by lifestyle choices rather than biology.
+                <select class="gap-field" data-q="read-7"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select>
+              </li>
+              <li>Adolescents typically shift toward a later chronotype during puberty.
+                <select class="gap-field" data-q="read-8"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select>
+              </li>
+              <li>"Social jet lag" refers to the effects of long-haul air travel.
+                <select class="gap-field" data-q="read-9"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select>
+              </li>
+              <li>Every industry that has trialled later start times has been able to implement them successfully.
+                <select class="gap-field" data-q="read-10"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select>
+              </li>
+              <li>Researchers have calculated one precise global dollar figure for productivity lost to chronotype mismatch.
+                <select class="gap-field" data-q="read-11"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select>
+              </li>
             </ol>
           </div>
           <div>
             <h5>Questions 12–15 — Summary completion (ONE WORD from the passage each)</h5>
-            <p>Chronotype is regulated by the <b>(12)&nbsp;____</b>, a brain structure controlling hormones like melatonin. Roughly half of chronotype variation is <b>(13)&nbsp;____</b>. When schedules ignore this, the resulting sleep debt is linked to higher rates of <b>(14)&nbsp;____</b> disease. New <b>(15)&nbsp;____</b> work tools now make chronotype-aware scheduling more realistic than before.</p>
+            <p>Chronotype is regulated by the <b>(12)</b> <input type="text" class="gap-field gap-input-inline" data-q="read-12" autocomplete="off" />, a brain structure controlling hormones like melatonin. Roughly half of chronotype variation is <b>(13)</b> <input type="text" class="gap-field gap-input-inline" data-q="read-13" autocomplete="off" />. When schedules ignore this, the resulting sleep debt is linked to higher rates of <b>(14)</b> <input type="text" class="gap-field gap-input-inline" data-q="read-14" autocomplete="off" /> disease. New <b>(15)</b> <input type="text" class="gap-field gap-input-inline" data-q="read-15" autocomplete="off" /> work tools now make chronotype-aware scheduling more realistic than before.</p>
           </div>
+        </div>
+        <div class="quiz-actions">
+          <button type="button" class="check-btn" id="checkReadingBtn">Check my answers</button>
+          <button type="button" class="reset-btn" id="resetReadingBtn">Reset</button>
+          <span class="quiz-score" id="readingScore" hidden></span>
         </div>
         <details>
           <summary>Answer key</summary>
@@ -988,6 +1073,78 @@
     });
   }
 
+  /* ---------- Scored gap-fill quizzes ---------- */
+  var LISTENING_ANSWERS = {
+    "listen-31": ["2019"],
+    "listen-32": ["12", "twelve"],
+    "listen-33": ["urban heat island", "heat island"],
+    "listen-34": ["18", "eighteen"],
+    "listen-35": ["two", "2"],
+    "listen-36": ["pesticide exposure", "pesticide", "pesticides"],
+    "listen-37": ["six weeks", "6 weeks", "six"],
+    "listen-38": ["corporate sponsorship", "corporate sponsors", "sponsorship"],
+    "listen-39": ["the old railway depot", "old railway depot", "railway depot"],
+    "listen-40": ["community engagement officer", "community engagement"]
+  };
+  var READING_ANSWERS = {
+    "read-1": ["vii"], "read-2": ["i"], "read-3": ["iii"], "read-4": ["ii"], "read-5": ["v"], "read-6": ["viii"],
+    "read-7": ["false"], "read-8": ["true"], "read-9": ["false"], "read-10": ["false"], "read-11": ["not given"],
+    "read-12": ["suprachiasmatic nucleus", "suprachiasmatic"], "read-13": ["genetic"],
+    "read-14": ["cardiovascular"], "read-15": ["asynchronous"]
+  };
+
+  function checkQuiz(containerId, answers, scoreElId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var correct = 0, total = 0;
+    Object.keys(answers).forEach(function (q) {
+      var field = container.querySelector('[data-q="' + q + '"]');
+      if (!field) return;
+      total++;
+      var old = field.parentElement.querySelector(".gap-feedback");
+      if (old) old.remove();
+      field.classList.remove("correct", "incorrect");
+      var val = (field.value || "").trim().toLowerCase();
+      var ok = answers[q].indexOf(val) !== -1;
+      if (ok) {
+        correct++;
+        field.classList.add("correct");
+      } else {
+        field.classList.add("incorrect");
+        var span = document.createElement("span");
+        span.className = "gap-feedback";
+        span.textContent = "Answer: " + answers[q][0];
+        field.insertAdjacentElement("afterend", span);
+      }
+    });
+    var scoreEl = document.getElementById(scoreElId);
+    scoreEl.textContent = "Score: " + correct + " / " + total;
+    scoreEl.hidden = false;
+  }
+
+  function resetQuiz(containerId, scoreElId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    container.querySelectorAll(".gap-field").forEach(function (f) {
+      f.value = "";
+      f.classList.remove("correct", "incorrect");
+    });
+    container.querySelectorAll(".gap-feedback").forEach(function (f) { f.remove(); });
+    var scoreEl = document.getElementById(scoreElId);
+    scoreEl.hidden = true;
+  }
+
+  function initQuizzes() {
+    var checkListening = document.getElementById("checkListeningBtn");
+    var resetListening = document.getElementById("resetListeningBtn");
+    var checkReading = document.getElementById("checkReadingBtn");
+    var resetReading = document.getElementById("resetReadingBtn");
+    if (checkListening) checkListening.addEventListener("click", function () { checkQuiz("listeningDrill", LISTENING_ANSWERS, "listeningScore"); });
+    if (resetListening) resetListening.addEventListener("click", function () { resetQuiz("listeningDrill", "listeningScore"); });
+    if (checkReading) checkReading.addEventListener("click", function () { checkQuiz("readingDrill", READING_ANSWERS, "readingScore"); });
+    if (resetReading) resetReading.addEventListener("click", function () { resetQuiz("readingDrill", "readingScore"); });
+  }
+
   /* ---------- init ---------- */
   document.getElementById("fDate").value = todayISO();
   renderHero();
@@ -995,6 +1152,7 @@
   renderAdherence();
   renderScoreSection();
   initPlayButton();
+  initQuizzes();
 })();
 </script>
 </body>

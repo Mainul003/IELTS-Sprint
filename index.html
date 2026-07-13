@@ -413,14 +413,14 @@
 
   /* ---------- Select-to-highlight (CD-IELTS style) ---------- */
   .passage-toolbar { display: flex; justify-content: flex-end; }
-  .passage mark.user-highlight {
+  mark.user-highlight {
     background: rgba(194, 121, 15, 0.32);
     color: inherit;
     padding: 0 1px;
     border-radius: 2px;
     cursor: pointer;
   }
-  .passage mark.user-highlight:hover { background: rgba(194, 121, 15, 0.48); }
+  mark.user-highlight:hover { background: rgba(194, 121, 15, 0.48); }
   .highlight-btn {
     position: fixed;
     z-index: 50;
@@ -435,6 +435,7 @@
     cursor: pointer;
     box-shadow: var(--shadow);
   }
+  .highlight-btn.remove-variant { background: var(--critical); color: #fff; }
   .highlight-btn[hidden] { display: none; }
   .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
   .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
@@ -608,7 +609,7 @@
           <li>Questions follow the passage in order. Use that to narrow your search instead of re-reading from the top each time.</li>
         </ul>
         <h4>Practice drill — Circadian Rhythms and the Cost of the Nine-to-Five</h4>
-        <p class="drill-note">Select any text in the passage below to highlight it — just like the real computer-delivered test. Click a highlight again to remove it.</p>
+        <p class="drill-note">Select any text in the passage or the questions below to highlight it — just like the real computer-delivered test. Click a highlight, then confirm, to remove it.</p>
         <div class="passage-toolbar">
           <button type="button" class="reset-btn" id="clearHighlightsBtn">Clear highlights</button>
         </div>
@@ -1183,75 +1184,150 @@
     parent.normalize();
   }
 
+  function getTextOffset(container, node, offset) {
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    var total = 0, cur;
+    while ((cur = walker.nextNode())) {
+      if (cur === node) return total + offset;
+      total += cur.nodeValue.length;
+    }
+    return total;
+  }
+
+  function rangeFromOffsets(container, start, end) {
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    var range = document.createRange();
+    var total = 0, cur, startSet = false;
+    while ((cur = walker.nextNode())) {
+      var len = cur.nodeValue.length;
+      if (!startSet && total + len >= start) { range.setStart(cur, start - total); startSet = true; }
+      if (startSet && total + len >= end) { range.setEnd(cur, end - total); return range; }
+      total += len;
+    }
+    range.selectNodeContents(container);
+    range.collapse(false);
+    return range;
+  }
+
   function initHighlighter() {
-    var passage = document.querySelector(".passage");
-    if (!passage) return;
-    var STORE_KEY = "ielts10.readingHighlights";
+    var containers = [
+      { el: document.querySelector(".passage"), key: "ielts10.readingHighlights" },
+      { el: document.getElementById("readingDrill"), key: "ielts10.readingQuestionHighlights" }
+    ].filter(function (c) { return c.el; });
+    if (!containers.length) return;
 
-    var saved = loadJSON(STORE_KEY, null);
-    if (saved) passage.innerHTML = saved;
-
-    function persist() { saveJSON(STORE_KEY, passage.innerHTML); }
-
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "highlight-btn";
-    btn.textContent = "✎ Highlight";
-    btn.hidden = true;
-    document.body.appendChild(btn);
-
-    var pendingRange = null;
-
-    function hideBtn() { btn.hidden = true; pendingRange = null; }
-
-    passage.addEventListener("mouseup", function () {
-      var sel = window.getSelection();
-      if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideBtn(); return; }
-      var range = sel.getRangeAt(0);
-      if (!passage.contains(range.commonAncestorContainer)) { hideBtn(); return; }
-      var rect = range.getBoundingClientRect();
-      if (!rect || (rect.width === 0 && rect.height === 0)) { hideBtn(); return; }
-      pendingRange = range.cloneRange();
-      btn.style.top = Math.max(8, rect.top - 36) + "px";
-      btn.style.left = Math.max(8, rect.left) + "px";
-      btn.hidden = false;
+    containers.forEach(function (c) {
+      var saved = loadJSON(c.key, null);
+      if (saved) c.el.innerHTML = saved;
     });
 
-    btn.addEventListener("mousedown", function (e) { e.preventDefault(); });
-    btn.addEventListener("click", function () {
-      if (!pendingRange) return;
+    function persistContainer(container) {
+      var c = containers.filter(function (x) { return x.el === container; })[0];
+      if (c) saveJSON(c.key, container.innerHTML);
+    }
+
+    var highlightBtn = document.createElement("button");
+    highlightBtn.type = "button";
+    highlightBtn.className = "highlight-btn";
+    highlightBtn.textContent = "✎ Highlight";
+    highlightBtn.hidden = true;
+    document.body.appendChild(highlightBtn);
+
+    var removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "highlight-btn remove-variant";
+    removeBtn.textContent = "🗑 Remove highlight";
+    removeBtn.hidden = true;
+    document.body.appendChild(removeBtn);
+
+    var pendingRange = null, pendingContainer = null, pendingMark = null;
+
+    function hideCreateBtn() { highlightBtn.hidden = true; pendingRange = null; pendingContainer = null; }
+    function hideRemoveBtn() { removeBtn.hidden = true; pendingMark = null; }
+
+    containers.forEach(function (c) {
+      var container = c.el;
+
+      container.addEventListener("mouseup", function () {
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideCreateBtn(); return; }
+        var range = sel.getRangeAt(0);
+        if (!container.contains(range.commonAncestorContainer)) { hideCreateBtn(); return; }
+        var rect = range.getBoundingClientRect();
+        if (!rect || (rect.width === 0 && rect.height === 0)) { hideCreateBtn(); return; }
+        hideRemoveBtn();
+        pendingRange = range.cloneRange();
+        pendingContainer = container;
+        highlightBtn.style.top = Math.max(8, rect.top - 36) + "px";
+        highlightBtn.style.left = Math.max(8, rect.left) + "px";
+        highlightBtn.hidden = false;
+      });
+
+      container.addEventListener("click", function (e) {
+        var mark = e.target.closest ? e.target.closest("mark.user-highlight") : null;
+        if (mark && window.getSelection().isCollapsed) {
+          hideCreateBtn();
+          var rect = mark.getBoundingClientRect();
+          removeBtn.style.top = Math.max(8, rect.top - 36) + "px";
+          removeBtn.style.left = Math.max(8, rect.left) + "px";
+          removeBtn.hidden = false;
+          pendingMark = mark;
+          pendingContainer = container;
+        }
+      });
+    });
+
+    highlightBtn.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    highlightBtn.addEventListener("click", function () {
+      if (!pendingRange || !pendingContainer) return;
+      var container = pendingContainer;
+      var startOffset = getTextOffset(container, pendingRange.startContainer, pendingRange.startOffset);
+      var endOffset = getTextOffset(container, pendingRange.endContainer, pendingRange.endOffset);
+      if (endOffset <= startOffset) { hideCreateBtn(); return; }
+
+      // Merge instead of nesting: drop any highlights this new selection overlaps.
+      container.querySelectorAll("mark.user-highlight").forEach(function (m) {
+        if (pendingRange.intersectsNode(m)) unwrapMark(m);
+      });
+
+      var freshRange = rangeFromOffsets(container, startOffset, endOffset);
       var mark = document.createElement("mark");
       mark.className = "user-highlight";
       mark.title = "Click to remove highlight";
       try {
-        pendingRange.surroundContents(mark);
-      } catch (e) {
-        var frag = pendingRange.extractContents();
+        freshRange.surroundContents(mark);
+      } catch (err) {
+        var frag = freshRange.extractContents();
         mark.appendChild(frag);
-        pendingRange.insertNode(mark);
+        freshRange.insertNode(mark);
       }
       window.getSelection().removeAllRanges();
-      hideBtn();
-      persist();
+      hideCreateBtn();
+      persistContainer(container);
     });
 
-    passage.addEventListener("click", function (e) {
-      var mark = e.target.closest ? e.target.closest("mark.user-highlight") : null;
-      if (mark && window.getSelection().isCollapsed) {
-        unwrapMark(mark);
-        persist();
+    removeBtn.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    removeBtn.addEventListener("click", function () {
+      if (pendingMark && pendingContainer) {
+        var container = pendingContainer;
+        unwrapMark(pendingMark);
+        persistContainer(container);
       }
+      hideRemoveBtn();
     });
 
     document.addEventListener("mousedown", function (e) {
-      if (e.target !== btn) hideBtn();
+      if (e.target !== highlightBtn) hideCreateBtn();
+      if (e.target !== removeBtn) hideRemoveBtn();
     });
 
     var clearBtn = document.getElementById("clearHighlightsBtn");
     if (clearBtn) {
       clearBtn.addEventListener("click", function () {
-        passage.querySelectorAll("mark.user-highlight").forEach(unwrapMark);
-        persist();
+        containers.forEach(function (c) {
+          c.el.querySelectorAll("mark.user-highlight").forEach(unwrapMark);
+          persistContainer(c.el);
+        });
       });
     }
   }
@@ -1269,5 +1345,3 @@
 </script>
 </body>
 </html>
-
-<!-- redeploy trigger -->

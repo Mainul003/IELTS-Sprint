@@ -410,6 +410,32 @@
     cursor: pointer;
   }
   .quiz-score { font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+
+  /* ---------- Select-to-highlight (CD-IELTS style) ---------- */
+  .passage-toolbar { display: flex; justify-content: flex-end; }
+  .passage mark.user-highlight {
+    background: rgba(194, 121, 15, 0.32);
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .passage mark.user-highlight:hover { background: rgba(194, 121, 15, 0.48); }
+  .highlight-btn {
+    position: fixed;
+    z-index: 50;
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.78rem;
+    background: var(--text-primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 100px;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .highlight-btn[hidden] { display: none; }
   .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
   .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
   .passage { font-size: 0.92rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 12px; }
@@ -582,6 +608,10 @@
           <li>Questions follow the passage in order. Use that to narrow your search instead of re-reading from the top each time.</li>
         </ul>
         <h4>Practice drill — Circadian Rhythms and the Cost of the Nine-to-Five</h4>
+        <p class="drill-note">Select any text in the passage below to highlight it — just like the real computer-delivered test. Click a highlight again to remove it.</p>
+        <div class="passage-toolbar">
+          <button type="button" class="reset-btn" id="clearHighlightsBtn">Clear highlights</button>
+        </div>
         <div class="passage">
           <p><b>A</b> For most of the industrial era, the working day has begun at roughly the same hour regardless of who is doing the work. The nine-to-five schedule was not derived from any study of human biology; it was set by factory whistles and, later, office convention, and has simply persisted. Yet a substantial body of research now suggests that individuals differ predictably in when their bodies are naturally primed for alertness — a trait researchers call chronotype — and that forcing everyone onto an identical clock carries a real, measurable cost.</p>
           <p><b>B</b> At the centre of this system sits the suprachiasmatic nucleus, a cluster of neurons in the brain that governs the timing of hormones such as cortisol and melatonin, effectively setting the body's internal clock roughly a day in length. Twin studies suggest that around half of the variation in chronotype between individuals is genetic, with the remainder shaped by age, light exposure and habit. Adolescents in particular undergo a well-documented shift toward later chronotypes during puberty, a change that reverses only gradually in early adulthood.</p>
@@ -1145,6 +1175,87 @@
     if (resetReading) resetReading.addEventListener("click", function () { resetQuiz("readingDrill", "readingScore"); });
   }
 
+  /* ---------- Select-to-highlight (CD-IELTS style) ---------- */
+  function unwrapMark(mark) {
+    var parent = mark.parentNode;
+    while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+    parent.removeChild(mark);
+    parent.normalize();
+  }
+
+  function initHighlighter() {
+    var passage = document.querySelector(".passage");
+    if (!passage) return;
+    var STORE_KEY = "ielts10.readingHighlights";
+
+    var saved = loadJSON(STORE_KEY, null);
+    if (saved) passage.innerHTML = saved;
+
+    function persist() { saveJSON(STORE_KEY, passage.innerHTML); }
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "highlight-btn";
+    btn.textContent = "✎ Highlight";
+    btn.hidden = true;
+    document.body.appendChild(btn);
+
+    var pendingRange = null;
+
+    function hideBtn() { btn.hidden = true; pendingRange = null; }
+
+    passage.addEventListener("mouseup", function () {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideBtn(); return; }
+      var range = sel.getRangeAt(0);
+      if (!passage.contains(range.commonAncestorContainer)) { hideBtn(); return; }
+      var rect = range.getBoundingClientRect();
+      if (!rect || (rect.width === 0 && rect.height === 0)) { hideBtn(); return; }
+      pendingRange = range.cloneRange();
+      btn.style.top = Math.max(8, rect.top - 36) + "px";
+      btn.style.left = Math.max(8, rect.left) + "px";
+      btn.hidden = false;
+    });
+
+    btn.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    btn.addEventListener("click", function () {
+      if (!pendingRange) return;
+      var mark = document.createElement("mark");
+      mark.className = "user-highlight";
+      mark.title = "Click to remove highlight";
+      try {
+        pendingRange.surroundContents(mark);
+      } catch (e) {
+        var frag = pendingRange.extractContents();
+        mark.appendChild(frag);
+        pendingRange.insertNode(mark);
+      }
+      window.getSelection().removeAllRanges();
+      hideBtn();
+      persist();
+    });
+
+    passage.addEventListener("click", function (e) {
+      var mark = e.target.closest ? e.target.closest("mark.user-highlight") : null;
+      if (mark && window.getSelection().isCollapsed) {
+        unwrapMark(mark);
+        persist();
+      }
+    });
+
+    document.addEventListener("mousedown", function (e) {
+      if (e.target !== btn) hideBtn();
+    });
+
+    var clearBtn = document.getElementById("clearHighlightsBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        passage.querySelectorAll("mark.user-highlight").forEach(unwrapMark);
+        persist();
+      });
+    }
+  }
+
   /* ---------- init ---------- */
   document.getElementById("fDate").value = todayISO();
   renderHero();
@@ -1153,6 +1264,7 @@
   renderScoreSection();
   initPlayButton();
   initQuizzes();
+  initHighlighter();
 })();
 </script>
 </body>

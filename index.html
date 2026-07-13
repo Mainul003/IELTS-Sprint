@@ -421,6 +421,17 @@
     cursor: pointer;
   }
   mark.user-highlight:hover { background: rgba(194, 121, 15, 0.48); }
+  mark.user-highlight.armed {
+    background: rgba(179, 38, 30, 0.3);
+    outline: 1px dashed var(--critical);
+    outline-offset: 1px;
+  }
+  mark.user-highlight.armed::after {
+    content: " ✕";
+    font-size: 0.75em;
+    font-weight: 700;
+    color: var(--critical);
+  }
   .highlight-btn {
     position: fixed;
     z-index: 50;
@@ -435,7 +446,6 @@
     cursor: pointer;
     box-shadow: var(--shadow);
   }
-  .highlight-btn.remove-variant { background: var(--critical); color: #fff; }
   .highlight-btn[hidden] { display: none; }
   .note-sheet { margin: 0; padding-left: 20px; color: var(--text-primary); font-size: 0.92rem; display: flex; flex-direction: column; gap: 8px; }
   .note-sheet b { color: var(--accent); font-family: "SFMono-Regular", Consolas, monospace; }
@@ -609,7 +619,7 @@
           <li>Questions follow the passage in order. Use that to narrow your search instead of re-reading from the top each time.</li>
         </ul>
         <h4>Practice drill — Circadian Rhythms and the Cost of the Nine-to-Five</h4>
-        <p class="drill-note">Select any text in the passage or the questions below to highlight it — just like the real computer-delivered test. Click a highlight, then confirm, to remove it.</p>
+        <p class="drill-note">Select any text in the passage or the questions below to highlight it — just like the real computer-delivered test. Click a highlight once to arm it (it turns red), then click it again to remove it.</p>
         <div class="passage-toolbar">
           <button type="button" class="reset-btn" id="clearHighlightsBtn">Clear highlights</button>
         </div>
@@ -1233,17 +1243,15 @@
     highlightBtn.hidden = true;
     document.body.appendChild(highlightBtn);
 
-    var removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.className = "highlight-btn remove-variant";
-    removeBtn.textContent = "🗑 Remove highlight";
-    removeBtn.hidden = true;
-    document.body.appendChild(removeBtn);
-
-    var pendingRange = null, pendingContainer = null, pendingMark = null;
+    var pendingRange = null, pendingContainer = null;
 
     function hideCreateBtn() { highlightBtn.hidden = true; pendingRange = null; pendingContainer = null; }
-    function hideRemoveBtn() { removeBtn.hidden = true; pendingMark = null; }
+
+    function disarmAll(except) {
+      document.querySelectorAll("mark.user-highlight.armed").forEach(function (m) {
+        if (m !== except) m.classList.remove("armed");
+      });
+    }
 
     containers.forEach(function (c) {
       var container = c.el;
@@ -1255,7 +1263,6 @@
         if (!container.contains(range.commonAncestorContainer)) { hideCreateBtn(); return; }
         var rect = range.getBoundingClientRect();
         if (!rect || (rect.width === 0 && rect.height === 0)) { hideCreateBtn(); return; }
-        hideRemoveBtn();
         pendingRange = range.cloneRange();
         pendingContainer = container;
         highlightBtn.style.top = Math.max(8, rect.top - 36) + "px";
@@ -1263,16 +1270,17 @@
         highlightBtn.hidden = false;
       });
 
+      // Click-to-arm, click-again-to-remove: avoids any accidental single-click
+      // removal, and needs no floating button whose position can go stale.
       container.addEventListener("click", function (e) {
         var mark = e.target.closest ? e.target.closest("mark.user-highlight") : null;
-        if (mark && window.getSelection().isCollapsed) {
-          hideCreateBtn();
-          var rect = mark.getBoundingClientRect();
-          removeBtn.style.top = Math.max(8, rect.top - 36) + "px";
-          removeBtn.style.left = Math.max(8, rect.left) + "px";
-          removeBtn.hidden = false;
-          pendingMark = mark;
-          pendingContainer = container;
+        disarmAll(mark);
+        if (!mark || !window.getSelection().isCollapsed) return;
+        if (mark.classList.contains("armed")) {
+          unwrapMark(mark);
+          persistContainer(container);
+        } else {
+          mark.classList.add("armed");
         }
       });
     });
@@ -1293,7 +1301,7 @@
       var freshRange = rangeFromOffsets(container, startOffset, endOffset);
       var mark = document.createElement("mark");
       mark.className = "user-highlight";
-      mark.title = "Click to remove highlight";
+      mark.title = "Click once to arm, click again to remove";
       try {
         freshRange.surroundContents(mark);
       } catch (err) {
@@ -1306,19 +1314,11 @@
       persistContainer(container);
     });
 
-    removeBtn.addEventListener("mousedown", function (e) { e.preventDefault(); });
-    removeBtn.addEventListener("click", function () {
-      if (pendingMark && pendingContainer) {
-        var container = pendingContainer;
-        unwrapMark(pendingMark);
-        persistContainer(container);
-      }
-      hideRemoveBtn();
-    });
-
     document.addEventListener("mousedown", function (e) {
       if (e.target !== highlightBtn) hideCreateBtn();
-      if (e.target !== removeBtn) hideRemoveBtn();
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest || !e.target.closest("mark.user-highlight")) disarmAll();
     });
 
     var clearBtn = document.getElementById("clearHighlightsBtn");

@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IELTS Reading Bank — 7 Full Passages</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AF%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #f6f3ec;
+    --surface: #ffffff;
+    --surface-2: #ece6d8;
+    --text-primary: #241f17;
+    --text-secondary: #5b5344;
+    --text-muted: #8a8272;
+    --border: #dad2c0;
+    --accent: #c2790f;
+    --accent-ink: #2a1b05;
+    --teal: #0e8f82;
+    --indigo: #5a63c4;
+    --good: #1f7a43;
+    --good-bg: #e6f0dd;
+    --warning: #b45309;
+    --warning-bg: #f7e7d3;
+    --critical: #b3261e;
+    --shadow: 0 1px 2px rgba(40, 32, 20, 0.07), 0 8px 24px -12px rgba(40, 32, 20, 0.2);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--text-primary);
+  }
+  .mono { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
+  a { color: var(--indigo); }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 32px) 64px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 40px);
+  }
+
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: clamp(20px, 4vw, 32px);
+    box-shadow: var(--shadow);
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); }
+  .hero p { color: var(--text-secondary); margin: 10px 0 0; font-size: 0.96rem; max-width: 65ch; }
+  .back-link { display: inline-block; margin-top: 14px; font-size: 0.88rem; font-weight: 700; }
+
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .toc h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 10px; }
+  .toc ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .toc a { color: var(--text-primary); font-weight: 700; text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+  .toc span { color: var(--text-muted); font-weight: 400; font-size: 0.88rem; }
+
+  .passage-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: clamp(20px, 4vw, 32px);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    scroll-margin-top: 20px;
+  }
+  .passage-card h2 { font-size: 1.4rem; }
+  .passage-card .eyebrow { margin-bottom: 6px; }
+  .source-note {
+    font-size: 0.82rem;
+    color: var(--warning);
+    background: var(--warning-bg);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0;
+  }
+
+  .passage { font-size: 0.94rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 12px; }
+  .passage p { margin: 0; }
+  .passage b { color: var(--text-primary); font-family: "SFMono-Regular", Consolas, monospace; margin-right: 6px; }
+  .passage em { color: var(--text-primary); }
+
+  .questions-block h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .qgroup { margin-bottom: 16px; }
+  .qgroup:last-child { margin-bottom: 0; }
+  .qgroup h4 { font-size: 0.92rem; font-family: -apple-system, sans-serif; color: var(--text-primary); margin-bottom: 6px; }
+  .qgroup p.instructions { font-size: 0.88rem; color: var(--text-secondary); margin: 0 0 8px; }
+  .qgroup ol, .qgroup ul { margin: 6px 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 0.9rem; color: var(--text-secondary); }
+  .qgroup ul.options { list-style: none; padding-left: 0; }
+  .qgroup ul.options li { padding-left: 0; }
+  .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .word-bank span { background: var(--surface-2); border-radius: 100px; padding: 4px 12px; font-size: 0.82rem; color: var(--text-primary); }
+
+  details {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  details[open] { padding-bottom: 16px; }
+  summary { cursor: pointer; font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .answer-table { border-collapse: collapse; width: 100%; font-size: 0.84rem; margin-top: 10px; }
+  .answer-table th, .answer-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .answer-table th { color: var(--text-muted); text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.05em; }
+  .answer-table td.qnum { font-family: "SFMono-Regular", Consolas, monospace; color: var(--text-muted); white-space: nowrap; }
+  .answer-table td.ans { font-weight: 700; color: var(--good); white-space: nowrap; }
+  .answer-table td.exp { color: var(--text-secondary); }
+  .table-scroll { overflow-x: auto; }
+
+  .glossary { margin: 10px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .glossary div { display: flex; flex-direction: column; gap: 2px; }
+  .glossary dt { font-weight: 700; color: var(--accent-ink); font-size: 0.9rem; }
+  .glossary dd { margin: 0; color: var(--text-secondary); font-size: 0.86rem; }
+
+  .site-footer { border-top: 1px solid var(--border); padding-top: 20px; font-size: 0.85rem; color: var(--text-secondary); }
+  .site-footer p { margin: 0 0 8px; }
+  .muted { color: var(--text-muted); font-size: 0.78rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">IELTS Reading Bank</p>
+    <h1>7 Full Reading Passages — Questions, Answer Key &amp; Vocabulary</h1>
+    <p>Real IELTS-style Reading passages collected from public practice sites, reformatted here with the full question set, an answer key with explanations, and a key-vocabulary glossary for each — the same reference style as your collected passage notes.</p>
+    <a class="back-link" href="index.html">← Back to your 10-day sprint plan</a>
+  </header>
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#meat">Should We Stop Eating Meat?</a> <span>— Q14–26</span></li>
+      <li><a href="#rubber">Rubber</a> <span>— Q1–13</span></li>
+      <li><a href="#dolls">Dolls Through the Ages</a> <span>— Q1–13</span></li>
+      <li><a href="#australia">200 Years of Australian Landscapes at the Royal Academy in London</a> <span>— Q27–40</span></li>
+      <li><a href="#mindmusic">Mind Music</a> <span>— Q28–40</span></li>
+      <li><a href="#deception">The Art of Deception</a> <span>— Q27–40</span></li>
+      <li><a href="#mahy">The New Zealand Writer Margaret Mahy</a> <span>— Q27–40</span></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- 1. SHOULD WE STOP EATING MEAT? -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="meat">
+    <div>
+      <p class="eyebrow">Passage 1 · Questions 14–26 · Source: ieltsmaterials.uz</p>
+      <h2>Should We Stop Eating Meat?</h2>
+    </div>
+    <div class="passage">
+      <p><em>Some claim that it's the only way to save our planet from disaster. But is it really that simple?</em></p>
+      <p><b>A</b> The call for people to eat less meat to save the planet is growing louder, so if less is good, wouldn't none be better? To find out, let's imagine what would happen if the world eliminated meat, milk and eggs from its diet, then trace the effects. Last year the world consumed 289 million tonnes of meat, 700 million tonnes of milk and 1.2 billion eggs. Environmentally speaking, this came at an enormous cost.</p>
+      <p><b>B</b> All agriculture damages the environment. Take for example the felled forests and the common use of irrigation systems. And it may surprise you to know that agriculture creates more greenhouse gases than all methods of transport put together. Livestock farming does the most damage. In part, that is because most livestock eat grain that could be used to feed human populations, and farmers are forced to grow more than we would otherwise need to meet the demand. Altogether, if we switched to a vegan diet, meaning no meat, dairy or eggs, the land currently required for crops would drop by an estimated 21 per cent, about 3.4 million hectares, roughly the size of India.</p>
+      <p><b>C</b> One environmental impact that would also lessen through a reduction in animal farming would be that of the nitrogen emitted from agricultural processes, which spreads into both waterways and land. According to environmental scientist Allison Leach, if everyone eliminated dairy products and eggs, this kind of pollution would fall by 60%. Livestock production has another serious environmental impact. Global statistics are hard to come by, but in the US at least, livestock account for 55% of erosion, mostly from forests being cut down to make way for grazing land. On top of this, half of all antibiotics manufacture are fed to livestock as part of their normal diet, a practice that is leading to drug-resistant bacteria.</p>
+      <p><b>D</b> A meat-free world, then would be greener in many ways. However, if everyone opted to give up meat there would be significant costs too. For most of human history, livestock grazed on land that wasn't suitable for ploughing, and in doing so they converted inedible grass into edible meat and milk. Even today, a flock of sheep or goats can be the most efficient way to get food from marginal land. In a world in which over a billion people do not have enough to eat, using this land for crop production would contribute to food insecurity.</p>
+      <p><b>E</b> In some parts of the world today, livestock like chickens, for instance, can subsist on leftovers and whatever they find. Tara Garnett, who heads the Food Climate Research Network at the University of Surrey, points out the usefulness of these animals. By giving them your leftovers, she says, they deal with your rubbish, and you get meat. Garnett admits, though, that if this kind of approach were generally adopted, it would require a major adjustment in food preferences; people would have to get used to chicken, for example, with less fat.</p>
+      <p><b>F</b> Another downside to a meat-free world would be the disappearance of animal by-products. Such a world would have to replace the 11 million tonnes of leather and 2 million tonnes of wool that come annually from livestock farming and which are turned into clothing. Furthermore, even ardent vegetarians acknowledge that dairy products and meat may be a good thing in poorer countries. "Whilst there's no doubt that considerable reduction of meat consumption would have an environmental benefit, we do have to be careful about saying it would be the best solution if the whole world went vegetarian," says Annette Pinner, chief executive of the UK Vegetarian Society. For many of the world's poorest rural residents, an animal may represent their only realistic hope for a little extra income, and a little animal protein can make a big difference to a marginal diet.</p>
+      <p><b>G</b> What if we decided on a no-meat vegetarian diet, rather than a vegan diet? After all, milk and eggs are very efficient ways of producing animal calories. "It's difficult to switch to no-meat but milk diet," says Helmut Haberl, a social ecologist. "Dairy cows must calve every year to keep producing milk, and only half their offspring will be female. While many vegetarians see moral reasons not to kill and eat the males, there is surely no practical reason to waste so much meat." Similar arguments apply to chickens kept for eggs.</p>
+      <p><b>H</b> So even though a meat-free world sounds good on paper, it is likely that a utopian future will still have some animal products in it. The real questions, then, are how much meat do we want, and how will we produce it? The answers depend on how you approach the questions. The most straightforward approach is to assume that the world will continue to want evermore meat. The United Nations' best guess is that by 2050, the world will need to more than double its production of meat, an increase that would be environmentally disastrous.</p>
+      <p><b>I</b> Under this scenario the goal will have to be producing the most meat at the lowest environmental cost. According to Walter Falcon, an agricultural economist, this means fewer free range cattle and sheep in green fields. "If you're going to keep some livestock systems, I think the ones you'll want to keep are the intensive ones," he says. Of course this does not take into account animal welfare issues, as intensive farming usually means poor living conditions and the use of growth hormones.</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 14–17</h4>
+        <p class="instructions">Reading Passage 1 has nine paragraphs, A–I. Which paragraph contains the following information? (NB You may use any letter more than once.)</p>
+        <ol start="14">
+          <li>the suggestion that people may need to adapt to a different quality of meat</li>
+          <li>a description of the way animals were fed in the past</li>
+          <li>a prediction in regard to human demand for meat</li>
+          <li>the potential consequences of a meat-free world for textile industries</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 18–22 — Summary Completion</h4>
+        <p class="instructions">Complete the summary below. Write ONE WORD ONLY from the passage for each answer.</p>
+        <p><strong>How does agriculture damage the environment?</strong> Agriculture causes significant harm to the environment in a number of ways, including the frequent use of <b>(18)</b> ____ in modern farming and the cutting down of trees. It is also responsible for the production of many greenhouse gases, more so than <b>(19)</b> ____ is. However, it is livestock farming in particular that is most harmful, because cows, chickens and sheep, for example, are given vast quantities of grain which could be consumed by people instead. A meat-free diet would mean that actually less <b>(20)</b> ____ could be used for crops. Far less chemical pollution, specifically in the form of <b>(21)</b> ____ would also be released into the environment, especially if consumers cut out dairy and egg products as well as meat. In the US, there is clear evidence that considerable <b>(22)</b> ____ is caused by the demand for grazing land, although there is no information on this from other countries.</p>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 23–26 — Matching People</h4>
+        <p class="instructions">Match each statement with the correct person, A–E.</p>
+        <ul class="options">
+          <li>A. Allison Leach</li>
+          <li>B. Tara Garnett</li>
+          <li>C. Annette Pinner</li>
+          <li>D. Helmut Haberl</li>
+          <li>E. Walter Falcon</li>
+        </ul>
+        <ol start="23">
+          <li>It is not possible to say that a vegetarian diet is right for everyone.</li>
+          <li>It may be economically preferable to farm animals in limited space.</li>
+          <li>It does not make sense to give up meat without giving up dairy products too.</li>
+          <li>Some animals can be fed in a way that allows waste to be recycled.</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">14</td><td class="ans">E</td><td class="exp">Garnett says the leftovers-feeding approach "would require a major adjustment in food preferences; people would have to get used to chicken... with less fat."</td></tr>
+            <tr><td class="qnum">15</td><td class="ans">D</td><td class="exp">"For most of human history, livestock grazed on land that wasn't suitable for ploughing, and in doing so they converted inedible grass into edible meat and milk."</td></tr>
+            <tr><td class="qnum">16</td><td class="ans">H</td><td class="exp">"The United Nations' best guess is that by 2050, the world will need to more than double its production of meat."</td></tr>
+            <tr><td class="qnum">17</td><td class="ans">F</td><td class="exp">"Such a world would have to replace the 11 million tonnes of leather and 2 million tonnes of wool... turned into clothing."</td></tr>
+            <tr><td class="qnum">18</td><td class="ans">irrigation</td><td class="exp">"the felled forests and the common use of irrigation systems."</td></tr>
+            <tr><td class="qnum">19</td><td class="ans">transport</td><td class="exp">"agriculture creates more greenhouse gases than all methods of transport put together."</td></tr>
+            <tr><td class="qnum">20</td><td class="ans">land</td><td class="exp">"the land currently required for crops would drop by an estimated 21 per cent... roughly the size of India."</td></tr>
+            <tr><td class="qnum">21</td><td class="ans">nitrogen</td><td class="exp">"the nitrogen emitted from agricultural processes... if everyone eliminated dairy products and eggs, this kind of pollution would fall by 60%."</td></tr>
+            <tr><td class="qnum">22</td><td class="ans">erosion</td><td class="exp">"in the US at least, livestock account for 55% of erosion, mostly from forests being cut down."</td></tr>
+            <tr><td class="qnum">23</td><td class="ans">C</td><td class="exp">Pinner: "we do have to be careful about saying it would be the best solution if the whole world went vegetarian."</td></tr>
+            <tr><td class="qnum">24</td><td class="ans">E</td><td class="exp">Falcon: "the ones you'll want to keep are the intensive ones."</td></tr>
+            <tr><td class="qnum">25</td><td class="ans">D</td><td class="exp">Haberl: "there is surely no practical reason to waste so much meat" (referring to male calves from dairy cows).</td></tr>
+            <tr><td class="qnum">26</td><td class="ans">B</td><td class="exp">Garnett: "By giving them your leftovers, she says, they deal with your rubbish, and you get meat."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>livestock (n.)</dt><dd>animals such as cattle, sheep, and pigs raised on farms.</dd></div>
+        <div><dt>irrigation (n.)</dt><dd>supplying land with water through channels or pipes, especially for crops.</dd></div>
+        <div><dt>erosion (n.)</dt><dd>the gradual wearing away of soil or rock by water, wind, or farming.</dd></div>
+        <div><dt>marginal (adj.)</dt><dd>of poor quality or barely adequate — here, land too poor for most crops.</dd></div>
+        <div><dt>subsist (v.)</dt><dd>to survive on a minimal or limited amount of resources.</dd></div>
+        <div><dt>ardent (adj.)</dt><dd>passionate and strongly committed to a cause or belief.</dd></div>
+        <div><dt>utopian (adj.)</dt><dd>describing an ideal but impractical or unrealistic vision of society.</dd></div>
+        <div><dt>intensive (adj.)</dt><dd>(of farming) using a high concentration of labour and livestock per unit of land to maximise output.</dd></div>
+        <div><dt>food insecurity (n.)</dt><dd>a lack of reliable access to enough affordable, nutritious food.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. RUBBER -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="rubber">
+    <div>
+      <p class="eyebrow">Passage 2 · Questions 1–13 · Source: ieltsreading.info</p>
+      <h2>Rubber</h2>
+    </div>
+    <div class="passage">
+      <p><em>T and W Musgrove discuss the origins and early uses of rubber</em></p>
+      <p>The plants that produce rubber are spread right across the globe, and grow in many different habitats. One might think it likely, therefore, that humankind has known about rubber for thousands of years. Yet, unlike other crops of economic importance, rubber led a relatively anonymous life until the last 150 years or so. The Indians of South America appear to be the first people to have understood the properties of rubber, and the Aztecs of what is now Mexico were the first to be recorded using the substance; a wall painting dating back to the sixth century depicts a scene of a tributary offering of crude rubber. With the arrival of Columbus in the Americas and the resulting Spanish influx, further evidence starts to appear concerning the Native American use of rubber. Antonio de Herrera y Tordesillas describes a ritual game played with a rubber ball at the court of the Aztec Emperor Montezuma II, and the Mayan and Toltec people are known to have taken part in similar activities. Rubber was also used to make raincoats, shoes, jars, torches and musical instruments, all of which must have been made from the indigenous Castilla elastica, as the Para plant now favoured for rubber cultivation does not grow in the Mexican region.</p>
+      <p>The first description of latex (liquid rubber) extraction is made by Juan de Torquemada, who noted that if a receptacle was not at hand the Native Americans would place the latex on their bodies to allow it to solidify. However, no real interest in rubber was shown by any European until Charles de la Condamine, a French mathematician, published an account of his journey to South America in 1735. The journey was undertaken on behalf of the Paris Academy of Sciences to measure an arc of the meridian line on the equator, but the journey home was to turn out to be more significant than the true purpose of the trip. Condamine explored Brazil and Peru and discovered how the local people used one single piece of coagulated latex to make boots. The boots were impervious to water and, when smoked, looked like real leather. In 1747 the first description of the rubber tree and latex tapping was made by a military engineer and amateur botanist, Francois Fresneau, who was posted to French Guiana. The publications of Condamine and Fresneau created considerable excitement among French scientists, and an attempt was made to discover a solvent that could turn the crude rubber into a substance for commercial exploitation.</p>
+      <p>In 1818 a British medical student named James Syme first used rubber to make waterproof cloth. Another early use of the substance was as an eraser of pencil marks, hence the name 'rubber'. This was complemented by balloons, rubber bands, braces, boots for the army and other ideas that met with varying degrees of success. In 1820 Thomas Hancock, an English manufacturer of rubber goods such as driving belts, industrial rollers and rubber hoses, invented a machine he called the 'pickle', which chewed up waste strips for re-use. It was discovered that the masticated rubber was more malleable, while maintaining much of its elasticity. In Scotland at the same time Charles Mackintosh had discovered a way of using rubber as waterproofing material, by a process he patented in 1823. Hancock and Mackintosh joined forces in 1834, and three years later Hancock invented a machine for spreading rubber onto material.</p>
+      <p>Despite their beneficial qualities, such as waterproofing, rubber goods were still not particularly popular as they had some major flaws, including the fact that they dissolved malodorously. They also became pliant when warm and rigid when cold. Then in 1839 the American Charles Goodyear discovered that it was possible to stabilise rubber by mixing it with sulphur while exposing it to heat — a process he called vulcanisation — and the full versatility of this extraordinary substance became apparent.</p>
+      <p>Rubber goods could now be manufactured which had all the beneficial qualities of the material, such as durability, elasticity and variability, but which were not sticky, soluble or governed by the vagaries of the weather. The economic potential of rubber was now clearly evident. It played an important role in the Industrial Revolution, being employed in the steam engines found in factories, mills, mines and railways. It made a triumphant entrance as a new and innovative material at the Great Exhibition of 1851, where shoes, airbeds, furniture and clothing made out of newly improved rubber were proudly displayed.</p>
+      <p>One of the most important rubber inventions was made in 1888, when an Irishman called John Boyd Dunlop produced the first pneumatic tyre. Solid rubber tyres had been used for the previous 18 years, but Dunlop's new design, which he updated in 1890, immediately became popular. In 1895 Dunlop's tyres were first used in motor cars, and with the mass production of cars just over the horizon the rubber industry had never looked healthier. The import levels of rubber over the nineteenth century bear witness to its irrepressible rise. In 1830 Britain had imported just 211 kg of crude rubber. This had risen to 10,000 kg in 1857, and by 1874 levels were just under six times as much again.</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 1–6 — True / False / Not Given</h4>
+        <p class="instructions">Do the following statements agree with the information given in the passage?</p>
+        <ol>
+          <li>Rubber plants grow only in certain regions of the world.</li>
+          <li>Rubber was extracted in Mexico as early as the sixth century.</li>
+          <li>Rubber from the Castilla elastica plant is of poorer quality than that from the Para plant.</li>
+          <li>A French mathematician inspired real interest in rubber amongst Europeans.</li>
+          <li>The process of vulcanisation was discovered by accident.</li>
+          <li>Imports of crude rubber into Britain fell during the nineteenth century.</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 7–13 — Summary Completion</h4>
+        <p class="instructions">Complete the summary below. Choose NO MORE THAN THREE WORDS from the passage for each answer.</p>
+        <p><strong>The Commercial Development of Rubber</strong><br/>Early European travellers gave accounts of various rubber objects in use in Central and South America, and these accounts created interest in the commercial exploitation of rubber. In 1818, <b>(7)</b> ____ was produced using rubber, and in 1820 a machine was invented for recycling <b>(8)</b> ____ of rubber. Over the next few years, other attempts were made to improve rubber, but some problems remained. For example, rubber products smelt bad when they were dissolved, and could turn either soft or <b>(9)</b> ____ depending on the temperature. However, in 1839 a new process to <b>(10)</b> ____ the substance greatly increased its potential. For example, rubber was used in the creation of the <b>(11)</b> ____ industry during the Industrial Revolution. Then in 1888 the <b>(12)</b> ____ was developed, and a few years later the <b>(13)</b> ____ of the motor car began.</p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">1</td><td class="ans">FALSE</td><td class="exp">"The plants that produce rubber are spread right across the globe" — contradicts "only in certain regions."</td></tr>
+            <tr><td class="qnum">2</td><td class="ans">TRUE</td><td class="exp">"a wall painting dating back to the sixth century depicts a scene of a tributary offering of crude rubber."</td></tr>
+            <tr><td class="qnum">3</td><td class="ans">NOT GIVEN</td><td class="exp">Both plants are mentioned but their quality is never compared.</td></tr>
+            <tr><td class="qnum">4</td><td class="ans">TRUE</td><td class="exp">"no real interest in rubber was shown by any European until Charles de la Condamine, a French mathematician, published an account..."</td></tr>
+            <tr><td class="qnum">5</td><td class="ans">NOT GIVEN</td><td class="exp">Goodyear "discovered" vulcanisation, but whether this was accidental or deliberate is never stated.</td></tr>
+            <tr><td class="qnum">6</td><td class="ans">FALSE</td><td class="exp">"The import levels of rubber over the nineteenth century bear witness to its irrepressible rise" — imports rose, not fell.</td></tr>
+            <tr><td class="qnum">7</td><td class="ans">waterproof cloth</td><td class="exp">"In 1818 a British medical student named James Syme first used rubber to make waterproof cloth."</td></tr>
+            <tr><td class="qnum">8</td><td class="ans">waste strips</td><td class="exp">Hancock's "pickle" machine "chewed up waste strips for re-use."</td></tr>
+            <tr><td class="qnum">9</td><td class="ans">rigid</td><td class="exp">"They also became pliant when warm and rigid when cold."</td></tr>
+            <tr><td class="qnum">10</td><td class="ans">stabilise</td><td class="exp">Goodyear discovered it was possible to "stabilise rubber by mixing it with sulphur while exposing it to heat."</td></tr>
+            <tr><td class="qnum">11</td><td class="ans">steam engines</td><td class="exp">"employed in the steam engines found in factories, mills, mines and railways."</td></tr>
+            <tr><td class="qnum">12</td><td class="ans">pneumatic tyre</td><td class="exp">"John Boyd Dunlop produced the first pneumatic tyre" in 1888.</td></tr>
+            <tr><td class="qnum">13</td><td class="ans">mass production</td><td class="exp">"with the mass production of cars just over the horizon."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>latex (n.)</dt><dd>the milky liquid produced by rubber trees, used to make rubber.</dd></div>
+        <div><dt>tributary offering (n.)</dt><dd>a gift given as a sign of submission or tribute to a ruler.</dd></div>
+        <div><dt>coagulated (adj.)</dt><dd>thickened or solidified from a liquid into a semi-solid mass.</dd></div>
+        <div><dt>impervious (adj.)</dt><dd>not allowing liquid to pass through.</dd></div>
+        <div><dt>malleable (adj.)</dt><dd>easily shaped or moulded.</dd></div>
+        <div><dt>elasticity (n.)</dt><dd>the ability of a material to return to its original shape after being stretched.</dd></div>
+        <div><dt>vulcanisation (n.)</dt><dd>a chemical process that hardens and stabilises rubber by heating it with sulphur.</dd></div>
+        <div><dt>versatility (n.)</dt><dd>the quality of being adaptable to many different uses.</dd></div>
+        <div><dt>pneumatic (adj.)</dt><dd>filled with or operated by compressed air.</dd></div>
+        <div><dt>irrepressible (adj.)</dt><dd>impossible to hold back or control.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. DOLLS THROUGH THE AGES -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="dolls">
+    <div>
+      <p class="eyebrow">Passage 3 · Questions 1–13 · Source: ieltsreading.info</p>
+      <h2>Dolls Through the Ages</h2>
+      <p class="source-note">Note: the source page's own text is truncated mid-sentence at two points (marked below) — this is a defect in the original site, not in this extraction.</p>
+    </div>
+    <div class="passage">
+      <p>What is today a simple children's toy has a surprisingly rich history. Dolls have been a part of humankind for thousands of years. Often depicting religious figures, or used as playthings, early dolls were probably made from primitive materials such as clay, fur, or wood.</p>
+      <p>Dolls constructed of flat pieces of wood, painted with various designs, and with hair made of clay, have often been found in Egyptian graves dating back to 2000 BC. Egyptian tombs of wealthy families have included pottery dolls. Dolls being placed in these graves leads some to believe that they were cherished possessions.</p>
+      <p>Girls from ancient Greece and Rome offered their wooden dolls to goddesses after they were too "grown-up" to play with dolls. Most ancient dolls that were found in tombs were very simple creations, often made from such materials as clay, rags, wood, or bone. Some of the more unique dolls were made with ivory or wax. The main goal was to make the doll as lifelike as possible. That ideal led to the creation of dolls with movable limbs and removable garments, dating back to 600 BC.</p>
+      <p>Following the era of the ancient dolls, Europe became a major hub for doll production. These dolls were primarily made of wood. Fewer than 30 examples of primitive wooden stump dolls from England survive today. The Grodnertal area of Germany produced many peg wooden dolls, a type of doll that has very simple peg joints and resembles a clothespin (a device for hanging washing on a clothesline). An alternative to wood was developed in the 1800s.</p>
+      <p>"Composition" is a collective term for mixtures of pulped wood or paper that were used to make doll heads and bodies. These mixtures were moulded under pressure, creating a durable doll that could be mass produced. Manufacturers closely guarded the recipes for their mixtures, sometimes using strange ingredients like ash or eggshells. Papier-mâché, a type of composition, was one of the most popular mixtures.</p>
+      <p>In addition to wooden dolls, wax dolls grew in popularity in the 17th and 18th centuries. Germany was a major manufacturing centre for wax dolls. Wax dollmakers would model a doll's head in wax or clay, and then cover it with plaster to create a mould. Then they would pour melted wax into the cast. The wax for the head would be very thin, no more than 3mm. Some of the most distinctive wax dolls were created in England between 1850 and 1930. One of the first dolls that portrayed a baby was made in England from wax…</p>
+      <p class="source-note" style="margin-bottom:-4px;">[Source text is truncated here mid-sentence — an unrelated advertisement snippet is injected at this exact point in the original page, and the sentence never continues elsewhere.]</p>
+      <p>Around the same time porcelain became popular. It is made by firing special clays in a kiln at more than 2372 degrees Fahrenheit (1300°C), and only a few clays can withstand firing at such high temperatures. Porcelain is used generically to refer to both china and bisque dolls; china is glazed, whereas bisque is unglazed. Germany, France, and Denmark started creating china heads for dolls in the 1840s. These china heads were replaced in the 1860s by ones made of bisque. Bisque, which is porcelain fired twice with colour added to it after the first firing, looked more like skin than china did.</p>
+      <p>In France, the bébé was popular in the 1880s, and it has become a highly sought after doll today. The bébé, first made in the 1850s, was different from its predecessors because it depicted a younger girl. Until then, most French dolls were representations of adults. Although the French dolls were unrivalled in their artistry, German bisque dolls became quite popular because they were not as expensive. Kammer &amp; Reinhardt introduced a bisque character doll in the 1900s, starting a trend of creating realistic dolls.</p>
+      <p>For many centuries, rag dolls were made by mothers for their children. The term "rag doll" refers generically to dolls made of any fabric. "Cloth doll" refers to a subset of rag dolls made of linen or cotton. Commercially produced rag dolls were first introduced in the 1850s by English and American manufacturers. Although not as sophisticated as dolls made from other materials, rag dolls were well loved, often as a child's first toy.</p>
+      <p>Dollmaking did not become an industry in the United States until after the Civil War in the 1860s. Doll production was concentrated in the New England region of the United States, with dolls made from a variety of materials such as leather, rubber, papier-mâché, and cloth. Celluloid was developed in the state of New Jersey in the late 1860s and was used to manufacture dolls until the mid-1950s. German, French, American, and Japanese factories churned out cheaply produced celluloid dolls in mass quantities. However, celluloid fell out of favour because of its extreme flammability and propensity to fade in bright light.</p>
+      <p>After World War I, doll makers experimented with plastics. Hard plastic dolls were manufactured in the 1940s. They resembled composition dolls, but they were much more durable. Other materials used in doll manufacturing included rubber, foam rubber, and vinyl in the 1950s and 1960s. Vinyl changed doll making, allowing doll makers to root hair into the head, rather than using wigs or painting the hair. Although most dolls are now mass-manufactured using these modern materials, many modern doll makers are still using…</p>
+      <p class="source-note" style="margin-bottom:-4px;">[The passage ends here mid-sentence in the source — the question section begins immediately afterward with no further passage text on the original page.]</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 1–6 — Note Completion</h4>
+        <p class="instructions">Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.</p>
+        <p><strong>Dolls</strong><br/>
+        Earliest known dolls — represented religious figures, used as toys<br/>
+        Egypt 2000 BC — bodies were made of <b>(1)</b> ____; <b>(2)</b> ____ was used for the hair<br/>
+        Ancient Greece and Rome — dolls were given to <b>(3)</b> ____ by older girls<br/>
+        600 BC — realistic dolls had separate clothes and <b>(4)</b> ____ that could be put in different positions<br/>
+        17th and 18th centuries — dolls made of <b>(5)</b> ____; moulds made of <b>(6)</b> ____</p>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 7–13 — True / False / Not Given</h4>
+        <ol start="7">
+          <li>Bisque dolls appear less realistic than dolls made of china.</li>
+          <li>French dolls tended to cost more than German bisque dolls.</li>
+          <li>The first rag dolls were made in the 1850s.</li>
+          <li>Only dolls made of cotton or linen are classified as cloth dolls.</li>
+          <li>Dolls made of celluloid tended to lose their colour.</li>
+          <li>Composition dolls lasted longer than the plastic dolls that were made in the 1940s.</li>
+          <li>Doll collectors prefer a doll to be dressed in its original clothing.</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">1</td><td class="ans">wood</td><td class="exp">"Dolls constructed of flat pieces of wood... with hair made of clay... found in Egyptian graves dating back to 2000 BC." (The source's own static answer list mistakenly says "clay" for both Q1 and Q2 — "wood" is used here since it matches the passage text; "clay" belongs to Q2.)</td></tr>
+            <tr><td class="qnum">2</td><td class="ans">clay</td><td class="exp">"...with hair made of clay."</td></tr>
+            <tr><td class="qnum">3</td><td class="ans">goddesses</td><td class="exp">"Girls from ancient Greece and Rome offered their wooden dolls to goddesses..."</td></tr>
+            <tr><td class="qnum">4</td><td class="ans">limbs</td><td class="exp">"...led to the creation of dolls with movable limbs and removable garments, dating back to 600 BC."</td></tr>
+            <tr><td class="qnum">5</td><td class="ans">wax</td><td class="exp">"wax dolls grew in popularity in the 17th and 18th centuries."</td></tr>
+            <tr><td class="qnum">6</td><td class="ans">plaster</td><td class="exp">"Wax dollmakers would model a doll's head in wax or clay, and then cover it with plaster to create a mould."</td></tr>
+            <tr><td class="qnum">7</td><td class="ans">FALSE</td><td class="exp">"Bisque... looked more like skin than china did" — implies bisque is MORE realistic, not less.</td></tr>
+            <tr><td class="qnum">8</td><td class="ans">TRUE</td><td class="exp">"Although the French dolls were unrivalled in their artistry, German bisque dolls became quite popular because they were not as expensive."</td></tr>
+            <tr><td class="qnum">9</td><td class="ans">FALSE</td><td class="exp">"Commercially produced rag dolls were first introduced in the 1850s" — refers only to commercial production; mothers had made rag dolls for centuries before that.</td></tr>
+            <tr><td class="qnum">10</td><td class="ans">TRUE</td><td class="exp">"'Cloth doll' refers to a subset of rag dolls made of linen or cotton."</td></tr>
+            <tr><td class="qnum">11</td><td class="ans">TRUE</td><td class="exp">"celluloid fell out of favour because of its extreme flammability and propensity to fade in bright light."</td></tr>
+            <tr><td class="qnum">12</td><td class="ans">FALSE</td><td class="exp">"Hard plastic dolls... resembled composition dolls, but they were much more durable" — plastic lasted longer, not composition.</td></tr>
+            <tr><td class="qnum">13</td><td class="ans">NOT GIVEN</td><td class="exp">The passage never mentions collector preferences about original clothing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>primitive (adj.)</dt><dd>belonging to an early stage of development; simple or basic.</dd></div>
+        <div><dt>composition (n.)</dt><dd>here, a mixture of pulped wood or paper used to make doll heads and bodies.</dd></div>
+        <div><dt>papier-mâché (n.)</dt><dd>a material made from paper pulp mixed with glue or paste, used for moulding.</dd></div>
+        <div><dt>porcelain (n.)</dt><dd>a hard, white ceramic material made by firing fine clay at high temperatures.</dd></div>
+        <div><dt>kiln (n.)</dt><dd>an oven used for firing clay or ceramics at very high temperatures.</dd></div>
+        <div><dt>bisque (n.)</dt><dd>unglazed porcelain, fired twice, with a matte, skin-like finish.</dd></div>
+        <div><dt>glazed (adj.)</dt><dd>coated with a glassy, shiny surface finish.</dd></div>
+        <div><dt>celluloid (n.)</dt><dd>an early type of flexible plastic made from plant cellulose, now largely obsolete.</dd></div>
+        <div><dt>flammability (n.)</dt><dd>how easily a material catches fire.</dd></div>
+        <div><dt>vinyl (n.)</dt><dd>a type of durable, flexible plastic.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. 200 YEARS OF AUSTRALIAN LANDSCAPES -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="australia">
+    <div>
+      <p class="eyebrow">Passage 4 · Questions 27–40 · Source: ece.edu.vn</p>
+      <h2>200 Years of Australian Landscapes at the Royal Academy in London</h2>
+      <p class="source-note">Note: the source restricts verbatim reproduction of this passage, so the text below is a detailed, complete paraphrase (every point preserved, no content omitted) rather than a word-for-word copy. The questions and answer key are reproduced exactly as published.</p>
+    </div>
+    <div class="passage">
+      <p><em>The exhibition claims to trace a nation's artistic evolution, but not everyone accepts the rationale for how the works were chosen.</em></p>
+      <p>For an ordinary visitor, the Royal Academy's landscape exhibition, "Australia," offers a sweeping tour of Australian art history: it spans colonial-era beginnings through Expressionism and Modernism up to today's generation of artists. Given that scope, the show ends up presenting a broad, flexible sense of what "landscape" means, not a narrow one.</p>
+      <p>Even so, the exhibition raises awkward questions about Britain's relationship with its former colony. Because landscape painting is a genre the British themselves excel at, choosing it as the organising theme invites the criticism that Britain is subtly imposing its own artistic standards when judging Australian art. Critic Joanna Mendelssohn (Associate Professor at the University of NSW's College of Fine Arts) suggests British artistic values, not Australian self-expression, shaped the exhibition — implying Australia wasn't given room to show its own artistic maturity.</p>
+      <p>What struck Mendelssohn as odd was how conservative the underlying selection criteria seemed. Since landscape is such a quintessentially British theme, she felt the British reviewers assumed a former colony's art would keep resembling British art — so when the British examined Australian art, they gravitated toward the landscape genre specifically.</p>
+      <p>Given the colonial relationship, it was almost unavoidable that Australian art's early years would mirror Britain's love of landscape before Australia developed its own distinct character and quirks. Mendelssohn's unease about the conventional curatorial choice has merit, but the Academy does still capture the distinctive qualities Australian art acquired from the mid-1800s onward — albeit while staying within the landscape framework.</p>
+      <p>The exhibition's curator, Kathleen Soriano (Director of Exhibitions at the Royal Academy), notes that English, French, and German influence is much clearer in the earliest period (early-to-mid 1800s). Her goal, she says, was to show how Australian art built a genuine distinctiveness tied to the Australian landscape and light.</p>
+      <p>Central to the show — especially for more contemporary artists — is this blending of European "tradition" with something distinctly Australian and personal. Sydney video artist Shaun Gladwell exemplifies this: his best-known piece in the show, <em>Storm Sequence</em> (2000), depicts him skateboarding at Bondi Beach as one of Sydney's characteristic violent storms approaches offshore. It nods to landscape/seascape tradition while filtering it through Gladwell's own sensibility. Gladwell explains that showing this work made sense because, around the time he made it, he was drawn to Turner and the idea of atmosphere shaping perception — he was engaging with the Romantic landscape tradition but wanted to make it personal, grounding it in his own world of skateboarding and beach culture rather than simply borrowing imagery.</p>
+      <p>So although reducing Australian art to the "landscape" genre may look limiting on Britain's part, British landscape painting clearly still resonates — if indirectly — with today's Australian artists.</p>
+      <p>Visitors first encounter Aboriginal art in the exhibition, reflecting the idea that, as the "first" Australian art, it deserves a prominent starting position. London has seen various smaller Aboriginal-art shows over the past couple of decades, but Soriano sees "Australia" as a chance to situate that work within its relationship to settler/white Australian art. She explains landscape was chosen partly because Australian art itself began "in and on the landscape," letting her merge the two traditions naturally; presenting Indigenous art as part of the continuous history of Australian art — rather than as a separate, standalone show — felt the most accurate approach.</p>
+      <p>Mendelssohn also observes that London matters less to today's generation of artists, which undercuts some of the occasion's grandeur. She says China is now the world's most important art market — succeeding in Shanghai is what counts. Her Australian students, drawn from all over the world, are eager to see the Venice Biennale and Art Basel but much less interested in London. In her own youth London was the destination, and by university age New York had taken that role for ambitious young artists; now, she says, young artists want to go everywhere — there's no longer a clear "centre" and "periphery," and the art world is more complicated than that.</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 27–31 — Yes / No / Not Given</h4>
+        <p class="instructions">Do the following statements agree with the claims of the writer?</p>
+        <ol start="27">
+          <li>As expected, the artworks chosen for the exhibition reflect a narrow interpretation of landscape.</li>
+          <li>The Academy rejected Australian suggestions for the subject of the exhibition.</li>
+          <li>The colonial relationship meant that early Australian landscape painting followed the traditions of English landscape painting.</li>
+          <li>The exhibition reflects the fact that Australian art developed its own particular qualities.</li>
+          <li>Contemporary Australian artists have generally rejected British landscape traditions.</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 32–36 — Multiple Choice</h4>
+        <ol start="32">
+          <li>What is the writer's main point in the second paragraph?<br/>A. Australian landscape painting derives from the British tradition.&nbsp; B. Australian landscape painting is more highly regarded than British.&nbsp; C. Britain is still imposing its principles on Australian art.&nbsp; D. British art cannot be compared to Australian art.</li>
+          <li>What does Joanna Mendelssohn find surprising?<br/>A. Modern Australian landscape painting has great variety.&nbsp; B. The guidelines for the choice of work were very traditional.&nbsp; C. Landscape painting remains a popular subject for British artists.&nbsp; D. The British find the Australian landscape unsuitable as a subject.</li>
+          <li>Shaun Gladwell's work is included in the exhibition because<br/>A. it adopts a subjective approach to depicting the landscape.&nbsp; B. skateboarding is an inspiration to many Australian artists.&nbsp; C. storms are a significant feature in the Australian landscape.&nbsp; D. Bondi is an iconic Australian location.</li>
+          <li>What was the reason for Soriano including Aboriginal art in the exhibition?<br/>A. It is not well known in London art circles.&nbsp; B. Aboriginal landscape painting influenced Australian settlers.&nbsp; C. It is part of the Australian art tradition and not independent of it.&nbsp; D. Modern Aboriginal painting deals with changes to the landscape.</li>
+          <li>By referring to China, Mendelssohn is making the point that<br/>A. having an exhibition in London is not as important as it used to be.&nbsp; B. young artists in Britain are not interested in Australian art.&nbsp; C. art from Shanghai is more important than Australian art.&nbsp; D. New York is still a preferred destination for young artists.</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 37–40 — Sentence Completion</h4>
+        <p class="instructions">Complete each sentence with the correct ending, A–F.</p>
+        <ul class="options">
+          <li>A. reflects the mood created by the natural environment.</li>
+          <li>B. demonstrates that the dominant art form in Australia is landscape painting.</li>
+          <li>C. demonstrates an understanding of the historical importance of the land.</li>
+          <li>D. showcases a very small number of artists.</li>
+          <li>E. demonstrates a strong European flavour.</li>
+          <li>F. shows an acceptance of the unique qualities of Australian art.</li>
+        </ul>
+        <ol start="37">
+          <li>In spite of its conservatism, the Royal Academy exhibition…</li>
+          <li>Australian art of the early to mid-1800s…</li>
+          <li>The modern work by Gladwell chosen for the exhibition…</li>
+          <li>Including Aboriginal art in the exhibition…</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">27</td><td class="ans">NO</td><td class="exp">The passage says the show results in a "flexible, wide-ranging notion of landscape" — the opposite of narrow.</td></tr>
+            <tr><td class="qnum">28</td><td class="ans">NOT GIVEN</td><td class="exp">The controversial choice of theme is discussed, but no Australian proposal being accepted/rejected is ever mentioned.</td></tr>
+            <tr><td class="qnum">29</td><td class="ans">YES</td><td class="exp">Early Australian art was said to "mirror Britain's love of landscape" before developing its own character — confirms it followed English tradition.</td></tr>
+            <tr><td class="qnum">30</td><td class="ans">YES</td><td class="exp">Curator Soriano wanted to show how "Australian art built a genuine distinctiveness."</td></tr>
+            <tr><td class="qnum">31</td><td class="ans">NOT GIVEN</td><td class="exp">British landscape painting is said to still be relevant to current artists — not the same as saying they rejected it.</td></tr>
+            <tr><td class="qnum">32</td><td class="ans">C</td><td class="exp">Mendelssohn suggests British values, not Australian self-expression, shaped the exhibition.</td></tr>
+            <tr><td class="qnum">33</td><td class="ans">B</td><td class="exp">"What struck Mendelssohn as odd was how conservative the underlying selection criteria seemed."</td></tr>
+            <tr><td class="qnum">34</td><td class="ans">A</td><td class="exp">Gladwell "wanted to make it personal" — i.e., a subjective approach.</td></tr>
+            <tr><td class="qnum">35</td><td class="ans">C</td><td class="exp">Soriano felt presenting Indigenous art "as part of the continuous history of Australian art" was most accurate.</td></tr>
+            <tr><td class="qnum">36</td><td class="ans">A</td><td class="exp">Mendelssohn cites China's rise to argue London matters less than it used to.</td></tr>
+            <tr><td class="qnum">37</td><td class="ans">F</td><td class="exp">Despite conservative selection, the Academy still "captures the distinctive qualities Australian art acquired."</td></tr>
+            <tr><td class="qnum">38</td><td class="ans">E</td><td class="exp">"English, French, and German influence is much clearer in the earliest period."</td></tr>
+            <tr><td class="qnum">39</td><td class="ans">A</td><td class="exp">Gladwell's interest in "atmosphere shaping perception" in <em>Storm Sequence</em>.</td></tr>
+            <tr><td class="qnum">40</td><td class="ans">C</td><td class="exp">Soriano: Australian art began "in and on the landscape" — Aboriginal art shown as part of that continuous history.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>colonial (adj.)</dt><dd>relating to a colony or one country's control over another.</dd></div>
+        <div><dt>genre (n.)</dt><dd>a category or style of artistic work, defined by its subject or form.</dd></div>
+        <div><dt>curatorial (adj.)</dt><dd>relating to the selection and organisation of items in an exhibition.</dd></div>
+        <div><dt>quintessentially (adv.)</dt><dd>representing the most perfect or typical example of something.</dd></div>
+        <div><dt>distinctiveness (n.)</dt><dd>the quality of being noticeably different from others.</dd></div>
+        <div><dt>periphery (n.)</dt><dd>the outer edge or margin of something, as opposed to its centre.</dd></div>
+        <div><dt>rationale (n.)</dt><dd>the underlying reasons or logical basis for a decision.</dd></div>
+        <div><dt>conservative (adj.)</dt><dd>cautious and resistant to change; sticking to traditional methods.</dd></div>
+        <div><dt>impose (v.)</dt><dd>to force a rule, belief, or standard onto someone else.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. MIND MUSIC -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="mindmusic">
+    <div>
+      <p class="eyebrow">Passage 5 · Questions 28–40 · Source: ieltsonlinetests.com</p>
+      <h2>Mind Music</h2>
+    </div>
+    <div class="passage">
+      <p><em>Scientists investigate 'earworms', the music we can't get out of our head</em></p>
+      <p><b>A</b> Ever had a song stuck in your head, playing on an endless loop? Scientists call them 'involuntary musical images', or 'earworms,' and a wave of new research is shining light on why they occur and what can be learned from them. Some neuroscientists and cognitive psychologists are studying earworms to explore the mysteries of memory and the part of the brain that is beyond our conscious control. "The idea that we have full control over our thought processes is an illusion," says psychologist Lauren Stewart, who founded the master's program in music, mind and brain at Goldsmiths, University of London, UK, where recent research has taken place. Researchers haven't been able to watch what happens in the brain when earworms occur, because they happen unpredictably. Much of what is known about them comes from surveys, questionnaires, diaries and lab experiments.</p>
+      <p><b>B</b> A Goldsmiths study published in the journal <em>Memory and Cognition</em> this year showed that the singing we hear in our heads tends to be true to actual recordings. Researchers had 17 volunteers tap to the beat of any earworm they heard during a four-day period while a device attached to their wrist recorded their movements. The tapping tempos were within 10% of the tempos of the original recordings. Another Goldsmiths study, published this year in <em>Consciousness and Cognition</em>, found that people who report hearing earworms often, and find them most intrusive, have slightly different brain structures, with more gray matter in areas associated with processing emotions.</p>
+      <p><b>C</b> Studies also show that the music in our heads often starts playing during times of 'low cognitive load', such as while showering, getting dressed, walking, or doing chores. Dr Stewart likens earworms to 'sonic screen savers' that keep the mind entertained while it is otherwise unoccupied. She and her colleagues tested that theory by having volunteers listen to songs and giving them various tasks afterwards. The volunteers who sat idly for the next five minutes were the most likely to report hearing the music in their heads. Dr Stewart observed that the more challenging the activity, the less likely the volunteers were to hear the music. Diary studies also show songs tend to match people's moods and therefore they are not random. If you are energised and upbeat, an earworm that occurs is likely to be uptempo too.</p>
+      <p><b>D</b> Songs the brain fixates on are usually those it has been exposed to recently, surveys show, which is why tunes getting heavy radio play frequently top the earworm charts. Even tunes you may have heard but didn't pay attention to can worm their way into your subconscious, says Ira Hyman, a psychologist at Western Washington University in Bellingham, USA. In an unpublished study there, participants who listened to music while doing other tasks were more likely to report that the songs returned as earworms later on, compared with participants who simply listened.</p>
+      <p><b>E</b> Some earworms are just fragments of a song that repeat like a broken record. So, when the mind hits a part of a song it can't remember, it loops back rather than moving on. That could make an earworm even more entrenched, Dr Hyman says. According to a theory known as the Zeigarnik effect, named for a Soviet psychologist, Bluma Zeigarnik, unfinished thoughts and activities weigh on the mind more heavily than those that are completed, although experiments exposing students to interrupted songs have yielded mixed results.</p>
+      <p><b>F</b> Researchers say they can't pinpoint a spot in the brain where earworms live. Imaging studies by Andrea Halpern at Bucknell University, in Lewisburg, USA, have shown that deliberately imagining music and actually listening to music activate many of the same neurological networks. Dr Halpern's earlier studies showed that when subjects listened to the first few notes of familiar music, areas in the right frontal and superior temporal portions of the brain became activated, along with the supplementary motor area at the top, which is typically involved in remembering sequences. When the same subjects listened to unfamiliar music and were asked to recall it, there was activity in the left frontal portions of the brain instead.</p>
+      <p><b>G</b> One factor that makes some songs stick might be repetition. "Repetition leads to familiarity which leads to anticipation, which is satisfied by hearing the song," says John Seabrook, author of <em>The Song Machine: Inside the Hit Factory</em>, about how producers pump pop songs full of aural "hooks", the punchy melodic phrases designed to target the brain and leave it wanting more. The researchers are comparing the melodic structure of 100 often-mentioned songs with 100 similarly popular songs that weren't cited as earworms, to assess the difference. Songs with earworm potential appear to share certain features: a repeating pattern of ups and downs in pitch, and an irregular musical interval.</p>
+      <p><b>H</b> The researchers plan next to test their results in reverse, and play ringtones from songs of both the earworm and non-earworm variety for volunteers several times a day to see which ones get stuck. Drs Stewart and Halpern are now working together to recruit survey participants for a study looking at whether people at different stages of life experience earworms differently. "You can argue that older people might get them more often because they know more songs," Dr Halpern says. "But the few responses we have so far indicate that they have earworms less often. It could be that they don't play music as often as younger people do."</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 28–31</h4>
+        <p class="instructions">The passage has eight paragraphs, A–H. Which paragraph contains the following information?</p>
+        <ol start="28">
+          <li>a description of the characteristics common to songs with earworms</li>
+          <li>a justification for research into earworms</li>
+          <li>a description of the brain's reaction to known and unknown songs</li>
+          <li>details of proposed research into the frequency with which earworms occur in different age groups</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 32–35 — Summary Completion</h4>
+        <p class="instructions">Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.</p>
+        <p>Researchers from Goldsmiths concluded that the music we imagine in our minds is quite similar to recordings. They proved this by asking volunteers to record the rhythm of music using a monitor on their <b>(32)</b> ____. Further research has demonstrated that those who hear earworms more frequently have brains that may deal with <b>(33)</b> ____ differently from other people. Dr Stewart also believes that the brain is <b>(34)</b> ____ by earworms when it is not focused on a task. In fact, a reduction in the occurrence of earworms was found to be directly related to how <b>(35)</b> ____ the task was.</p>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 36–40 — Matching People</h4>
+        <p class="instructions">Match each statement with the correct researcher. (NB You may use any letter more than once.)</p>
+        <ul class="options">
+          <li>A. Lauren Stewart</li>
+          <li>B. Ira Hyman</li>
+          <li>C. Andrea Halpern</li>
+          <li>D. John Seabrook</li>
+        </ul>
+        <ol start="36">
+          <li>Some musicians create music that is intentionally memorable.</li>
+          <li>People are unable to completely regulate how they think.</li>
+          <li>We can remember songs without knowing that we have heard them.</li>
+          <li>Thinking about music has a similar effect on the brain to hearing music.</li>
+          <li>Earworms are more persistent when only a short section of the song is constantly replayed.</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">28</td><td class="ans">G</td><td class="exp">"a repeating pattern of ups and downs in pitch, and an irregular musical interval" plus repetition/"hooks".</td></tr>
+            <tr><td class="qnum">29</td><td class="ans">A</td><td class="exp">"studying earworms to explore the mysteries of memory and the part of the brain that is beyond our conscious control."</td></tr>
+            <tr><td class="qnum">30</td><td class="ans">F</td><td class="exp">Contrasts brain activity for familiar vs unfamiliar music (right frontal/temporal vs left frontal).</td></tr>
+            <tr><td class="qnum">31</td><td class="ans">H</td><td class="exp">"a study looking at whether people at different stages of life experience earworms differently."</td></tr>
+            <tr><td class="qnum">32</td><td class="ans">wrist</td><td class="exp">"a device attached to their wrist recorded their movements."</td></tr>
+            <tr><td class="qnum">33</td><td class="ans">emotions</td><td class="exp">"more gray matter in areas associated with processing emotions."</td></tr>
+            <tr><td class="qnum">34</td><td class="ans">entertained</td><td class="exp">Earworms "keep the mind entertained while it is otherwise unoccupied."</td></tr>
+            <tr><td class="qnum">35</td><td class="ans">challenging</td><td class="exp">"the more challenging the activity, the less likely the volunteers were to hear the music."</td></tr>
+            <tr><td class="qnum">36</td><td class="ans">D</td><td class="exp">Seabrook discusses producers designing "hooks" to be memorable.</td></tr>
+            <tr><td class="qnum">37</td><td class="ans">A</td><td class="exp">Stewart: "The idea that we have full control over our thought processes is an illusion."</td></tr>
+            <tr><td class="qnum">38</td><td class="ans">B</td><td class="exp">Hyman's study: music half-heard while multitasking still returned as an earworm later.</td></tr>
+            <tr><td class="qnum">39</td><td class="ans">C</td><td class="exp">Halpern's imaging studies show imagining and hearing music "activate many of the same neurological networks."</td></tr>
+            <tr><td class="qnum">40</td><td class="ans">B</td><td class="exp">Hyman says fragment-looping makes an earworm "even more entrenched."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>cognitive (adj.)</dt><dd>relating to mental processes such as thinking, memory, and perception.</dd></div>
+        <div><dt>neurological (adj.)</dt><dd>relating to the nervous system and the brain.</dd></div>
+        <div><dt>subconscious (n./adj.)</dt><dd>part of the mind that influences thought without conscious awareness.</dd></div>
+        <div><dt>entrenched (adj.)</dt><dd>firmly and deeply established; hard to remove.</dd></div>
+        <div><dt>gray matter (n.)</dt><dd>brain tissue containing nerve cell bodies, associated with processing information.</dd></div>
+        <div><dt>tempo (n.)</dt><dd>the speed at which a piece of music is played.</dd></div>
+        <div><dt>hook (n.)</dt><dd>a short, catchy musical phrase designed to be memorable.</dd></div>
+        <div><dt>irregular (adj.)</dt><dd>not following a regular, even, or predictable pattern.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 6. THE ART OF DECEPTION -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="deception">
+    <div>
+      <p class="eyebrow">Passage 6 · Questions 27–40 · Source: mockarena.uz</p>
+      <h2>The Art of Deception</h2>
+    </div>
+    <div class="passage">
+      <p><em>Do tiny changes of facial expression show whether someone is telling lies?</em></p>
+      <p>Forty years ago, the research psychologist Dr Paul Ekman was addressing a group of young psychiatrists in training when he was asked a question, the answer to which has kept him busy ever since. Suppose, the group wanted to know, a particular patient swears they are telling the truth. They look and sound sincere. So here is the question: is there any way you can be sure they are telling the truth? Ekman did not know the answer then, but wanted to find out.</p>
+      <p>As part of his research, he had already filmed a series of 12-minute interviews with psychiatric patients. In a subsequent conversation, one of the patients told him that she had lied to him. So, Ekman sat and looked at the film but saw nothing noteworthy. Then he slowed it down and looked again. Then he slowed it even further. And suddenly, there, across just two frames of the film, he saw it: an intense expression of extreme anguish. It lasted less than a 15th of a second, but once he had spotted the first expression, he soon found three more examples in that same interview. He termed his discovery "micro-expression: very rapid intense demonstrations of emotion that the subject intended to be concealed."</p>
+      <p>Over the course of the next four decades, Ekman successfully demonstrated a proposition first suggested by Charles Darwin: that the ways in which we express rage, disgust, contempt, fear, surprise, happiness and sadness are universal. The facial muscles triggered by those seven basic emotions are, he has shown, essentially standard, regardless of language and culture, from the US to Japan and Brazil to Papua New Guinea. What is more, expressions of emotion are impossible to suppress and, particularly when we are lying, micro-expressions of powerfully felt emotions will inevitably flit across our face before we get the chance to stop them.</p>
+      <p>Fortunately for liars, most people will fail to spot these fleeting signals of inner torment. Of the 15,000 Ekman has tested, only 50 people, whom he calls "naturals", have been able to do it. But given a little more training, Ekman says, almost anyone can develop the skill. He should know, since these tests were completed in the mid-1980s and the first publication of his research, he has been called in by the FBI and CIA (among countless more law-enforcement and other agencies around the world), not just to solve cases, but to teach them how to use his technique for themselves. He has held workshops for defense and prosecution lawyers, health professionals, even jealous spouses, all of them wanting to know exactly when someone is not being 100 percent candid.</p>
+      <p>Most recently, Ekman's research has resulted in a new television series about the exploits of the fictional Dr Cal Lightman, a scientist who studies involuntary body language to discover not only if you are lying, but why you might have been motivated to do so. According to the publicity blurb, Lightman is a human lie detector, even more accurate than a polygraph test. Ekman concedes he was skeptical when the producer first approached him with the idea of turning his life's work into a TV series, and initially would have stopped the project if he could. In particular, he was fearful that the show would exaggerate the effectiveness of his techniques and create the quite inaccurate impression among audiences that criminals could no longer hope to get away with lying. In the worst-case scenario, he was concerned about unfair convictions, that one day someone not properly trained in his techniques might be sitting on a jury and wrongly find someone guilty of a crime simply on the basis of a television programme.</p>
+      <p>In the end though, he was won over because the series is unusual in several respects. It is the first time, as far as Ekman is aware, that a commercial TV drama has been based on the work of just one scientist. That scientist is also deeply involved in the project, talking through plot ideas and checking five successive drafts of each script to ensure details are correct. He was also impressed with the producer's manifestly serious and well-intentioned reasons for making the programme. Now that the first series has been completed, he believes probably 80–90 per cent of the show is based on fact, and that's good enough for what is, after all, a drama, not a documentary.</p>
+      <p>Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully are completely unrelated. He has been asked by people running for high office if he could teach them to become more credible with the public but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A "true" lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They are supposed to deceive you, it's part of the game, and the same is true of flattery. He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 27–31 — Multiple Choice</h4>
+        <ol start="27">
+          <li>According to the writer, Ekman became interested in lying after a question from his<br/>A. peers.&nbsp; B. patients.&nbsp; C. students.&nbsp; D. teachers.</li>
+          <li>The writer refers to the 12-minute interviews in order to<br/>A. illustrate how frequently patients lie.&nbsp; B. describe the origins of Ekman's theories.&nbsp; C. compare Ekman's research to previous studies.&nbsp; D. show how patients' behaviour is affected by filming.</li>
+          <li>What is the writer's point in the third paragraph?<br/>A. Micro-expressions are common to all people.&nbsp; B. Recent research has refuted an old idea.&nbsp; C. With practice we can learn to control our micro-expressions.&nbsp; D. Human society is too complex to allow for generalisations.</li>
+          <li>What are we told about Ekman's conclusions from his tests?<br/>A. It's natural for people to lie.&nbsp; B. Few untrained people can detect lying.&nbsp; C. Most liars suffer from periods of depression.&nbsp; D. All of his subjects were trained to identify micro-expressions.</li>
+          <li>What point does the writer make about Ekman's techniques in the fourth paragraph?<br/>A. They take a decade to teach.&nbsp; B. They have been in great demand.&nbsp; C. They have aroused the suspicions of some agencies.&nbsp; D. They can be used by a limited range of occupations.</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 32–36 — Summary Completion</h4>
+        <p class="instructions">Complete the summary using the word bank below.</p>
+        <div class="word-bank">
+          <span>A. consequences</span><span>B. crimes</span><span>C. false beliefs</span><span>D. motives</span><span>E. justice</span><span>F. accuracy</span><span>G. acting</span><span>H. research</span><span>I. ratings</span>
+        </div>
+        <p>A new TV series based on Ekman's work features a hero named Lightman, who detects lies. Initially, Ekman was unenthusiastic about the TV project because he feared the possibility of encouraging viewers' <b>(32)</b> ____. For example, he was worried that one day the programme could result in <b>(33)</b> ____ not being carried out. Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's <b>(34)</b> ____. The <b>(35)</b> ____ of the show's producer have been another pleasant surprise considering the genre of the programme. Ekman is happy with the show's overall <b>(36)</b> ____.</p>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 37–40 — Yes / No / Not Given</h4>
+        <ol start="37">
+          <li>Ekman regrets the lies he told as a child.</li>
+          <li>People who are good at lying tend to be good at detecting lies.</li>
+          <li>Ekman has worked with poker players to help them lie more convincingly.</li>
+          <li>Ekman is more interested in the types of lies with serious consequences.</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">27</td><td class="ans">C</td><td class="exp">He was "addressing a group of young psychiatrists in training" — i.e., students.</td></tr>
+            <tr><td class="qnum">28</td><td class="ans">B</td><td class="exp">The interviews are where Ekman first discovered "micro-expressions" — the origin of his theory.</td></tr>
+            <tr><td class="qnum">29</td><td class="ans">A</td><td class="exp">Ekman showed expression of the seven basic emotions is "universal... regardless of language and culture."</td></tr>
+            <tr><td class="qnum">30</td><td class="ans">B</td><td class="exp">"Of the 15,000 Ekman has tested, only 50 people... have been able to do it."</td></tr>
+            <tr><td class="qnum">31</td><td class="ans">B</td><td class="exp">Called in by the FBI, CIA, and many other agencies; ran workshops for numerous groups.</td></tr>
+            <tr><td class="qnum">32</td><td class="ans">C (false beliefs)</td><td class="exp">He feared "encouraging viewers' false beliefs."</td></tr>
+            <tr><td class="qnum">33</td><td class="ans">E (justice)</td><td class="exp">Worried a wrongful conviction could mean "justice... not being carried out."</td></tr>
+            <tr><td class="qnum">34</td><td class="ans">H (research)</td><td class="exp">"no other comparable programme based on a single person's research."</td></tr>
+            <tr><td class="qnum">35</td><td class="ans">D (motives)</td><td class="exp">"The motives of the show's producer" were a pleasant surprise.</td></tr>
+            <tr><td class="qnum">36</td><td class="ans">F (accuracy)</td><td class="exp">Ekman is happy with the show's overall accuracy (80–90% fact-based).</td></tr>
+            <tr><td class="qnum">37</td><td class="ans">NO</td><td class="exp">He states the fact that he was "a terrible liar" as a child, with no expression of regret.</td></tr>
+            <tr><td class="qnum">38</td><td class="ans">NO</td><td class="exp">"the ability to detect a lie and the ability to lie successfully are completely unrelated."</td></tr>
+            <tr><td class="qnum">39</td><td class="ans">NO</td><td class="exp">Ekman explicitly excludes poker players from "true" liars — he does not train them to lie better.</td></tr>
+            <tr><td class="qnum">40</td><td class="ans">YES</td><td class="exp">He focuses on lies "where the liar would be in grave trouble... and where the target would feel properly aggrieved."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>micro-expression (n.)</dt><dd>a very brief, involuntary facial expression revealing a true emotion.</dd></div>
+        <div><dt>anguish (n.)</dt><dd>severe mental or physical suffering.</dd></div>
+        <div><dt>skeptical (adj.)</dt><dd>having doubts about the truth or value of something.</dd></div>
+        <div><dt>polygraph (n.)</dt><dd>a device measuring physiological responses to help detect lying; a "lie detector".</dd></div>
+        <div><dt>credible (adj.)</dt><dd>believable or trustworthy.</dd></div>
+        <div><dt>deliberate (adj.)</dt><dd>done consciously and intentionally.</dd></div>
+        <div><dt>aggrieved (adj.)</dt><dd>feeling resentment at having been treated unfairly.</dd></div>
+        <div><dt>flattery (n.)</dt><dd>excessive or insincere praise given to please someone.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 7. MARGARET MAHY -->
+  <!-- ============================================================ -->
+  <section class="passage-card" id="mahy">
+    <div>
+      <p class="eyebrow">Passage 7 · Questions 27–40 · Source: ieltsmaterials.uz</p>
+      <h2>The New Zealand Writer Margaret Mahy</h2>
+    </div>
+    <div class="passage">
+      <p>In a career spanning some fifty years, Margaret Mahy has come to occupy a unique place in New Zealand writing with innovative fiction and original characterisation. In our solidly realist tradition, the linguistic fireworks of Mahy's children's fiction and the explorations of human behaviour at the heart of her supernatural teenage fiction stand gloriously alone. Mahy's clearest heir, I have always thought, is Elizabeth Knox — and maybe the true inheritance there is sheer singularity. Just as there is no one else like Knox in New Zealand writing, Mahy, too, has ventured into imaginative territory unknown to other local writers. So it was with great pleasure that I visited Mahy recently at her Governor's Bay home to talk about her new book. As with all journalists, she is generous to a fault with her time and attention; and, as always, despite her careful consideration of questions and thoughtful answers, I'm reminded she isn't truly comfortable making herself or her life the heart of any conversation.</p>
+      <p>Certainly, any consideration of the style of Mahy's novels and picture books throws up some irresistible theories. As a writer committed to supporting herself through her art, she has seldom had the time for formal research. Rather, it has been a matter of going out and finding inspiration from her immediate environment: the writing on the side of a bus; a spelling mistake in a note to herself; the similarity between a cat and a fur hat. But despite these sometimes mundane origins, the settings for her stories are delightfully varied, as these books celebrate the dramatic plot twists and unpredictability of adventures on the high seas or in Antarctica, and also in quite unassuming places like the library or even down the back of a chair at home. Mahy has a lifelong affection for characters who are agents of upheaval and disturbance. Her junior and picture books are peppered with pirates, robbers and lions, though they appear alongside librarians, mothers and children, working against comfortable stereotype. Her fictions often have at their heart a young adult burdened with special powers, such as the ability to cast spells in order to transform their world in supernatural and fantastical ways. Another common feature is that, while the conclusions of her tales are usually predictable, they leave the reader feeling absolutely complete.</p>
+      <p>Many of these themes can be found in her new novel, <em>The Magician of Hoad</em>. The book was begun more than 15 years ago and envisioned as an entire fantasy — one set in a fully imagined world with detailed history and complex tribal inter-relationships, a classical hero quest at its heart. The story ballooned at one point to 800 pages and has been through at least two substantial rewrites. Now half its original size, it is a fascinating read — an adventure, a romance, and a gold mine of Mahy literary preoccupations.</p>
+      <p>The other splendid Mahy publication this year is a re-issue of <em>Bubble Trouble</em> in a newly illustrated edition. This tongue-twister tale first appeared in 1991, was included in <em>100 New Zealand Poems</em>, and has been recited by Mahy at countless private and public functions. Perhaps more than any other work, <em>Bubble Trouble</em> is the Mahy that New Zealand children and their parents know so well, the rollicking story of a clown who serves up a joyous torrent of word play and unexpected rhyme.</p>
+      <p>Those connections are four or five deep now. I read <em>The Lion in the Meadow</em> in the School Journal in the late 1960s; my stepdaughter listened to <em>The Boy Who Was Followed Home</em> over and over in the 1970s; my own children sat very still mouthing <em>The Great White Man-Eating Shark</em> in the 80s and 90s; now in the 21st century, my grandchildren have heard <em>Down the Dragon's Tongue</em>, <em>A Summery Saturday Morning</em> and <em>Dashing Dog</em> many times.</p>
+      <p>Of course, readers are important to any working writer, but Mahy's espousal of the act of reading goes beyond that: a book is not properly finished, she has often said, until it has been read, because a reader brings something important to the book. So, doubtless out of need to build a market, but also out of genuine care for that other dynamic part of the author-reader relationship, Mahy has, until recently, kept up a punishing schedule of public appearances.</p>
+      <p>Private conversation with Mahy has always been a wild ride — marvellous, in the true sense of the word, the product of a hungry head and an infinite capacity to be astonished. A few years ago, the writer David Hill told a funny story. Though his writing was very different from Mahy's, he had been affected by her peculiarly alert way of looking at the world, particularly the mad, slippery life of language. Once, Hill said, in a motel room, a sign on a door caught his eye: 'This door is alarmed.' Mahy would like that, thought Hill. She would enjoy the comedy just below the surface of the formal warning; she would leap immediately to the possibilities for story and language play.</p>
+    </div>
+
+    <div class="questions-block">
+      <h3>Questions</h3>
+      <div class="qgroup">
+        <h4>Questions 27–31 — Yes / No / Not Given</h4>
+        <ol start="27">
+          <li>Mahy and Knox have sometimes criticised each other's work.</li>
+          <li>Mahy explores the traditional themes of New Zealand literature.</li>
+          <li>Mahy's children's books have been more popular than her teenage books.</li>
+          <li>Mahy is welcoming to interviewers.</li>
+          <li>Mahy is at ease speaking about her experiences.</li>
+        </ol>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 32–35 — Summary Completion</h4>
+        <p class="instructions">Complete the summary using the word bank below.</p>
+        <div class="word-bank">
+          <span>A. disruptive and unpredictable</span><span>B. everyday</span><span>C. loveable</span><span>D. controversial</span><span>E. exotic and ordinary</span><span>F. isolated</span><span>G. unconfident</span><span>H. unsurprising but satisfying</span><span>I. magical</span>
+        </div>
+        <p><strong>Theories about Mahy's style</strong><br/>Mahy's determination to earn a living from writing has encouraged her to find the ideas for her work in <b>(32)</b> ____ places. The stories themselves are set in locations that are <b>(33)</b> ____. In terms of characterisation, very often an adolescent possesses <b>(34)</b> ____ abilities. Finally, the endings of the stories tend to be <b>(35)</b> ____.</p>
+      </div>
+      <div class="qgroup">
+        <h4>Questions 36–40 — Multiple Choice</h4>
+        <ol start="36">
+          <li>What does the writer say about <em>The Magician of Hoad</em>?<br/>A. It is partly based on true history.&nbsp; B. It was restructured in the writing process.&nbsp; C. It is quite different from conventional stories.&nbsp; D. It does not reflect the usual themes of Mahy's work.</li>
+          <li>According to the writer, <em>Bubble Trouble</em><br/>A. was first illustrated in 1991.&nbsp; B. is written in plain language.&nbsp; C. is an old favourite for many families.&nbsp; D. has not been read aloud by Mahy before.</li>
+          <li>The writer's purpose in the fifth paragraph is to<br/>A. show how Mahy's style has changed through generations.&nbsp; B. criticise Mahy's children's stories for being repetitive.&nbsp; C. describe how new media have changed entertainment.&nbsp; D. illustrate Mahy's popularity with generations of children.</li>
+          <li>According to the sixth paragraph, which of the following is true?<br/>A. Readers sometimes do not finish Mahy's books.&nbsp; B. Mahy actively encourages feedback from readers.&nbsp; C. Readers are necessary in order to complete a book.&nbsp; D. Mahy does not realise how important she is to some readers.</li>
+          <li>What is the writer doing in the final paragraph?<br/>A. illustrating Mahy's view of the world&nbsp; B. comparing Mahy with another writer&nbsp; C. correcting a misconception about Mahy&nbsp; D. suggesting reasons for Mahy's approach</li>
+        </ol>
+      </div>
+    </div>
+
+    <details>
+      <summary>Answer key &amp; explanations</summary>
+      <div class="table-scroll">
+        <table class="answer-table">
+          <thead><tr><th>Q</th><th>Answer</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="qnum">27</td><td class="ans">NOT GIVEN</td><td class="exp">Knox is described only as Mahy's literary "heir" through shared singularity — no mention of mutual criticism.</td></tr>
+            <tr><td class="qnum">28</td><td class="ans">NO</td><td class="exp">Mahy's work is contrasted with "our solidly realist tradition" and said to "stand gloriously alone" — not exploring traditional themes.</td></tr>
+            <tr><td class="qnum">29</td><td class="ans">NOT GIVEN</td><td class="exp">Personal reading experiences across generations are listed, but popularity is never compared between her children's and teenage books.</td></tr>
+            <tr><td class="qnum">30</td><td class="ans">YES</td><td class="exp">"As with all journalists, she is generous to a fault with her time and attention."</td></tr>
+            <tr><td class="qnum">31</td><td class="ans">NO</td><td class="exp">"I'm reminded she isn't truly comfortable making herself or her life the heart of any conversation."</td></tr>
+            <tr><td class="qnum">32</td><td class="ans">B (everyday)</td><td class="exp">Inspiration from mundane sources: "the writing on the side of a bus... a spelling mistake."</td></tr>
+            <tr><td class="qnum">33</td><td class="ans">E (exotic and ordinary)</td><td class="exp">Settings range from "the high seas or Antarctica" to "the library or... down the back of a chair at home."</td></tr>
+            <tr><td class="qnum">34</td><td class="ans">I (magical)</td><td class="exp">"a young adult burdened with special powers, such as the ability to cast spells."</td></tr>
+            <tr><td class="qnum">35</td><td class="ans">H (unsurprising but satisfying)</td><td class="exp">"conclusions... are usually predictable, they leave the reader feeling absolutely complete."</td></tr>
+            <tr><td class="qnum">36</td><td class="ans">B</td><td class="exp">"Now half its original size" — the book was substantially restructured/cut down through rewrites.</td></tr>
+            <tr><td class="qnum">37</td><td class="ans">C</td><td class="exp">"the Mahy that New Zealand children and their parents know so well" — recited at "countless" functions, an old favourite.</td></tr>
+            <tr><td class="qnum">38</td><td class="ans">D</td><td class="exp">Traces one family's multi-generational listening from the late 1960s to present-day grandchildren — illustrating cross-generational popularity.</td></tr>
+            <tr><td class="qnum">39</td><td class="ans">C</td><td class="exp">"a book is not properly finished... until it has been read, because a reader brings something important to the book."</td></tr>
+            <tr><td class="qnum">40</td><td class="ans">A</td><td class="exp">The door-sign anecdote illustrates Mahy's "peculiarly alert way of looking at the world."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary>Key vocabulary</summary>
+      <dl class="glossary">
+        <div><dt>heir (n.)</dt><dd>here, a writer regarded as continuing another's style or tradition.</dd></div>
+        <div><dt>singularity (n.)</dt><dd>the quality of being unique or one of a kind.</dd></div>
+        <div><dt>upheaval (n.)</dt><dd>a sudden or violent disturbance or change.</dd></div>
+        <div><dt>tongue-twister (n.)</dt><dd>a phrase that is difficult to pronounce quickly and clearly.</dd></div>
+        <div><dt>rollicking (adj.)</dt><dd>full of high spirits and boisterous fun.</dd></div>
+        <div><dt>espousal (n.)</dt><dd>the act of adopting or supporting a cause or belief.</dd></div>
+        <div><dt>punishing (adj.)</dt><dd>extremely demanding or exhausting.</dd></div>
+        <div><dt>astonished (adj.)</dt><dd>greatly surprised or amazed.</dd></div>
+      </dl>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <p>All seven passages were collected from public IELTS practice sites for personal study. Question wording and answer keys were cross-checked against the passage text itself wherever a source's own key was incomplete or inconsistent — see the notes on individual passages above (Dolls Through the Ages, 200 Years of Australian Landscapes).</p>
+    <p class="muted">Source sites: ieltsmaterials.uz · ieltsreading.info · ece.edu.vn · ieltsonlinetests.com · mockarena.uz</p>
+  </footer>
+
+</div>
+</body>
+</html>

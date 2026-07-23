@@ -112,6 +112,75 @@
   .passage b { color: var(--text-primary); font-family: "SFMono-Regular", Consolas, monospace; margin-right: 6px; }
   .passage em { color: var(--text-primary); }
 
+  /* ---------- Select-to-highlight (CD-IELTS style) ---------- */
+  mark.user-highlight {
+    background: rgba(194, 121, 15, 0.32);
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  mark.user-highlight:hover { background: rgba(194, 121, 15, 0.48); }
+  mark.user-highlight.armed {
+    position: relative;
+    background: rgba(179, 38, 30, 0.3);
+    outline: 1px dashed var(--critical);
+    outline-offset: 1px;
+  }
+  mark.user-highlight.armed::after {
+    content: "✕";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--critical);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  }
+  .highlight-btn {
+    position: fixed;
+    z-index: 50;
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.78rem;
+    background: var(--text-primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 100px;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .highlight-btn[hidden] { display: none; }
+  .highlight-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .clear-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .clear-btn:hover { color: var(--critical); border-color: var(--critical); }
+
   .questions-block h3 {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -178,6 +247,11 @@
       <li><a href="#mahy">The New Zealand Writer Margaret Mahy</a> <span>— Q27–40</span></li>
     </ol>
   </nav>
+
+  <div class="highlight-note">
+    <p>Select any text in a passage or its questions to highlight it — like the real computer-delivered test. Click a highlight once to arm it (it turns red), then click again to remove it.</p>
+    <button type="button" class="clear-btn" id="clearHighlightsBtn">Clear all highlights</button>
+  </div>
 
   <!-- ============================================================ -->
   <!-- 1. SHOULD WE STOP EATING MEAT? -->
@@ -835,5 +909,167 @@
   </footer>
 
 </div>
+
+<script>
+(function () {
+  "use strict";
+
+  function loadJSON(key, fallback) {
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch (e) { return fallback; }
+  }
+  function saveJSON(key, val) {
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+  }
+
+  function unwrapMark(mark) {
+    var parent = mark.parentNode;
+    while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+    parent.removeChild(mark);
+    parent.normalize();
+  }
+
+  function getTextOffset(container, node, offset) {
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    var total = 0, cur;
+    while ((cur = walker.nextNode())) {
+      if (cur === node) return total + offset;
+      total += cur.nodeValue.length;
+    }
+    return total;
+  }
+
+  function rangeFromOffsets(container, start, end) {
+    var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    var range = document.createRange();
+    var total = 0, cur, startSet = false;
+    while ((cur = walker.nextNode())) {
+      var len = cur.nodeValue.length;
+      if (!startSet && total + len >= start) { range.setStart(cur, start - total); startSet = true; }
+      if (startSet && total + len >= end) { range.setEnd(cur, end - total); return range; }
+      total += len;
+    }
+    range.selectNodeContents(container);
+    range.collapse(false);
+    return range;
+  }
+
+  function initHighlighter() {
+    var containers = [];
+    document.querySelectorAll(".passage-card").forEach(function (card, i) {
+      var slug = card.id || ("card" + i);
+      var passage = card.querySelector(".passage");
+      var questions = card.querySelector(".questions-block");
+      if (passage) containers.push({ el: passage, key: "readingbank." + slug + ".passage" });
+      if (questions) containers.push({ el: questions, key: "readingbank." + slug + ".questions" });
+    });
+    if (!containers.length) return;
+
+    containers.forEach(function (c) {
+      var saved = loadJSON(c.key, null);
+      if (saved) c.el.innerHTML = saved;
+    });
+
+    function persistContainer(container) {
+      var c = containers.filter(function (x) { return x.el === container; })[0];
+      if (c) saveJSON(c.key, container.innerHTML);
+    }
+
+    var highlightBtn = document.createElement("button");
+    highlightBtn.type = "button";
+    highlightBtn.className = "highlight-btn";
+    highlightBtn.textContent = "✎ Highlight";
+    highlightBtn.hidden = true;
+    document.body.appendChild(highlightBtn);
+
+    var pendingRange = null, pendingContainer = null;
+
+    function hideCreateBtn() { highlightBtn.hidden = true; pendingRange = null; pendingContainer = null; }
+
+    function disarmAll(except) {
+      document.querySelectorAll("mark.user-highlight.armed").forEach(function (m) {
+        if (m !== except) m.classList.remove("armed");
+      });
+    }
+
+    containers.forEach(function (c) {
+      var container = c.el;
+
+      container.addEventListener("mouseup", function () {
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideCreateBtn(); return; }
+        var range = sel.getRangeAt(0);
+        if (!container.contains(range.commonAncestorContainer)) { hideCreateBtn(); return; }
+        var rect = range.getBoundingClientRect();
+        if (!rect || (rect.width === 0 && rect.height === 0)) { hideCreateBtn(); return; }
+        pendingRange = range.cloneRange();
+        pendingContainer = container;
+        highlightBtn.style.top = Math.max(8, rect.top - 36) + "px";
+        highlightBtn.style.left = Math.max(8, rect.left) + "px";
+        highlightBtn.hidden = false;
+      });
+
+      container.addEventListener("click", function (e) {
+        var mark = e.target.closest ? e.target.closest("mark.user-highlight") : null;
+        disarmAll(mark);
+        if (!mark || !window.getSelection().isCollapsed) return;
+        if (mark.classList.contains("armed")) {
+          unwrapMark(mark);
+          persistContainer(container);
+        } else {
+          mark.classList.add("armed");
+        }
+      });
+    });
+
+    highlightBtn.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    highlightBtn.addEventListener("click", function () {
+      if (!pendingRange || !pendingContainer) return;
+      var container = pendingContainer;
+      var startOffset = getTextOffset(container, pendingRange.startContainer, pendingRange.startOffset);
+      var endOffset = getTextOffset(container, pendingRange.endContainer, pendingRange.endOffset);
+      if (endOffset <= startOffset) { hideCreateBtn(); return; }
+
+      container.querySelectorAll("mark.user-highlight").forEach(function (m) {
+        if (pendingRange.intersectsNode(m)) unwrapMark(m);
+      });
+
+      var freshRange = rangeFromOffsets(container, startOffset, endOffset);
+      var mark = document.createElement("mark");
+      mark.className = "user-highlight";
+      mark.title = "Click once to arm, click again to remove";
+      try {
+        freshRange.surroundContents(mark);
+      } catch (err) {
+        var frag = freshRange.extractContents();
+        mark.appendChild(frag);
+        freshRange.insertNode(mark);
+      }
+      window.getSelection().removeAllRanges();
+      hideCreateBtn();
+      persistContainer(container);
+    });
+
+    document.addEventListener("mousedown", function (e) {
+      if (e.target !== highlightBtn) hideCreateBtn();
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest || !e.target.closest("mark.user-highlight")) disarmAll();
+    });
+
+    var clearBtn = document.getElementById("clearHighlightsBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        containers.forEach(function (c) {
+          c.el.querySelectorAll("mark.user-highlight").forEach(unwrapMark);
+          persistContainer(c.el);
+        });
+      });
+    }
+  }
+
+  initHighlighter();
+})();
+</script>
 </body>
 </html>

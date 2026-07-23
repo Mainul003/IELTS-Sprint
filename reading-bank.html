@@ -181,6 +181,36 @@
   }
   .clear-btn:hover { color: var(--critical); border-color: var(--critical); }
 
+  .gap-field {
+    font: inherit;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    color: var(--text-primary);
+  }
+  .gap-field.correct { border-color: var(--good); background: var(--good-bg); }
+  .gap-field.incorrect { border-color: var(--critical); background: #f8e6e4; }
+  select.gap-field { cursor: pointer; }
+  .gap-input { width: 130px; }
+  .gap-input-wide { width: 190px; }
+  .gap-feedback { font-size: 0.78rem; color: var(--critical); margin-left: 6px; display: inline-block; }
+  .quiz-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .check-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.82rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 100px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  .check-btn:hover { filter: brightness(1.06); }
+  .quiz-score { font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+
   .questions-block h3 {
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -275,22 +305,22 @@
       <p><b>I</b> Under this scenario the goal will have to be producing the most meat at the lowest environmental cost. According to Walter Falcon, an agricultural economist, this means fewer free range cattle and sheep in green fields. "If you're going to keep some livestock systems, I think the ones you'll want to keep are the intensive ones," he says. Of course this does not take into account animal welfare issues, as intensive farming usually means poor living conditions and the use of growth hormones.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-meat">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 14–17</h4>
         <p class="instructions">Reading Passage 1 has nine paragraphs, A–I. Which paragraph contains the following information? (NB You may use any letter more than once.)</p>
         <ol start="14">
-          <li>the suggestion that people may need to adapt to a different quality of meat</li>
-          <li>a description of the way animals were fed in the past</li>
-          <li>a prediction in regard to human demand for meat</li>
-          <li>the potential consequences of a meat-free world for textile industries</li>
+          <li>the suggestion that people may need to adapt to a different quality of meat <select class="gap-field" data-q="meat-14"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></li>
+          <li>a description of the way animals were fed in the past <select class="gap-field" data-q="meat-15"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></li>
+          <li>a prediction in regard to human demand for meat <select class="gap-field" data-q="meat-16"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></li>
+          <li>the potential consequences of a meat-free world for textile industries <select class="gap-field" data-q="meat-17"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 18–22 — Summary Completion</h4>
         <p class="instructions">Complete the summary below. Write ONE WORD ONLY from the passage for each answer.</p>
-        <p><strong>How does agriculture damage the environment?</strong> Agriculture causes significant harm to the environment in a number of ways, including the frequent use of <b>(18)</b> ____ in modern farming and the cutting down of trees. It is also responsible for the production of many greenhouse gases, more so than <b>(19)</b> ____ is. However, it is livestock farming in particular that is most harmful, because cows, chickens and sheep, for example, are given vast quantities of grain which could be consumed by people instead. A meat-free diet would mean that actually less <b>(20)</b> ____ could be used for crops. Far less chemical pollution, specifically in the form of <b>(21)</b> ____ would also be released into the environment, especially if consumers cut out dairy and egg products as well as meat. In the US, there is clear evidence that considerable <b>(22)</b> ____ is caused by the demand for grazing land, although there is no information on this from other countries.</p>
+        <p><strong>How does agriculture damage the environment?</strong> Agriculture causes significant harm to the environment in a number of ways, including the frequent use of <b>(18)</b> <input type="text" class="gap-field gap-input" data-q="meat-18" autocomplete="off" /> in modern farming and the cutting down of trees. It is also responsible for the production of many greenhouse gases, more so than <b>(19)</b> <input type="text" class="gap-field gap-input" data-q="meat-19" autocomplete="off" /> is. However, it is livestock farming in particular that is most harmful, because cows, chickens and sheep, for example, are given vast quantities of grain which could be consumed by people instead. A meat-free diet would mean that actually less <b>(20)</b> <input type="text" class="gap-field gap-input" data-q="meat-20" autocomplete="off" /> could be used for crops. Far less chemical pollution, specifically in the form of <b>(21)</b> <input type="text" class="gap-field gap-input" data-q="meat-21" autocomplete="off" /> would also be released into the environment, especially if consumers cut out dairy and egg products as well as meat. In the US, there is clear evidence that considerable <b>(22)</b> <input type="text" class="gap-field gap-input" data-q="meat-22" autocomplete="off" /> is caused by the demand for grazing land, although there is no information on this from other countries.</p>
       </div>
       <div class="qgroup">
         <h4>Questions 23–26 — Matching People</h4>
@@ -303,11 +333,16 @@
           <li>E. Walter Falcon</li>
         </ul>
         <ol start="23">
-          <li>It is not possible to say that a vegetarian diet is right for everyone.</li>
-          <li>It may be economically preferable to farm animals in limited space.</li>
-          <li>It does not make sense to give up meat without giving up dairy products too.</li>
-          <li>Some animals can be fed in a way that allows waste to be recycled.</li>
+          <li>It is not possible to say that a vegetarian diet is right for everyone. <select class="gap-field" data-q="meat-23"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></li>
+          <li>It may be economically preferable to farm animals in limited space. <select class="gap-field" data-q="meat-24"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></li>
+          <li>It does not make sense to give up meat without giving up dairy products too. <select class="gap-field" data-q="meat-25"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></li>
+          <li>Some animals can be fed in a way that allows waste to be recycled. <select class="gap-field" data-q="meat-26"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-meat">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-meat">Reset</button>
+        <span class="quiz-score" data-score="q-meat" hidden></span>
       </div>
     </div>
 
@@ -369,24 +404,29 @@
       <p>One of the most important rubber inventions was made in 1888, when an Irishman called John Boyd Dunlop produced the first pneumatic tyre. Solid rubber tyres had been used for the previous 18 years, but Dunlop's new design, which he updated in 1890, immediately became popular. In 1895 Dunlop's tyres were first used in motor cars, and with the mass production of cars just over the horizon the rubber industry had never looked healthier. The import levels of rubber over the nineteenth century bear witness to its irrepressible rise. In 1830 Britain had imported just 211 kg of crude rubber. This had risen to 10,000 kg in 1857, and by 1874 levels were just under six times as much again.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-rubber">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 1–6 — True / False / Not Given</h4>
         <p class="instructions">Do the following statements agree with the information given in the passage?</p>
         <ol>
-          <li>Rubber plants grow only in certain regions of the world.</li>
-          <li>Rubber was extracted in Mexico as early as the sixth century.</li>
-          <li>Rubber from the Castilla elastica plant is of poorer quality than that from the Para plant.</li>
-          <li>A French mathematician inspired real interest in rubber amongst Europeans.</li>
-          <li>The process of vulcanisation was discovered by accident.</li>
-          <li>Imports of crude rubber into Britain fell during the nineteenth century.</li>
+          <li>Rubber plants grow only in certain regions of the world. <select class="gap-field" data-q="rubber-1"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Rubber was extracted in Mexico as early as the sixth century. <select class="gap-field" data-q="rubber-2"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Rubber from the Castilla elastica plant is of poorer quality than that from the Para plant. <select class="gap-field" data-q="rubber-3"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>A French mathematician inspired real interest in rubber amongst Europeans. <select class="gap-field" data-q="rubber-4"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>The process of vulcanisation was discovered by accident. <select class="gap-field" data-q="rubber-5"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Imports of crude rubber into Britain fell during the nineteenth century. <select class="gap-field" data-q="rubber-6"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 7–13 — Summary Completion</h4>
         <p class="instructions">Complete the summary below. Choose NO MORE THAN THREE WORDS from the passage for each answer.</p>
-        <p><strong>The Commercial Development of Rubber</strong><br/>Early European travellers gave accounts of various rubber objects in use in Central and South America, and these accounts created interest in the commercial exploitation of rubber. In 1818, <b>(7)</b> ____ was produced using rubber, and in 1820 a machine was invented for recycling <b>(8)</b> ____ of rubber. Over the next few years, other attempts were made to improve rubber, but some problems remained. For example, rubber products smelt bad when they were dissolved, and could turn either soft or <b>(9)</b> ____ depending on the temperature. However, in 1839 a new process to <b>(10)</b> ____ the substance greatly increased its potential. For example, rubber was used in the creation of the <b>(11)</b> ____ industry during the Industrial Revolution. Then in 1888 the <b>(12)</b> ____ was developed, and a few years later the <b>(13)</b> ____ of the motor car began.</p>
+        <p><strong>The Commercial Development of Rubber</strong><br/>Early European travellers gave accounts of various rubber objects in use in Central and South America, and these accounts created interest in the commercial exploitation of rubber. In 1818, <b>(7)</b> <input type="text" class="gap-field gap-input-wide" data-q="rubber-7" autocomplete="off" /> was produced using rubber, and in 1820 a machine was invented for recycling <b>(8)</b> <input type="text" class="gap-field gap-input-wide" data-q="rubber-8" autocomplete="off" /> of rubber. Over the next few years, other attempts were made to improve rubber, but some problems remained. For example, rubber products smelt bad when they were dissolved, and could turn either soft or <b>(9)</b> <input type="text" class="gap-field gap-input" data-q="rubber-9" autocomplete="off" /> depending on the temperature. However, in 1839 a new process to <b>(10)</b> <input type="text" class="gap-field gap-input" data-q="rubber-10" autocomplete="off" /> the substance greatly increased its potential. For example, rubber was used in the creation of the <b>(11)</b> <input type="text" class="gap-field gap-input-wide" data-q="rubber-11" autocomplete="off" /> industry during the Industrial Revolution. Then in 1888 the <b>(12)</b> <input type="text" class="gap-field gap-input-wide" data-q="rubber-12" autocomplete="off" /> was developed, and a few years later the <b>(13)</b> <input type="text" class="gap-field gap-input-wide" data-q="rubber-13" autocomplete="off" /> of the motor car began.</p>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-rubber">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-rubber">Reset</button>
+        <span class="quiz-score" data-score="q-rubber" hidden></span>
       </div>
     </div>
 
@@ -456,29 +496,34 @@
       <p class="source-note" style="margin-bottom:-4px;">[The passage ends here mid-sentence in the source — the question section begins immediately afterward with no further passage text on the original page.]</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-dolls">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 1–6 — Note Completion</h4>
         <p class="instructions">Complete the notes below. Choose ONE WORD ONLY from the passage for each answer.</p>
         <p><strong>Dolls</strong><br/>
         Earliest known dolls — represented religious figures, used as toys<br/>
-        Egypt 2000 BC — bodies were made of <b>(1)</b> ____; <b>(2)</b> ____ was used for the hair<br/>
-        Ancient Greece and Rome — dolls were given to <b>(3)</b> ____ by older girls<br/>
-        600 BC — realistic dolls had separate clothes and <b>(4)</b> ____ that could be put in different positions<br/>
-        17th and 18th centuries — dolls made of <b>(5)</b> ____; moulds made of <b>(6)</b> ____</p>
+        Egypt 2000 BC — bodies were made of <b>(1)</b> <input type="text" class="gap-field gap-input" data-q="dolls-1" autocomplete="off" />; <b>(2)</b> <input type="text" class="gap-field gap-input" data-q="dolls-2" autocomplete="off" /> was used for the hair<br/>
+        Ancient Greece and Rome — dolls were given to <b>(3)</b> <input type="text" class="gap-field gap-input" data-q="dolls-3" autocomplete="off" /> by older girls<br/>
+        600 BC — realistic dolls had separate clothes and <b>(4)</b> <input type="text" class="gap-field gap-input" data-q="dolls-4" autocomplete="off" /> that could be put in different positions<br/>
+        17th and 18th centuries — dolls made of <b>(5)</b> <input type="text" class="gap-field gap-input" data-q="dolls-5" autocomplete="off" />; moulds made of <b>(6)</b> <input type="text" class="gap-field gap-input" data-q="dolls-6" autocomplete="off" /></p>
       </div>
       <div class="qgroup">
         <h4>Questions 7–13 — True / False / Not Given</h4>
         <ol start="7">
-          <li>Bisque dolls appear less realistic than dolls made of china.</li>
-          <li>French dolls tended to cost more than German bisque dolls.</li>
-          <li>The first rag dolls were made in the 1850s.</li>
-          <li>Only dolls made of cotton or linen are classified as cloth dolls.</li>
-          <li>Dolls made of celluloid tended to lose their colour.</li>
-          <li>Composition dolls lasted longer than the plastic dolls that were made in the 1940s.</li>
-          <li>Doll collectors prefer a doll to be dressed in its original clothing.</li>
+          <li>Bisque dolls appear less realistic than dolls made of china. <select class="gap-field" data-q="dolls-7"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>French dolls tended to cost more than German bisque dolls. <select class="gap-field" data-q="dolls-8"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>The first rag dolls were made in the 1850s. <select class="gap-field" data-q="dolls-9"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Only dolls made of cotton or linen are classified as cloth dolls. <select class="gap-field" data-q="dolls-10"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Dolls made of celluloid tended to lose their colour. <select class="gap-field" data-q="dolls-11"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Composition dolls lasted longer than the plastic dolls that were made in the 1940s. <select class="gap-field" data-q="dolls-12"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Doll collectors prefer a doll to be dressed in its original clothing. <select class="gap-field" data-q="dolls-13"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-dolls">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-dolls">Reset</button>
+        <span class="quiz-score" data-score="q-dolls" hidden></span>
       </div>
     </div>
 
@@ -545,27 +590,27 @@
       <p>Mendelssohn also observes that London matters less to today's generation of artists, which undercuts some of the occasion's grandeur. She says China is now the world's most important art market — succeeding in Shanghai is what counts. Her Australian students, drawn from all over the world, are eager to see the Venice Biennale and Art Basel but much less interested in London. In her own youth London was the destination, and by university age New York had taken that role for ambitious young artists; now, she says, young artists want to go everywhere — there's no longer a clear "centre" and "periphery," and the art world is more complicated than that.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-australia">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 27–31 — Yes / No / Not Given</h4>
         <p class="instructions">Do the following statements agree with the claims of the writer?</p>
         <ol start="27">
-          <li>As expected, the artworks chosen for the exhibition reflect a narrow interpretation of landscape.</li>
-          <li>The Academy rejected Australian suggestions for the subject of the exhibition.</li>
-          <li>The colonial relationship meant that early Australian landscape painting followed the traditions of English landscape painting.</li>
-          <li>The exhibition reflects the fact that Australian art developed its own particular qualities.</li>
-          <li>Contemporary Australian artists have generally rejected British landscape traditions.</li>
+          <li>As expected, the artworks chosen for the exhibition reflect a narrow interpretation of landscape. <select class="gap-field" data-q="australia-27"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>The Academy rejected Australian suggestions for the subject of the exhibition. <select class="gap-field" data-q="australia-28"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>The colonial relationship meant that early Australian landscape painting followed the traditions of English landscape painting. <select class="gap-field" data-q="australia-29"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>The exhibition reflects the fact that Australian art developed its own particular qualities. <select class="gap-field" data-q="australia-30"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Contemporary Australian artists have generally rejected British landscape traditions. <select class="gap-field" data-q="australia-31"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 32–36 — Multiple Choice</h4>
         <ol start="32">
-          <li>What is the writer's main point in the second paragraph?<br/>A. Australian landscape painting derives from the British tradition.&nbsp; B. Australian landscape painting is more highly regarded than British.&nbsp; C. Britain is still imposing its principles on Australian art.&nbsp; D. British art cannot be compared to Australian art.</li>
-          <li>What does Joanna Mendelssohn find surprising?<br/>A. Modern Australian landscape painting has great variety.&nbsp; B. The guidelines for the choice of work were very traditional.&nbsp; C. Landscape painting remains a popular subject for British artists.&nbsp; D. The British find the Australian landscape unsuitable as a subject.</li>
-          <li>Shaun Gladwell's work is included in the exhibition because<br/>A. it adopts a subjective approach to depicting the landscape.&nbsp; B. skateboarding is an inspiration to many Australian artists.&nbsp; C. storms are a significant feature in the Australian landscape.&nbsp; D. Bondi is an iconic Australian location.</li>
-          <li>What was the reason for Soriano including Aboriginal art in the exhibition?<br/>A. It is not well known in London art circles.&nbsp; B. Aboriginal landscape painting influenced Australian settlers.&nbsp; C. It is part of the Australian art tradition and not independent of it.&nbsp; D. Modern Aboriginal painting deals with changes to the landscape.</li>
-          <li>By referring to China, Mendelssohn is making the point that<br/>A. having an exhibition in London is not as important as it used to be.&nbsp; B. young artists in Britain are not interested in Australian art.&nbsp; C. art from Shanghai is more important than Australian art.&nbsp; D. New York is still a preferred destination for young artists.</li>
+          <li>What is the writer's main point in the second paragraph?<br/>A. Australian landscape painting derives from the British tradition.&nbsp; B. Australian landscape painting is more highly regarded than British.&nbsp; C. Britain is still imposing its principles on Australian art.&nbsp; D. British art cannot be compared to Australian art. <select class="gap-field" data-q="australia-32"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What does Joanna Mendelssohn find surprising?<br/>A. Modern Australian landscape painting has great variety.&nbsp; B. The guidelines for the choice of work were very traditional.&nbsp; C. Landscape painting remains a popular subject for British artists.&nbsp; D. The British find the Australian landscape unsuitable as a subject. <select class="gap-field" data-q="australia-33"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>Shaun Gladwell's work is included in the exhibition because<br/>A. it adopts a subjective approach to depicting the landscape.&nbsp; B. skateboarding is an inspiration to many Australian artists.&nbsp; C. storms are a significant feature in the Australian landscape.&nbsp; D. Bondi is an iconic Australian location. <select class="gap-field" data-q="australia-34"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What was the reason for Soriano including Aboriginal art in the exhibition?<br/>A. It is not well known in London art circles.&nbsp; B. Aboriginal landscape painting influenced Australian settlers.&nbsp; C. It is part of the Australian art tradition and not independent of it.&nbsp; D. Modern Aboriginal painting deals with changes to the landscape. <select class="gap-field" data-q="australia-35"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>By referring to China, Mendelssohn is making the point that<br/>A. having an exhibition in London is not as important as it used to be.&nbsp; B. young artists in Britain are not interested in Australian art.&nbsp; C. art from Shanghai is more important than Australian art.&nbsp; D. New York is still a preferred destination for young artists. <select class="gap-field" data-q="australia-36"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
@@ -580,11 +625,16 @@
           <li>F. shows an acceptance of the unique qualities of Australian art.</li>
         </ul>
         <ol start="37">
-          <li>In spite of its conservatism, the Royal Academy exhibition…</li>
-          <li>Australian art of the early to mid-1800s…</li>
-          <li>The modern work by Gladwell chosen for the exhibition…</li>
-          <li>Including Aboriginal art in the exhibition…</li>
+          <li>In spite of its conservatism, the Royal Academy exhibition… <select class="gap-field" data-q="australia-37"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></li>
+          <li>Australian art of the early to mid-1800s… <select class="gap-field" data-q="australia-38"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></li>
+          <li>The modern work by Gladwell chosen for the exhibition… <select class="gap-field" data-q="australia-39"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></li>
+          <li>Including Aboriginal art in the exhibition… <select class="gap-field" data-q="australia-40"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-australia">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-australia">Reset</button>
+        <span class="quiz-score" data-score="q-australia" hidden></span>
       </div>
     </div>
 
@@ -649,22 +699,22 @@
       <p><b>H</b> The researchers plan next to test their results in reverse, and play ringtones from songs of both the earworm and non-earworm variety for volunteers several times a day to see which ones get stuck. Drs Stewart and Halpern are now working together to recruit survey participants for a study looking at whether people at different stages of life experience earworms differently. "You can argue that older people might get them more often because they know more songs," Dr Halpern says. "But the few responses we have so far indicate that they have earworms less often. It could be that they don't play music as often as younger people do."</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-mindmusic">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 28–31</h4>
         <p class="instructions">The passage has eight paragraphs, A–H. Which paragraph contains the following information?</p>
         <ol start="28">
-          <li>a description of the characteristics common to songs with earworms</li>
-          <li>a justification for research into earworms</li>
-          <li>a description of the brain's reaction to known and unknown songs</li>
-          <li>details of proposed research into the frequency with which earworms occur in different age groups</li>
+          <li>a description of the characteristics common to songs with earworms <select class="gap-field" data-q="mindmusic-28"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></li>
+          <li>a justification for research into earworms <select class="gap-field" data-q="mindmusic-29"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></li>
+          <li>a description of the brain's reaction to known and unknown songs <select class="gap-field" data-q="mindmusic-30"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></li>
+          <li>details of proposed research into the frequency with which earworms occur in different age groups <select class="gap-field" data-q="mindmusic-31"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 32–35 — Summary Completion</h4>
         <p class="instructions">Complete the summary below. Choose ONE WORD ONLY from the passage for each answer.</p>
-        <p>Researchers from Goldsmiths concluded that the music we imagine in our minds is quite similar to recordings. They proved this by asking volunteers to record the rhythm of music using a monitor on their <b>(32)</b> ____. Further research has demonstrated that those who hear earworms more frequently have brains that may deal with <b>(33)</b> ____ differently from other people. Dr Stewart also believes that the brain is <b>(34)</b> ____ by earworms when it is not focused on a task. In fact, a reduction in the occurrence of earworms was found to be directly related to how <b>(35)</b> ____ the task was.</p>
+        <p>Researchers from Goldsmiths concluded that the music we imagine in our minds is quite similar to recordings. They proved this by asking volunteers to record the rhythm of music using a monitor on their <b>(32)</b> <input type="text" class="gap-field gap-input" data-q="mindmusic-32" autocomplete="off" />. Further research has demonstrated that those who hear earworms more frequently have brains that may deal with <b>(33)</b> <input type="text" class="gap-field gap-input" data-q="mindmusic-33" autocomplete="off" /> differently from other people. Dr Stewart also believes that the brain is <b>(34)</b> <input type="text" class="gap-field gap-input" data-q="mindmusic-34" autocomplete="off" /> by earworms when it is not focused on a task. In fact, a reduction in the occurrence of earworms was found to be directly related to how <b>(35)</b> <input type="text" class="gap-field gap-input" data-q="mindmusic-35" autocomplete="off" /> the task was.</p>
       </div>
       <div class="qgroup">
         <h4>Questions 36–40 — Matching People</h4>
@@ -676,12 +726,17 @@
           <li>D. John Seabrook</li>
         </ul>
         <ol start="36">
-          <li>Some musicians create music that is intentionally memorable.</li>
-          <li>People are unable to completely regulate how they think.</li>
-          <li>We can remember songs without knowing that we have heard them.</li>
-          <li>Thinking about music has a similar effect on the brain to hearing music.</li>
-          <li>Earworms are more persistent when only a short section of the song is constantly replayed.</li>
+          <li>Some musicians create music that is intentionally memorable. <select class="gap-field" data-q="mindmusic-36"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>People are unable to completely regulate how they think. <select class="gap-field" data-q="mindmusic-37"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>We can remember songs without knowing that we have heard them. <select class="gap-field" data-q="mindmusic-38"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>Thinking about music has a similar effect on the brain to hearing music. <select class="gap-field" data-q="mindmusic-39"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>Earworms are more persistent when only a short section of the song is constantly replayed. <select class="gap-field" data-q="mindmusic-40"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-mindmusic">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-mindmusic">Reset</button>
+        <span class="quiz-score" data-score="q-mindmusic" hidden></span>
       </div>
     </div>
 
@@ -743,16 +798,16 @@
       <p>Ekman, incidentally, professes to have been a terrible liar ever since he was a small boy and observes that the ability to detect a lie and the ability to lie successfully are completely unrelated. He has been asked by people running for high office if he could teach them to become more credible with the public but has always refused to use his skills in that way on ethical grounds. He also insists that there are various kinds of lies. A "true" lie can be identified by having two essential characteristics: there must be a deliberate intent to mislead and there must be no notification that this is what is occurring. This means that an actor or a poker player isn't a true liar. They are supposed to deceive you, it's part of the game, and the same is true of flattery. He prefers to focus on the kinds of lies where the liar would be in grave trouble if they were found out, and where the target would feel properly aggrieved if they knew.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-deception">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 27–31 — Multiple Choice</h4>
         <ol start="27">
-          <li>According to the writer, Ekman became interested in lying after a question from his<br/>A. peers.&nbsp; B. patients.&nbsp; C. students.&nbsp; D. teachers.</li>
-          <li>The writer refers to the 12-minute interviews in order to<br/>A. illustrate how frequently patients lie.&nbsp; B. describe the origins of Ekman's theories.&nbsp; C. compare Ekman's research to previous studies.&nbsp; D. show how patients' behaviour is affected by filming.</li>
-          <li>What is the writer's point in the third paragraph?<br/>A. Micro-expressions are common to all people.&nbsp; B. Recent research has refuted an old idea.&nbsp; C. With practice we can learn to control our micro-expressions.&nbsp; D. Human society is too complex to allow for generalisations.</li>
-          <li>What are we told about Ekman's conclusions from his tests?<br/>A. It's natural for people to lie.&nbsp; B. Few untrained people can detect lying.&nbsp; C. Most liars suffer from periods of depression.&nbsp; D. All of his subjects were trained to identify micro-expressions.</li>
-          <li>What point does the writer make about Ekman's techniques in the fourth paragraph?<br/>A. They take a decade to teach.&nbsp; B. They have been in great demand.&nbsp; C. They have aroused the suspicions of some agencies.&nbsp; D. They can be used by a limited range of occupations.</li>
+          <li>According to the writer, Ekman became interested in lying after a question from his<br/>A. peers.&nbsp; B. patients.&nbsp; C. students.&nbsp; D. teachers. <select class="gap-field" data-q="deception-27"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>The writer refers to the 12-minute interviews in order to<br/>A. illustrate how frequently patients lie.&nbsp; B. describe the origins of Ekman's theories.&nbsp; C. compare Ekman's research to previous studies.&nbsp; D. show how patients' behaviour is affected by filming. <select class="gap-field" data-q="deception-28"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What is the writer's point in the third paragraph?<br/>A. Micro-expressions are common to all people.&nbsp; B. Recent research has refuted an old idea.&nbsp; C. With practice we can learn to control our micro-expressions.&nbsp; D. Human society is too complex to allow for generalisations. <select class="gap-field" data-q="deception-29"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What are we told about Ekman's conclusions from his tests?<br/>A. It's natural for people to lie.&nbsp; B. Few untrained people can detect lying.&nbsp; C. Most liars suffer from periods of depression.&nbsp; D. All of his subjects were trained to identify micro-expressions. <select class="gap-field" data-q="deception-30"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What point does the writer make about Ekman's techniques in the fourth paragraph?<br/>A. They take a decade to teach.&nbsp; B. They have been in great demand.&nbsp; C. They have aroused the suspicions of some agencies.&nbsp; D. They can be used by a limited range of occupations. <select class="gap-field" data-q="deception-31"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
@@ -761,16 +816,21 @@
         <div class="word-bank">
           <span>A. consequences</span><span>B. crimes</span><span>C. false beliefs</span><span>D. motives</span><span>E. justice</span><span>F. accuracy</span><span>G. acting</span><span>H. research</span><span>I. ratings</span>
         </div>
-        <p>A new TV series based on Ekman's work features a hero named Lightman, who detects lies. Initially, Ekman was unenthusiastic about the TV project because he feared the possibility of encouraging viewers' <b>(32)</b> ____. For example, he was worried that one day the programme could result in <b>(33)</b> ____ not being carried out. Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's <b>(34)</b> ____. The <b>(35)</b> ____ of the show's producer have been another pleasant surprise considering the genre of the programme. Ekman is happy with the show's overall <b>(36)</b> ____.</p>
+        <p>A new TV series based on Ekman's work features a hero named Lightman, who detects lies. Initially, Ekman was unenthusiastic about the TV project because he feared the possibility of encouraging viewers' <b>(32)</b> <select class="gap-field" data-q="deception-32"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>. For example, he was worried that one day the programme could result in <b>(33)</b> <select class="gap-field" data-q="deception-33"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> not being carried out. Ultimately though, he has given the show his blessing because he is not aware of any other comparable programme based on a single person's <b>(34)</b> <select class="gap-field" data-q="deception-34"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>. The <b>(35)</b> <select class="gap-field" data-q="deception-35"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> of the show's producer have been another pleasant surprise considering the genre of the programme. Ekman is happy with the show's overall <b>(36)</b> <select class="gap-field" data-q="deception-36"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>.</p>
       </div>
       <div class="qgroup">
         <h4>Questions 37–40 — Yes / No / Not Given</h4>
         <ol start="37">
-          <li>Ekman regrets the lies he told as a child.</li>
-          <li>People who are good at lying tend to be good at detecting lies.</li>
-          <li>Ekman has worked with poker players to help them lie more convincingly.</li>
-          <li>Ekman is more interested in the types of lies with serious consequences.</li>
+          <li>Ekman regrets the lies he told as a child. <select class="gap-field" data-q="deception-37"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>People who are good at lying tend to be good at detecting lies. <select class="gap-field" data-q="deception-38"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Ekman has worked with poker players to help them lie more convincingly. <select class="gap-field" data-q="deception-39"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Ekman is more interested in the types of lies with serious consequences. <select class="gap-field" data-q="deception-40"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-deception">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-deception">Reset</button>
+        <span class="quiz-score" data-score="q-deception" hidden></span>
       </div>
     </div>
 
@@ -832,16 +892,16 @@
       <p>Private conversation with Mahy has always been a wild ride — marvellous, in the true sense of the word, the product of a hungry head and an infinite capacity to be astonished. A few years ago, the writer David Hill told a funny story. Though his writing was very different from Mahy's, he had been affected by her peculiarly alert way of looking at the world, particularly the mad, slippery life of language. Once, Hill said, in a motel room, a sign on a door caught his eye: 'This door is alarmed.' Mahy would like that, thought Hill. She would enjoy the comedy just below the surface of the formal warning; she would leap immediately to the possibilities for story and language play.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-mahy">
       <h3>Questions</h3>
       <div class="qgroup">
         <h4>Questions 27–31 — Yes / No / Not Given</h4>
         <ol start="27">
-          <li>Mahy and Knox have sometimes criticised each other's work.</li>
-          <li>Mahy explores the traditional themes of New Zealand literature.</li>
-          <li>Mahy's children's books have been more popular than her teenage books.</li>
-          <li>Mahy is welcoming to interviewers.</li>
-          <li>Mahy is at ease speaking about her experiences.</li>
+          <li>Mahy and Knox have sometimes criticised each other's work. <select class="gap-field" data-q="mahy-27"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Mahy explores the traditional themes of New Zealand literature. <select class="gap-field" data-q="mahy-28"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Mahy's children's books have been more popular than her teenage books. <select class="gap-field" data-q="mahy-29"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Mahy is welcoming to interviewers. <select class="gap-field" data-q="mahy-30"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
+          <li>Mahy is at ease speaking about her experiences. <select class="gap-field" data-q="mahy-31"><option value=""></option><option value="yes">Yes</option><option value="no">No</option><option value="not given">Not Given</option></select></li>
         </ol>
       </div>
       <div class="qgroup">
@@ -850,17 +910,22 @@
         <div class="word-bank">
           <span>A. disruptive and unpredictable</span><span>B. everyday</span><span>C. loveable</span><span>D. controversial</span><span>E. exotic and ordinary</span><span>F. isolated</span><span>G. unconfident</span><span>H. unsurprising but satisfying</span><span>I. magical</span>
         </div>
-        <p><strong>Theories about Mahy's style</strong><br/>Mahy's determination to earn a living from writing has encouraged her to find the ideas for her work in <b>(32)</b> ____ places. The stories themselves are set in locations that are <b>(33)</b> ____. In terms of characterisation, very often an adolescent possesses <b>(34)</b> ____ abilities. Finally, the endings of the stories tend to be <b>(35)</b> ____.</p>
+        <p><strong>Theories about Mahy's style</strong><br/>Mahy's determination to earn a living from writing has encouraged her to find the ideas for her work in <b>(32)</b> <select class="gap-field" data-q="mahy-32"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> places. The stories themselves are set in locations that are <b>(33)</b> <select class="gap-field" data-q="mahy-33"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>. In terms of characterisation, very often an adolescent possesses <b>(34)</b> <select class="gap-field" data-q="mahy-34"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select> abilities. Finally, the endings of the stories tend to be <b>(35)</b> <select class="gap-field" data-q="mahy-35"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option></select>.</p>
       </div>
       <div class="qgroup">
         <h4>Questions 36–40 — Multiple Choice</h4>
         <ol start="36">
-          <li>What does the writer say about <em>The Magician of Hoad</em>?<br/>A. It is partly based on true history.&nbsp; B. It was restructured in the writing process.&nbsp; C. It is quite different from conventional stories.&nbsp; D. It does not reflect the usual themes of Mahy's work.</li>
-          <li>According to the writer, <em>Bubble Trouble</em><br/>A. was first illustrated in 1991.&nbsp; B. is written in plain language.&nbsp; C. is an old favourite for many families.&nbsp; D. has not been read aloud by Mahy before.</li>
-          <li>The writer's purpose in the fifth paragraph is to<br/>A. show how Mahy's style has changed through generations.&nbsp; B. criticise Mahy's children's stories for being repetitive.&nbsp; C. describe how new media have changed entertainment.&nbsp; D. illustrate Mahy's popularity with generations of children.</li>
-          <li>According to the sixth paragraph, which of the following is true?<br/>A. Readers sometimes do not finish Mahy's books.&nbsp; B. Mahy actively encourages feedback from readers.&nbsp; C. Readers are necessary in order to complete a book.&nbsp; D. Mahy does not realise how important she is to some readers.</li>
-          <li>What is the writer doing in the final paragraph?<br/>A. illustrating Mahy's view of the world&nbsp; B. comparing Mahy with another writer&nbsp; C. correcting a misconception about Mahy&nbsp; D. suggesting reasons for Mahy's approach</li>
+          <li>What does the writer say about <em>The Magician of Hoad</em>?<br/>A. It is partly based on true history.&nbsp; B. It was restructured in the writing process.&nbsp; C. It is quite different from conventional stories.&nbsp; D. It does not reflect the usual themes of Mahy's work. <select class="gap-field" data-q="mahy-36"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>According to the writer, <em>Bubble Trouble</em><br/>A. was first illustrated in 1991.&nbsp; B. is written in plain language.&nbsp; C. is an old favourite for many families.&nbsp; D. has not been read aloud by Mahy before. <select class="gap-field" data-q="mahy-37"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>The writer's purpose in the fifth paragraph is to<br/>A. show how Mahy's style has changed through generations.&nbsp; B. criticise Mahy's children's stories for being repetitive.&nbsp; C. describe how new media have changed entertainment.&nbsp; D. illustrate Mahy's popularity with generations of children. <select class="gap-field" data-q="mahy-38"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>According to the sixth paragraph, which of the following is true?<br/>A. Readers sometimes do not finish Mahy's books.&nbsp; B. Mahy actively encourages feedback from readers.&nbsp; C. Readers are necessary in order to complete a book.&nbsp; D. Mahy does not realise how important she is to some readers. <select class="gap-field" data-q="mahy-39"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
+          <li>What is the writer doing in the final paragraph?<br/>A. illustrating Mahy's view of the world&nbsp; B. comparing Mahy with another writer&nbsp; C. correcting a misconception about Mahy&nbsp; D. suggesting reasons for Mahy's approach <select class="gap-field" data-q="mahy-40"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option></select></li>
         </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-mahy">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-mahy">Reset</button>
+        <span class="quiz-score" data-score="q-mahy" hidden></span>
       </div>
     </div>
 
@@ -924,19 +989,44 @@
       <p><b>8</b> In later years, Strizic combined his artistic practice with teaching in Melbourne's new photography departments during the boom of the 1970s. In 1988 he returned to his earliest negatives of Melbourne, staging an exhibition that highlighted his long-standing interest in the city's changing urban landscape. Since then, he has often been remembered as a nostalgic chronicler of "old Melbourne" or "disappearing Melbourne." Yet such a label oversimplifies his contribution. His career was marked by continuous experimentation, by fruitful collaborations with artists, writers and designers, and by a willingness to engage with both traditional and avant-garde practices. In this sense, he occupies a significant though sometimes underrecognised position in the development of Australian visual culture.</p>
     </div>
 
-    <div class="questions-block">
+    <div class="questions-block" id="q-strizic">
       <h3>Questions (as recorded in the saved notes)</h3>
+      <p class="instructions">The original question wording wasn't preserved in the saved notes — only the answer and its supporting quote. So instead of the original prompts, here's what each answer is based on; type your own answer, then check it against the passage.</p>
       <div class="qgroup">
         <h4>Questions 27–32 — Matching People</h4>
-        <p class="instructions">Each of these questions asks which person is associated with a particular contribution described in the passage.</p>
+        <p class="instructions">Type the name of the person associated with each contribution.</p>
+        <ol start="27">
+          <li>Collaborated with Strizic on <em>Melbourne: A Portrait</em> (1960) as critic and historian. <input type="text" class="gap-field gap-input-wide" data-q="strizic-27" autocomplete="off" /></li>
+          <li>Edited the limited-edition art book <em>Involvement</em> (1968). <input type="text" class="gap-field gap-input-wide" data-q="strizic-28" autocomplete="off" /></li>
+          <li>Designed the cover of <em>Melbourne: A Portrait</em>. <input type="text" class="gap-field gap-input-wide" data-q="strizic-29" autocomplete="off" /></li>
+          <li>Whose earlier work shaped the idea for <em>Melbourne: A Portrait</em>? <input type="text" class="gap-field gap-input-wide" data-q="strizic-30" autocomplete="off" /></li>
+          <li>Collaborated with Strizic on the 1970 Ciba-Geigy mural. <input type="text" class="gap-field gap-input-wide" data-q="strizic-31" autocomplete="off" /></li>
+          <li>Wrote the accompanying text for <em>Involvement</em>. <input type="text" class="gap-field gap-input-wide" data-q="strizic-32" autocomplete="off" /></li>
+        </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 33–37 — True / False / Not Given</h4>
-        <p class="instructions">Statements about claims made in the passage (original wording not preserved in the saved notes — see explanations below for what each answer is based on).</p>
+        <ol start="33">
+          <li>Both the film <em>2000 Weeks</em> and Strizic's accompanying photo-roman book were commercial failures. <select class="gap-field" data-q="strizic-33"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Strizic's <em>Some Australian Personalities</em> portraits were exhibited at the National Gallery of Victoria in 1968. <select class="gap-field" data-q="strizic-34"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>Strizic was the first person to photographically document Asher Bilu's <em>Sculptron</em>. <select class="gap-field" data-q="strizic-35"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>The Ciba-Geigy mural combined digital imaging technology with painting. <select class="gap-field" data-q="strizic-36"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+          <li>The passage agrees that Strizic is best described simply as a nostalgic chronicler of "old Melbourne". <select class="gap-field" data-q="strizic-37"><option value=""></option><option value="true">True</option><option value="false">False</option><option value="not given">Not Given</option></select></li>
+        </ol>
       </div>
       <div class="qgroup">
         <h4>Questions 38–40 — Matching Dates</h4>
-        <p class="instructions">Each question asks which year a particular event took place.</p>
+        <p class="instructions">Type the year in which each event took place.</p>
+        <ol start="38">
+          <li><em>Melbourne: A Portrait</em> was awarded Book of the Year. <input type="text" class="gap-field gap-input" data-q="strizic-38" autocomplete="off" /></li>
+          <li>Strizic worked with Robin Boyd on <em>Living in Australia</em>. <input type="text" class="gap-field gap-input" data-q="strizic-39" autocomplete="off" /></li>
+          <li>Strizic staged an exhibition of his earliest Melbourne negatives. <input type="text" class="gap-field gap-input" data-q="strizic-40" autocomplete="off" /></li>
+        </ol>
+      </div>
+      <div class="quiz-actions">
+        <button type="button" class="check-btn" data-check="q-strizic">Check my answers</button>
+        <button type="button" class="clear-btn" data-reset="q-strizic">Reset</button>
+        <span class="quiz-score" data-score="q-strizic" hidden></span>
       </div>
     </div>
 
@@ -1147,7 +1237,95 @@
     }
   }
 
+  /* ---------- Scored quizzes ---------- */
+  var ANSWERS = {
+    "meat-14": ["e"], "meat-15": ["d"], "meat-16": ["h"], "meat-17": ["f"],
+    "meat-18": ["irrigation"], "meat-19": ["transport"], "meat-20": ["land"], "meat-21": ["nitrogen"], "meat-22": ["erosion"],
+    "meat-23": ["c"], "meat-24": ["e"], "meat-25": ["d"], "meat-26": ["b"],
+
+    "rubber-1": ["false"], "rubber-2": ["true"], "rubber-3": ["not given"], "rubber-4": ["true"], "rubber-5": ["not given"], "rubber-6": ["false"],
+    "rubber-7": ["waterproof cloth"], "rubber-8": ["waste strips"], "rubber-9": ["rigid"],
+    "rubber-10": ["stabilise", "stabilize"], "rubber-11": ["steam engines"], "rubber-12": ["pneumatic tyre"], "rubber-13": ["mass production"],
+
+    "dolls-1": ["wood"], "dolls-2": ["clay"], "dolls-3": ["goddesses"], "dolls-4": ["limbs"], "dolls-5": ["wax"], "dolls-6": ["plaster"],
+    "dolls-7": ["false"], "dolls-8": ["true"], "dolls-9": ["false"], "dolls-10": ["true"], "dolls-11": ["true"], "dolls-12": ["false"], "dolls-13": ["not given"],
+
+    "australia-27": ["no"], "australia-28": ["not given"], "australia-29": ["yes"], "australia-30": ["yes"], "australia-31": ["not given"],
+    "australia-32": ["c"], "australia-33": ["b"], "australia-34": ["a"], "australia-35": ["c"], "australia-36": ["a"],
+    "australia-37": ["f"], "australia-38": ["e"], "australia-39": ["a"], "australia-40": ["c"],
+
+    "mindmusic-28": ["g"], "mindmusic-29": ["a"], "mindmusic-30": ["f"], "mindmusic-31": ["h"],
+    "mindmusic-32": ["wrist"], "mindmusic-33": ["emotions"], "mindmusic-34": ["entertained"], "mindmusic-35": ["challenging"],
+    "mindmusic-36": ["d"], "mindmusic-37": ["a"], "mindmusic-38": ["b"], "mindmusic-39": ["c"], "mindmusic-40": ["b"],
+
+    "deception-27": ["c"], "deception-28": ["b"], "deception-29": ["a"], "deception-30": ["b"], "deception-31": ["b"],
+    "deception-32": ["c"], "deception-33": ["e"], "deception-34": ["h"], "deception-35": ["d"], "deception-36": ["f"],
+    "deception-37": ["no"], "deception-38": ["no"], "deception-39": ["no"], "deception-40": ["yes"],
+
+    "mahy-27": ["not given"], "mahy-28": ["no"], "mahy-29": ["not given"], "mahy-30": ["yes"], "mahy-31": ["no"],
+    "mahy-32": ["b"], "mahy-33": ["e"], "mahy-34": ["i"], "mahy-35": ["h"],
+    "mahy-36": ["b"], "mahy-37": ["c"], "mahy-38": ["d"], "mahy-39": ["c"], "mahy-40": ["a"],
+
+    "strizic-27": ["david saunders", "saunders"], "strizic-28": ["andrew grimwade", "grimwade"], "strizic-29": ["leonard french", "french"],
+    "strizic-30": ["strizic's father", "his father", "father"], "strizic-31": ["stanislav ostoja-kotkowski", "ostoja-kotkowski"], "strizic-32": ["geoffrey dutton", "dutton"],
+    "strizic-33": ["true"], "strizic-34": ["true"], "strizic-35": ["not given"], "strizic-36": ["false"], "strizic-37": ["false"],
+    "strizic-38": ["1961"], "strizic-39": ["1970"], "strizic-40": ["1988"]
+  };
+
+  function checkQuiz(containerId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var correct = 0, total = 0;
+    Object.keys(ANSWERS).forEach(function (q) {
+      var field = container.querySelector('[data-q="' + q + '"]');
+      if (!field) return;
+      total++;
+      var old = field.parentElement.querySelector(".gap-feedback");
+      if (old) old.remove();
+      field.classList.remove("correct", "incorrect");
+      var val = (field.value || "").trim().toLowerCase();
+      var ok = ANSWERS[q].indexOf(val) !== -1;
+      if (ok) {
+        correct++;
+        field.classList.add("correct");
+      } else {
+        field.classList.add("incorrect");
+        var span = document.createElement("span");
+        span.className = "gap-feedback";
+        span.textContent = "Answer: " + ANSWERS[q][0];
+        field.insertAdjacentElement("afterend", span);
+      }
+    });
+    var scoreEl = document.querySelector('[data-score="' + containerId + '"]');
+    if (scoreEl) {
+      scoreEl.textContent = "Score: " + correct + " / " + total;
+      scoreEl.hidden = false;
+    }
+  }
+
+  function resetQuiz(containerId) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    container.querySelectorAll(".gap-field").forEach(function (f) {
+      f.value = "";
+      f.classList.remove("correct", "incorrect");
+    });
+    container.querySelectorAll(".gap-feedback").forEach(function (f) { f.remove(); });
+    var scoreEl = document.querySelector('[data-score="' + containerId + '"]');
+    if (scoreEl) scoreEl.hidden = true;
+  }
+
+  function initQuizzes() {
+    document.querySelectorAll("[data-check]").forEach(function (btn) {
+      btn.addEventListener("click", function () { checkQuiz(btn.dataset.check); });
+    });
+    document.querySelectorAll("[data-reset]").forEach(function (btn) {
+      btn.addEventListener("click", function () { resetQuiz(btn.dataset.reset); });
+    });
+  }
+
   initHighlighter();
+  initQuizzes();
 })();
 </script>
 </body>
